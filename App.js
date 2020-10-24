@@ -8,6 +8,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 
 import LandingPage from "./components/LandingPage";
+import FaqPage from "./components/FaqPage";
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -60,6 +61,30 @@ function landingScreenStack({ navigation }) {
   );
 }
 
+function faqScreenStack({ navigation }) {
+  return (
+    <Stack.Navigator initialRouteName="FaqPage">
+      <Stack.Screen
+        name="FaqPage"
+        component={FaqPage}
+        options={{
+          title: "Beach Checker",
+          headerLeft: () => (
+            <NavigationDrawerStructure navigationProps={navigation} />
+          ),
+          headerStyle: {
+            backgroundColor: "#f4511e"
+          },
+          headerTintColor: "#fff",
+          headerTitleStyle: {
+            fontWeight: "bold"
+          }
+        }}
+      />
+    </Stack.Navigator>
+  );
+}
+
 function App() {
   return (
     <NavigationContainer>
@@ -71,8 +96,13 @@ function App() {
       >
         <Drawer.Screen
           name="LandingPage"
-          options={{ drawerLabel: "First page Option" }}
+          options={{ drawerLabel: "Dashboard" }}
           component={landingScreenStack}
+        />
+        <Drawer.Screen
+          name="FaqPage"
+          options={{ drawerLabel: "FAQ's" }}
+          component={faqScreenStack}
         />
       </Drawer.Navigator>
     </NavigationContainer>
