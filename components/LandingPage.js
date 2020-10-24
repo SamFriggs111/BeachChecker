@@ -1,26 +1,19 @@
 import * as React from "react";
-import { Button, View, Text, SafeAreaView } from "react-native";
+import {
+  Button,
+  View,
+  StyleSheet,
+  SafeAreaView,
+  Dimensions
+} from "react-native";
+import MapView from "react-native-maps";
 
 const LandingPage = ({ navigation }) => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <View style={{ flex: 1, padding: 16 }}>
-        <View
-          style={{
-            flex: 1,
-            alignItems: "center",
-            justifyContent: "center"
-          }}
-        >
-          <Text
-            style={{
-              fontSize: 25,
-              textAlign: "center",
-              marginBottom: 16
-            }}
-          >
-            Landing Page
-          </Text>
+      <View style={{ flex: 1, padding: 0 }}>
+        <View>
+          <MapView style={styles.mapStyle} />
         </View>
       </View>
     </SafeAreaView>
@@ -28,3 +21,16 @@ const LandingPage = ({ navigation }) => {
 };
 
 export default LandingPage;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  mapStyle: {
+    width: Dimensions.get("window").width,
+    height: Dimensions.get("window").height
+  }
+});
