@@ -6,12 +6,23 @@ import {
   SafeAreaView,
   Dimensions
 } from "react-native";
+import MapView from "react-native-maps";
 
 const LandingPage = ({ navigation }) => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={{ flex: 1, padding: 0 }}>
-        <View></View>
+        <View>
+          <MapView
+            style={styles.mapStyle}
+            initialRegion={{
+              latitude: 50.715733,
+              longitude: -1.875273,
+              latitudeDelta: 0.008,
+              longitudeDelta: 0.008
+            }}
+          />
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -25,5 +36,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center"
+  },
+  mapStyle: {
+    width: Dimensions.get("window").width,
+    height: Dimensions.get("window").height
   }
 });
