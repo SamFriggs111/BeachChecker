@@ -50,7 +50,7 @@ function landingScreenStack({ navigation }) {
             <NavigationDrawerStructure navigationProps={navigation} />
           ),
           headerStyle: {
-            backgroundColor: "#f4511e"
+            backgroundColor: "deepskyblue"
           },
           headerTintColor: "#fff",
           headerTitleStyle: {
@@ -74,7 +74,7 @@ function faqScreenStack({ navigation }) {
             <NavigationDrawerStructure navigationProps={navigation} />
           ),
           headerStyle: {
-            backgroundColor: "#f4511e"
+            backgroundColor: "deepskyblue"
           },
           headerTintColor: "#fff",
           headerTitleStyle: {

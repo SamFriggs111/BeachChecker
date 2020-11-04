@@ -4,6 +4,12 @@ const noticeText = {
 
 const helpText = "Colour coded maps are for guidance only and predict likely crowding of promenade and beach areas today based on previous footfall, CCTV, weather patterns and observation. Information is then updated via live observation by the Seafront Team between 11am - 5pm.";
 
+const warnings = [
+    {colour: "red", text: "Avoid, safe social distancing not possible"},
+    {colour: "orange", text: "Congested, stay alert"},
+    {colour: "green", text: "Low congestion"}
+]
+
 export const getNoticeText = () => {
     if (typeof noticeText !== 'undefined')
         return noticeText;
@@ -16,6 +22,11 @@ export const getHelpText = () => {
         return helpText;
     else
         return "No advice at this time";
+}
+
+export const getCongestion = () => {
+    if (typeof warnings !== 'undefined')
+        return warnings;
 }
 
 // export default getNoticeText;
