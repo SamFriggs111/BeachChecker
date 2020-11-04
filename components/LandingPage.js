@@ -1,6 +1,6 @@
 import * as React from "react";
 import {
-  Button,
+  Text,
   View,
   StyleSheet,
   SafeAreaView,
@@ -11,7 +11,18 @@ const LandingPage = ({ navigation }) => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={{ flex: 1, padding: 0 }}>
-        <View></View>
+        <View style={{ flex: 1, backgroundColor: 'powderblue' }}>
+          <Text style={{}}>Test</Text>
+        </View>
+        <View style={{ flex: 1, backgroundColor: 'skyblue' }}>
+          <Text style={{}}>Test</Text>
+        </View>
+        <View style={{ flex: 1, backgroundColor: 'steelblue' }}>
+          <Text style={{}}>Test</Text>
+        </View>
+        <View style={{ flex: 3, backgroundColor: 'powderblue' }}>
+          <Text style={{}}>Test</Text>
+        </View>
       </View>
     </SafeAreaView>
   );

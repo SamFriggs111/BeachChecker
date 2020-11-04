@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import MapView from "react-native-maps";
 
-const LandingPage = ({ navigation }) => {
+const MapsView = ({ navigation }) => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={{ flex: 1, padding: 0 }}>
@@ -28,7 +28,7 @@ const LandingPage = ({ navigation }) => {
   );
 };
 
-export default LandingPage;
+export default MapsView;
 
 const styles = StyleSheet.create({
   container: {
