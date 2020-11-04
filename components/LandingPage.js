@@ -6,7 +6,7 @@ import {
   SafeAreaView,
   Dimensions
 } from "react-native";
-import getNoticeText from "./../api/api.js"
+import { getNoticeText, getHelpText } from "./../api/api.js"
 
 const NoticeTextView = () => {
   let notice = getNoticeText();
@@ -19,16 +19,21 @@ const NoticeTextView = () => {
   ); 
 };
 
+const HelpTextView = () => {
+  let help = getHelpText();
+  return (
+    <View style={styles.textContainer}>
+      <Text style={styles.textPadding}>{help}</Text>
+    </View>
+  ); 
+};
+
 const LandingPage = ({ navigation }) => {
   return (
     <SafeAreaView style={{flex: 1}}>
       <View style={{ flex: 1, padding: 0 }}>
         <NoticeTextView></NoticeTextView>
-        <View style={styles.textContainer}>
-          <Text style={{}}>
-            Colour coded maps are for guidance only and predict likely crowding of promenade and beach areas today based on previous footfall, CCTV, weather patterns and observation. Information is then updated via live observation by the Seafront Team between 11am - 5pm.
-          </Text>
-        </View>
+        <HelpTextView></HelpTextView>
         <View style={{ flex: 1, backgroundColor: 'steelblue' }}>
           <Text style={{}}>Test</Text>
         </View>
@@ -49,7 +54,9 @@ const styles = StyleSheet.create({
     // paddingTop: 10,
     // paddingBottom: 10,
     paddingLeft: 10,
-    paddingRight: 10
+    paddingRight: 10,
+    borderBottomColor: 'black',
+    borderBottomWidth: 1,
   },
   textPadding: {
     paddingTop: 3,
