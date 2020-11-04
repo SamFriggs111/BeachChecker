@@ -6,6 +6,7 @@ import {
   SafeAreaView
 } from "react-native";
 
+import { SearchBar } from 'react-native-elements';
 import { getNoticeText, getHelpText, getCongestion } from "./../api/api.js"
 import { FontAwesome } from '@expo/vector-icons';
 
@@ -39,9 +40,29 @@ const CongestionTextView = () => {
   ));
 };
 
+state = {
+  search: '',
+};
+
+updateSearch = (search) => {
+  this.setState({ search });
+};
+
+const SearchInput = () => {
+  const { search } = this.state;
+  return (
+    <SearchBar
+        placeholder="Type Here..."
+        onChangeText={this.updateSearch}
+        value={search}
+      />
+  );
+};
+
 const LandingPage = ({ navigation }) => {
   return (
     <SafeAreaView style={{flex: 1}}>
+      {/* <SearchBar></SearchBar> */}
       <View style={{ flex: 1, padding: 0 }}>
         <NoticeTextView></NoticeTextView>
         <HelpTextView></HelpTextView>
