@@ -14,6 +14,49 @@ const warnings = [
   { colour: "green", text: "Low congestion" }
 ];
 
+// latitude: 50.711054,
+// longitude: -1.895746,
+// latitudeDelta: 0.008,
+// longitudeDelta: 0.008
+
+const beachData = [
+  {
+    title: "Branksome Dene Beach",
+    coordinates: [
+      { name: "topLeft", latitude: 50.70746, longitude: -1.906429 },
+      { name: "bottomLeft", latitude: 50.707354, longitude: -1.906306 },
+      { name: "bottomRight", latitude: 50.70974, longitude: -1.899223 },
+      { name: "topRight", latitude: 50.709998, longitude: -1.899228 }
+    ],
+    beachInfo: [
+      {
+        congestion: [
+          {
+            severity: "Low",
+            colour: "green"
+          }
+        ]
+      },
+      { lifeguarded: "" },
+      { toilets: "" },
+      { dogs: "" },
+      { cycling: "" },
+      { bbq: "" },
+      { img: "" },
+      { warning: "" }
+    ]
+  },
+  {
+    title: "Alum Chine Beach",
+    coordinates: [
+      { name: "topLeft", latitude: 50.709998, longitude: -1.899228 },
+      { name: "bottomLeft", latitude: 50.70974, longitude: -1.899223 },
+      { name: "bottomRight", latitude: 50.711558, longitude: -1.893613 },
+      { name: "topRight", latitude: 50.711806, longitude: -1.893869 }
+    ]
+  }
+];
+
 export const getNoticeText = () => {
   if (typeof noticeText !== "undefined") return noticeText;
   else

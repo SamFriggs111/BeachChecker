@@ -15,7 +15,6 @@ import MapsView from ".././components/MapsView";
 
 const DATA = [
   {
-    // id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
     title: "Alum Chine Beach",
     latitude: 50.711054,
     longitude: -1.895746,
@@ -23,7 +22,6 @@ const DATA = [
     longitudeDelta: 0.008
   },
   {
-    // id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
     title: "Boscombe Beach",
     latitude: 50.719771,
     longitude: -1.841441,
@@ -47,8 +45,7 @@ const SearchView = ({ navigation }) => {
     <TouchableOpacity
       onPress={() => navigation.navigate("Map", { region: item })}
     >
-      <Item title="test" />
-      {/* <Item title={item.title} /> */}
+      <Item title={item.title} />
     </TouchableOpacity>
   );
   return (

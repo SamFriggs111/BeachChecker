@@ -7,8 +7,6 @@ import {
   Dimensions
 } from "react-native";
 import MapView, { Polygon } from "react-native-maps";
-// import { NavigationEvents } from "react-navigation";
-import { useNavigationState } from "react-navigation";
 
 const MapsView = ({ route, navigation }) => {
   const defaultRegion = {
@@ -22,30 +20,61 @@ const MapsView = ({ route, navigation }) => {
     route.params ? route.params.region : defaultRegion
   );
 
-  console.log("before effect", route.params.region);
-  const region = route.params.region;
-
-  // React.useEffect(
-  //   () =>
-  //     navigation.addListener("focus", () => {
-  //       console.log("after effect", region);
-  //       changeBeach(region);
-  //       // console.log("beach", [route.params.region, activeBeach]);
-  //     }),
-  //   []
-  // );
+  const region = route.params ? route.params.region : defaultRegion;
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={{ flex: 1, padding: 0 }}>
         <View>
-          <MapView style={styles.mapStyle} region={activeBeach}>
+          <MapView style={styles.mapStyle} region={region}>
             <Polygon
+              fillColor="#1dad31"
               coordinates={[
-                { name: "1", latitude: 50.710327, longitude: -1.898517 },
-                { name: "2", latitude: 50.710045, longitude: -1.898772 },
-                { name: "3", latitude: 50.711569, longitude: -1.893491 },
-                { name: "4", latitude: 50.711868, longitude: -1.893727 }
+                {
+                  name: "topLeft",
+                  latitude: 50.709998,
+                  longitude: -1.899228
+                },
+                {
+                  name: "bottomLeft",
+                  latitude: 50.70974,
+                  longitude: -1.899223
+                },
+                {
+                  name: "bottomRight",
+                  latitude: 50.711558,
+                  longitude: -1.893613
+                },
+                {
+                  name: "topRight",
+                  latitude: 50.711806,
+                  longitude: -1.893869
+                }
+              ]}
+            />
+            <Polygon
+              fillColor="#e3780e"
+              coordinates={[
+                {
+                  name: "topLeft",
+                  latitude: 50.70746,
+                  longitude: -1.906429
+                },
+                {
+                  name: "bottomLeft",
+                  latitude: 50.707354,
+                  longitude: -1.906306
+                },
+                {
+                  name: "bottomRight",
+                  latitude: 50.70974,
+                  longitude: -1.899223
+                },
+                {
+                  name: "topRight",
+                  latitude: 50.709998,
+                  longitude: -1.899228
+                }
               ]}
             />
           </MapView>
