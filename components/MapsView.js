@@ -6,7 +6,7 @@ import {
   SafeAreaView,
   Dimensions
 } from "react-native";
-import MapView from "react-native-maps";
+import MapView, { Polygon } from "react-native-maps";
 
 const MapsView = ({ navigation }) => {
   return (
@@ -21,7 +21,16 @@ const MapsView = ({ navigation }) => {
               latitudeDelta: 0.008,
               longitudeDelta: 0.008
             }}
-          />
+          >
+            <Polygon
+              coordinates={[
+                { name: "1", latitude: 50.710327, longitude: -1.898517 },
+                { name: "2", latitude: 50.710045, longitude: -1.898772 },
+                { name: "3", latitude: 50.711569, longitude: -1.893491 },
+                { name: "4", latitude: 50.711868, longitude: -1.893727 },
+              ]}
+            />
+          </MapView>
         </View>
       </View>
     </SafeAreaView>
