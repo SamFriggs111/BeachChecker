@@ -15,12 +15,20 @@ import MapsView from ".././components/MapsView";
 
 const DATA = [
   {
-    id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-    title: "First Item",
+    // id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
+    title: "Alum Chine Beach",
+    latitude: 50.711054,
+    longitude: -1.895746,
+    latitudeDelta: 0.008,
+    longitudeDelta: 0.008,
   },
   {
-    id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
-    title: "Second Item",
+    // id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
+    title: "Boscombe Beach",
+    latitude: 50.719771,
+    longitude: -1.841441,
+    latitudeDelta: 0.008,
+    longitudeDelta: 0.008,
   },
   {
     id: "58694a0f-3da1-471f-bd96-145571e29d72",
@@ -37,7 +45,7 @@ const Item = ({ title }) => (
 const SearchView = ({ navigation }) => {
   const renderItem = ({ item }) => (
     <TouchableOpacity
-      onPress={() => navigation.navigate("Map", { screen: "Map" })}
+      onPress={() => navigation.navigate("Map", { region: item })}
     >
       <Item title={item.title} />
     </TouchableOpacity>
@@ -48,7 +56,6 @@ const SearchView = ({ navigation }) => {
         data={DATA}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
-        component={MapsView}
       />
     </SafeAreaView>
   );

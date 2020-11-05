@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import {
   Button,
   View,
@@ -7,21 +7,37 @@ import {
   Dimensions,
 } from "react-native";
 import MapView, { Polygon } from "react-native-maps";
+// import { NavigationEvents } from "react-navigation";
 
-const MapsView = ({ navigation }) => {
+const MapsView = ({ route }) => {
+  const defaultRegion = {
+    latitude: 50.715733,
+    longitude: -1.875273,
+    latitudeDelta: 0.008,
+    longitudeDelta: 0.008,
+  };
+
+  const [activeBeach, changeBeach] = useState(
+    route.params ? route.params.region : defaultRegion
+  );
+
+  // // function getInitialState() {
+  // //   changeBeach(route.params ? route.params.region : defaultRegion);
+  // // }
+
+  // const isFocused = useIsFocused();
+  // if (isFocused) {
+  //   changeBeach(route.params ? route.params.region : defaultRegion);
+  //   break;
+  // }
+
+  console.log("test", activeBeach);
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={{ flex: 1, padding: 0 }}>
         <View>
-          <MapView
-            style={styles.mapStyle}
-            initialRegion={{
-              latitude: 50.715733,
-              longitude: -1.875273,
-              latitudeDelta: 0.008,
-              longitudeDelta: 0.008,
-            }}
-          >
+          <MapView style={styles.mapStyle} region={activeBeach}>
             <Polygon
               coordinates={[
                 { name: "1", latitude: 50.710327, longitude: -1.898517 },
