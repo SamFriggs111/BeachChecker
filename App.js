@@ -5,19 +5,12 @@ import { createMaterialBottomTabNavigator } from "@react-navigation/material-bot
 import {
   MaterialCommunityIcons,
   MaterialIcons,
-  FontAwesome5
+  FontAwesome5,
 } from "@expo/vector-icons";
 
 import LandingPage from "./components/LandingPage";
 import MapsView from "./components/MapsView";
-
-function Feed() {
-  return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Feed!</Text>
-    </View>
-  );
-}
+import SearchView from "./components/SearchView";
 
 function Profile() {
   return (
@@ -52,17 +45,17 @@ function MyTabs() {
           tabBarLabel: "Home",
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="home" color={color} size={26} />
-          )
+          ),
         }}
       />
       <Tab.Screen
         name="Search"
-        component={Notifications}
+        component={SearchView}
         options={{
           tabBarLabel: "Search",
           tabBarIcon: ({ color }) => (
             <MaterialIcons name="search" size={24} color={color} size={26} />
-          )
+          ),
         }}
       />
       <Tab.Screen
@@ -77,7 +70,7 @@ function MyTabs() {
               color={color}
               size={26}
             />
-          )
+          ),
         }}
       />
       <Tab.Screen
@@ -92,7 +85,7 @@ function MyTabs() {
               color={color}
               size={26}
             />
-          )
+          ),
         }}
       />
       <Tab.Screen
@@ -102,7 +95,7 @@ function MyTabs() {
           tabBarLabel: "Feedback",
           tabBarIcon: ({ color }) => (
             <MaterialIcons name="feedback" color={color} size={26} />
-          )
+          ),
         }}
       />
     </Tab.Navigator>
@@ -133,14 +126,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     height: 60,
-    flexDirection: "row"
+    flexDirection: "row",
   },
   title: {
     color: "white",
     fontWeight: "bold",
-    fontSize: 20
+    fontSize: 20,
   },
   titleIcon: {
-    marginRight: 10
-  }
+    marginRight: 10,
+  },
 });

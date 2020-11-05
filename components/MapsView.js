@@ -4,7 +4,7 @@ import {
   View,
   StyleSheet,
   SafeAreaView,
-  Dimensions
+  Dimensions,
 } from "react-native";
 import MapView, { Polygon } from "react-native-maps";
 
@@ -19,7 +19,7 @@ const MapsView = ({ navigation }) => {
               latitude: 50.715733,
               longitude: -1.875273,
               latitudeDelta: 0.008,
-              longitudeDelta: 0.008
+              longitudeDelta: 0.008,
             }}
           >
             <Polygon
@@ -44,10 +44,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   mapStyle: {
     width: Dimensions.get("window").width,
-    height: Dimensions.get("window").height
-  }
+    height: Dimensions.get("window").height,
+  },
 });
