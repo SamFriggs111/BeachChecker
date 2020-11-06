@@ -5,7 +5,7 @@ import {
   SafeAreaView,
   Dimensions,
   Text,
-  Image,
+  Image
 } from "react-native";
 import { getDefaultRegion, getBeachData } from ".././api/api";
 import MapView, { Callout, Marker, Polygon } from "react-native-maps";
@@ -14,7 +14,7 @@ const beachData = getBeachData();
 // console.log(route.params);
 
 const PolygonViews = () => {
-  return beachData.map((data) => (
+  return beachData.map(data => (
     // fillColor="#1dad31"
     <Polygon fillColor="green" coordinates={data.polygonCoordinates} />
   ));
@@ -34,7 +34,7 @@ const MapsView = ({ route }) => {
 
   const CustomCallouts = () => {
     return beachData.map(
-      (data) => (
+      data => (
         <Marker ref={markerRef} coordinate={data}>
           <Callout style={styles.callout}>
             <Text style={styles.calloutTitle}>{data.title}</Text>
@@ -70,18 +70,18 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "center"
   },
   mapStyle: {
     width: Dimensions.get("window").width,
-    height: Dimensions.get("window").height,
+    height: Dimensions.get("window").height
   },
   callout: {
-    width: 100,
+    width: 100
   },
   calloutTitle: {
     textAlign: "center",
     fontSize: 12,
-    padding: 5,
-  },
+    padding: 5
+  }
 });

@@ -39,13 +39,13 @@ const CongestionTextView = () => {
 const LandingPage = ({ navigation }) => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <View style={{ flex: 2, padding: 0 }}>
-        <NoticeTextView></NoticeTextView>
+      <View style={{ flex: 1, padding: 0 }}>
+        <NoticeTextView style={{ flex: 1 }}></NoticeTextView>
         <HelpTextView></HelpTextView>
         <View style={[styles.textPadding, styles.congestionColour]}>
           <CongestionTextView></CongestionTextView>
         </View>
-        <View style={[styles.congestionColour, { flex: 3.5 }]}></View>
+        <View style={[styles.congestionColour, { flex: 1.5 }]}></View>
       </View>
     </SafeAreaView>
   );

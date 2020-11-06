@@ -5,48 +5,19 @@ import {
   Dimensions,
   Text,
   StyleSheet,
-  Image,
+  Image
 } from "react-native";
+import MapView, { Callout, Marker, Polygon } from "react-native-maps";
+import { getDefaultRegion, getBeachData } from ".././api/api";
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
-
-const styles = StyleSheet.create({
-  slide: {
-    height: windowHeight,
-    width: windowWidth,
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 170,
-  },
-  slideImage: { width: windowWidth * 0.9, height: windowHeight * 0.2 },
-  slideTitle: { fontSize: 24 },
-  slideSubtitle: { fontSize: 18 },
-
-  pagination: {
-    position: "absolute",
-    bottom: 8,
-    width: "100%",
-    justifyContent: "center",
-    flexDirection: "row",
-  },
-  paginationDot: {
-    width: 8,
-    height: 8,
-    borderRadius: 4,
-    marginHorizontal: 2,
-  },
-  paginationDotActive: { backgroundColor: "lightblue" },
-  paginationDotInactive: { backgroundColor: "gray" },
-
-  carousel: { flex: 1 },
-});
 
 const slideList = Array.from({ length: 12 }).map((_, i) => {
   return {
     id: i,
     image: `https://picsum.photos/1440/2842?random=${i}`,
     title: `This is the title ${i + 1}!`,
-    subtitle: `This is the subtitle ${i + 1}!`,
+    subtitle: `This is the subtitle ${i + 1}!`
   };
 });
 
@@ -71,7 +42,7 @@ function Pagination({ index }) {
               styles.paginationDot,
               index === i
                 ? styles.paginationDotActive
-                : styles.paginationDotInactive,
+                : styles.paginationDotInactive
             ]}
           />
         );
@@ -80,11 +51,14 @@ function Pagination({ index }) {
   );
 }
 
-export default function Carousel() {
+const defaultRegion = getDefaultRegion();
+const region = defaultRegion;
+
+const FaqPage = () => {
   const [index, setIndex] = useState(0);
   const indexRef = useRef(index);
   indexRef.current = index;
-  const onScroll = useCallback((event) => {
+  const onScroll = useCallback(event => {
     const slideSize = event.nativeEvent.layoutMeasurement.width;
     const index = event.nativeEvent.contentOffset.x / slideSize;
     const roundIndex = Math.round(index);
@@ -107,15 +81,15 @@ export default function Carousel() {
     removeClippedSubviews: true,
     scrollEventThrottle: 16,
     windowSize: 2,
-    keyExtractor: useCallback((s) => String(s.id), []),
+    keyExtractor: useCallback(s => String(s.id), []),
     getItemLayout: useCallback(
       (_, index) => ({
         index,
         length: windowWidth,
-        offset: index * windowWidth,
+        offset: index * windowWidth
       }),
       []
-    ),
+    )
   };
 
   const renderItem = useCallback(function renderItem({ item }) {
@@ -124,6 +98,7 @@ export default function Carousel() {
 
   return (
     <>
+      <MapView style={styles.mapStyle} region={region}></MapView>
       <FlatList
         data={slideList}
         style={styles.carousel}
@@ -138,4 +113,46 @@ export default function Carousel() {
       <Pagination index={index}></Pagination>
     </>
   );
-}
+};
+
+export default FaqPage;
+
+const styles = StyleSheet.create({
+  slide: {
+    height: windowHeight,
+    width: windowWidth,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 100,
+    zIndex: 99999
+  },
+  slideImage: { width: windowWidth * 0.9, height: windowHeight * 0.2 },
+  slideTitle: { fontSize: 24 },
+  slideSubtitle: { fontSize: 18 },
+
+  pagination: {
+    position: "absolute",
+    bottom: 8,
+    width: "100%",
+    justifyContent: "center",
+    flexDirection: "row"
+  },
+  paginationDot: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    marginHorizontal: 2
+  },
+  paginationDotActive: { backgroundColor: "lightblue" },
+  paginationDotInactive: { backgroundColor: "gray" },
+  carousel: {
+    flex: 1,
+    position: "absolute"
+    // marginBottom: 10000
+  },
+  mapStyle: {
+    zIndex: 0,
+    width: Dimensions.get("window").width,
+    height: Dimensions.get("window").height
+  }
+});
