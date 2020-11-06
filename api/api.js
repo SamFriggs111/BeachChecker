@@ -14,15 +14,6 @@ const warnings = [
   { colour: "green", text: "Low congestion" },
 ];
 
-export const getDefaultRegion = () => {
-  return {
-    latitude: 50.715733,
-    longitude: -1.875273,
-    latitudeDelta: 0.008,
-    longitudeDelta: 0.008,
-  };
-};
-
 // latitude: 50.711054,
 // longitude: -1.895746,
 // latitudeDelta: 0.008,
@@ -31,12 +22,16 @@ export const getDefaultRegion = () => {
 const beachData = [
   {
     title: "Branksome Dene Beach",
-    coordinates: [
+    polygonCoordinates: [
       { name: "topLeft", latitude: 50.70746, longitude: -1.906429 },
       { name: "bottomLeft", latitude: 50.707354, longitude: -1.906306 },
       { name: "bottomRight", latitude: 50.70974, longitude: -1.899223 },
       { name: "topRight", latitude: 50.709998, longitude: -1.899228 },
     ],
+    latitude: (50.70746 + 50.70974) / 2,
+    longitude: (-1.906429 + -1.899223) / 2,
+    latitudeDelta: 0.008,
+    longitudeDelta: 0.008,
     beachInfo: [
       {
         congestion: [
@@ -57,14 +52,27 @@ const beachData = [
   },
   {
     title: "Alum Chine Beach",
-    coordinates: [
+    polygonCoordinates: [
       { name: "topLeft", latitude: 50.709998, longitude: -1.899228 },
       { name: "bottomLeft", latitude: 50.70974, longitude: -1.899223 },
       { name: "bottomRight", latitude: 50.711558, longitude: -1.893613 },
       { name: "topRight", latitude: 50.711806, longitude: -1.893869 },
     ],
+    latitude: 50.710778,
+    longitude: -1.8964205,
+    latitudeDelta: 0.008,
+    longitudeDelta: 0.008,
   },
 ];
+
+export const getDefaultRegion = () => {
+  return {
+    latitude: 50.715733,
+    longitude: -1.875273,
+    latitudeDelta: 0.008,
+    longitudeDelta: 0.008,
+  };
+};
 
 export const getBeachData = () => {
   return beachData;

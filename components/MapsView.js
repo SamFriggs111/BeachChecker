@@ -11,17 +11,19 @@ import { getDefaultRegion, getBeachData } from ".././api/api";
 import MapView, { Callout, Marker, Polygon } from "react-native-maps";
 
 const beachData = getBeachData();
-console.log(beachData[0].beachInfo[0].congestion[0].colour);
+// console.log(route.params);
 
 const PolygonViews = () => {
   return beachData.map((data) => (
-    <Polygon fillColor="green" coordinates={data.coordinates} />
+    // fillColor="#1dad31"
+    <Polygon fillColor="green" coordinates={data.polygonCoordinates} />
   ));
 };
 
 const MapsView = ({ route }) => {
   const defaultRegion = getDefaultRegion();
   const region = route.params ? route.params.region : defaultRegion;
+  console.log(region);
   const markerRef = useRef(null);
 
   const onRegionChangeComplete = () => {
@@ -40,61 +42,8 @@ const MapsView = ({ route }) => {
             onRegionChangeComplete={onRegionChangeComplete}
           >
             <PolygonViews></PolygonViews>
-            {/* <Polygon
-              fillColor="#1dad31"
-              coordinates={[
-                {
-                  name: "topLeft",
-                  latitude: 50.709998,
-                  longitude: -1.899228,
-                },
-                {
-                  name: "bottomLeft",
-                  latitude: 50.70974,
-                  longitude: -1.899223,
-                },
-                {
-                  name: "bottomRight",
-                  latitude: 50.711558,
-                  longitude: -1.893613,
-                },
-                {
-                  name: "topRight",
-                  latitude: 50.711806,
-                  longitude: -1.893869,
-                },
-              ]}
-            /> */}
-            {/* <Polygon
-              fillColor="#e3780e"
-              coordinates={[
-                {
-                  name: "topLeft",
-                  latitude: 50.70746,
-                  longitude: -1.906429,
-                },
-                {
-                  name: "bottomLeft",
-                  latitude: 50.707354,
-                  longitude: -1.906306,
-                },
-                {
-                  name: "bottomRight",
-                  latitude: 50.70974,
-                  longitude: -1.899223,
-                },
-                {
-                  name: "topRight",
-                  latitude: 50.709998,
-                  longitude: -1.899228,
-                },
-              ]}
-            /> */}
-            <Marker
-              ref={markerRef}
-              coordinate={{ latitude: 50.710778, longitude: -1.8964205 }}
-            >
-              <Callout resizeMode="cover">
+            <Marker ref={markerRef} coordinate={region}>
+              <Callout>
                 <Text>Tester123</Text>
                 <Text>Tester123</Text>
                 <Button title="test"></Button>
