@@ -7,8 +7,17 @@ import {
   Text,
   Button,
 } from "react-native";
-import { getDefaultRegion } from ".././api/api";
+import { getDefaultRegion, getBeachData } from ".././api/api";
 import MapView, { Callout, Marker, Polygon } from "react-native-maps";
+
+const beachData = getBeachData();
+console.log(beachData[0].beachInfo[0].congestion[0].colour);
+
+const PolygonViews = () => {
+  return beachData.map((data) => (
+    <Polygon fillColor="green" coordinates={data.coordinates} />
+  ));
+};
 
 const MapsView = ({ route }) => {
   const defaultRegion = getDefaultRegion();
@@ -30,7 +39,8 @@ const MapsView = ({ route }) => {
             region={region}
             onRegionChangeComplete={onRegionChangeComplete}
           >
-            <Polygon
+            <PolygonViews></PolygonViews>
+            {/* <Polygon
               fillColor="#1dad31"
               coordinates={[
                 {
@@ -54,8 +64,8 @@ const MapsView = ({ route }) => {
                   longitude: -1.893869,
                 },
               ]}
-            />
-            <Polygon
+            /> */}
+            {/* <Polygon
               fillColor="#e3780e"
               coordinates={[
                 {
@@ -79,7 +89,7 @@ const MapsView = ({ route }) => {
                   longitude: -1.899228,
                 },
               ]}
-            />
+            /> */}
             <Marker
               ref={markerRef}
               coordinate={{ latitude: 50.710778, longitude: -1.8964205 }}

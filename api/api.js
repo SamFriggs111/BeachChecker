@@ -66,6 +66,10 @@ const beachData = [
   },
 ];
 
+export const getBeachData = () => {
+  return beachData;
+};
+
 export const getNoticeText = () => {
   if (typeof noticeText !== "undefined") return noticeText;
   else
