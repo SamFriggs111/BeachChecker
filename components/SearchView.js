@@ -63,7 +63,6 @@ const SearchView = ({ navigation }) => {
         onRefresh={() => {
           setBeachData(getBeachData());
         }}
-        style={styles.test}
       />
     </SafeAreaView>
   );
@@ -72,10 +71,6 @@ const SearchView = ({ navigation }) => {
 export default SearchView;
 
 const styles = StyleSheet.create({
-  // test: {
-  //   position: "absolute",
-  //   bottom: 8
-  // },
   container: {
     flex: 1
   },

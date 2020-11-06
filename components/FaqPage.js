@@ -7,8 +7,8 @@ import {
   StyleSheet,
   Image
 } from "react-native";
-import MapView, { Callout, Marker, Polygon } from "react-native-maps";
-import { getDefaultRegion, getBeachData } from ".././api/api";
+import MapView from "react-native-maps";
+import { getDefaultRegion } from ".././api/api";
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
@@ -101,7 +101,7 @@ const FaqPage = () => {
       <MapView style={styles.mapStyle} region={region}></MapView>
       <FlatList
         data={slideList}
-        style={styles.test}
+        style={styles.carousel}
         renderItem={renderItem}
         pagingEnabled
         horizontal
@@ -118,28 +118,26 @@ const FaqPage = () => {
 export default FaqPage;
 
 const styles = StyleSheet.create({
-  test: {
-    position: "absolute",
-    bottom: 16
-  },
   slide: {
-    // height: windowHeight,
     width: windowWidth,
     justifyContent: "center",
-    alignItems: "center"
-    // marginTop: windowHeight - 380
-    // zIndex: 99999
-    // bottom: 80
+    alignItems: "center",
+    backgroundColor: "white",
+    // marginHorizontal: 15,
+    marginVertical: 15,
+    borderRadius: 20
+    // marginLeft: 10,
+    // marginRight: 10
   },
   slideImage: {
-    width: windowWidth * 0.9,
+    width: windowWidth * 0.6,
     height: windowHeight * 0.2
   },
   slideTitle: {
-    fontSize: 24
+    fontSize: 20
   },
   slideSubtitle: {
-    fontSize: 18
+    fontSize: 14
   },
   pagination: {
     position: "absolute",
@@ -155,15 +153,14 @@ const styles = StyleSheet.create({
     marginHorizontal: 2
   },
   paginationDotActive: {
-    backgroundColor: "lightblue"
+    backgroundColor: "white"
   },
   paginationDotInactive: {
     backgroundColor: "gray"
   },
   carousel: {
-    flex: 1,
-    position: "absolute"
-    // marginBottom: 10000
+    position: "absolute",
+    bottom: 30
   },
   mapStyle: {
     zIndex: 0,
