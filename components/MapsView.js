@@ -5,7 +5,7 @@ import {
   SafeAreaView,
   Dimensions,
   Text,
-  Button,
+  Image,
 } from "react-native";
 import { getDefaultRegion, getBeachData } from ".././api/api";
 import MapView, { Callout, Marker, Polygon } from "react-native-maps";
@@ -23,25 +23,26 @@ const PolygonViews = () => {
 const MapsView = ({ route }) => {
   const defaultRegion = getDefaultRegion();
   const region = route.params ? route.params.region : defaultRegion;
-  console.log(region);
+  // console.log(region);
   const markerRef = useRef(null);
 
   const onRegionChangeComplete = () => {
-    if (markerRef && markerRef.current && markerRef.current.showCallout) {
-      markerRef.current.showCallout();
-    }
+    // if (markerRef && markerRef.current && markerRef.current.showCallout) {
+    markerRef.current.showCallout();
+    // }
   };
 
   const CustomCallouts = () => {
-    return beachData.map((data) => (
-      <Marker ref={markerRef} coordinate={region}>
-        <Callout>
-          <Text>Tester123</Text>
-          <Text>Tester123</Text>
-          <Button title="test"></Button>
-        </Callout>
-      </Marker>
-    ));
+    return beachData.map(
+      (data) => (
+        <Marker ref={markerRef} coordinate={data}>
+          <Callout style={styles.callout}>
+            <Text style={styles.calloutTitle}>{data.title}</Text>
+          </Callout>
+        </Marker>
+      ),
+      () => console.log("data")
+    );
   };
 
   return (
@@ -74,5 +75,13 @@ const styles = StyleSheet.create({
   mapStyle: {
     width: Dimensions.get("window").width,
     height: Dimensions.get("window").height,
+  },
+  callout: {
+    width: 100,
+  },
+  calloutTitle: {
+    textAlign: "center",
+    fontSize: 12,
+    padding: 5,
   },
 });
