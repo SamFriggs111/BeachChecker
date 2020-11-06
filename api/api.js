@@ -2,7 +2,7 @@ const noticeText = {
   Intro:
     "Due to the close of the summer season, congestion statuses will be continually reviewed and updated when required.",
   Desc:
-    "Groyne renewal works are taking place between Alum & Middle Chine until Spring 2021"
+    "Groyne renewal works are taking place between Alum & Middle Chine until Spring 2021",
 }; // Pretend value from database
 
 const helpText =
@@ -11,8 +11,17 @@ const helpText =
 const warnings = [
   { colour: "red", text: "Avoid, safe social distancing not possible" },
   { colour: "orange", text: "Congested, stay alert" },
-  { colour: "green", text: "Low congestion" }
+  { colour: "green", text: "Low congestion" },
 ];
+
+export const getDefaultRegion = () => {
+  return {
+    latitude: 50.715733,
+    longitude: -1.875273,
+    latitudeDelta: 0.008,
+    longitudeDelta: 0.008,
+  };
+};
 
 // latitude: 50.711054,
 // longitude: -1.895746,
@@ -26,16 +35,16 @@ const beachData = [
       { name: "topLeft", latitude: 50.70746, longitude: -1.906429 },
       { name: "bottomLeft", latitude: 50.707354, longitude: -1.906306 },
       { name: "bottomRight", latitude: 50.70974, longitude: -1.899223 },
-      { name: "topRight", latitude: 50.709998, longitude: -1.899228 }
+      { name: "topRight", latitude: 50.709998, longitude: -1.899228 },
     ],
     beachInfo: [
       {
         congestion: [
           {
             severity: "Low",
-            colour: "green"
-          }
-        ]
+            colour: "green",
+          },
+        ],
       },
       { lifeguarded: "" },
       { toilets: "" },
@@ -43,8 +52,8 @@ const beachData = [
       { cycling: "" },
       { bbq: "" },
       { img: "" },
-      { warning: "" }
-    ]
+      { warning: "" },
+    ],
   },
   {
     title: "Alum Chine Beach",
@@ -52,9 +61,9 @@ const beachData = [
       { name: "topLeft", latitude: 50.709998, longitude: -1.899228 },
       { name: "bottomLeft", latitude: 50.70974, longitude: -1.899223 },
       { name: "bottomRight", latitude: 50.711558, longitude: -1.893613 },
-      { name: "topRight", latitude: 50.711806, longitude: -1.893869 }
-    ]
-  }
+      { name: "topRight", latitude: 50.711806, longitude: -1.893869 },
+    ],
+  },
 ];
 
 export const getNoticeText = () => {
@@ -62,7 +71,7 @@ export const getNoticeText = () => {
   else
     return {
       Intro: "No notices at this time",
-      Desc: "All updates will be displayed here"
+      Desc: "All updates will be displayed here",
     };
 };
 
