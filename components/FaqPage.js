@@ -12,7 +12,7 @@ import { getDefaultRegion } from ".././api/api";
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
-const slideList = Array.from({ length: 12 }).map((_, i) => {
+const slideList = Array.from({ length: 8 }).map((_, i) => {
   return {
     id: i,
     image: `https://picsum.photos/1440/2842?random=${i}`,
@@ -24,9 +24,11 @@ const slideList = Array.from({ length: 12 }).map((_, i) => {
 const Slide = memo(function Slide({ data }) {
   return (
     <View style={styles.slide}>
-      <Image source={{ uri: data.image }} style={styles.slideImage}></Image>
-      <Text style={styles.slideTitle}>{data.title}</Text>
-      <Text style={styles.slideSubtitle}>{data.subtitle}</Text>
+      <View style={styles.innerSlide}>
+        <Image source={{ uri: data.image }} style={styles.slideImage}></Image>
+        <Text style={styles.slideTitle}>{data.title}</Text>
+        <Text style={styles.slideSubtitle}>{data.subtitle}</Text>
+      </View>
     </View>
   );
 });
@@ -58,19 +60,18 @@ const FaqPage = () => {
   const [index, setIndex] = useState(0);
   const indexRef = useRef(index);
   indexRef.current = index;
+
   const onScroll = useCallback(event => {
     const slideSize = event.nativeEvent.layoutMeasurement.width;
     const index = event.nativeEvent.contentOffset.x / slideSize;
-    const roundIndex = Math.round(index);
 
+    const roundIndex = Math.round(index);
     const distance = Math.abs(roundIndex - index);
 
-    // Prevent one pixel triggering setIndex in the middle
-    // of the transition. With this we have to scroll a bit
-    // more to trigger the index change.
     const isNoMansLand = 0.4 < distance;
 
     if (roundIndex !== indexRef.current && !isNoMansLand) {
+      console.log("roundIndex2", roundIndex);
       setIndex(roundIndex);
     }
   }, []);
@@ -78,7 +79,7 @@ const FaqPage = () => {
   const flatListOptimizationProps = {
     initialNumToRender: 0,
     maxToRenderPerBatch: 1,
-    removeClippedSubviews: true,
+    removeClippedSubviews: false,
     scrollEventThrottle: 16,
     windowSize: 2,
     keyExtractor: useCallback(s => String(s.id), []),
@@ -120,14 +121,15 @@ export default FaqPage;
 const styles = StyleSheet.create({
   slide: {
     width: windowWidth,
+    alignItems: "center"
+  },
+  innerSlide: {
+    paddingHorizontal: 50,
+    backgroundColor: "white",
     justifyContent: "center",
     alignItems: "center",
-    // backgroundColor: "white",
-    // marginHorizontal: 15,
     marginVertical: 15,
     borderRadius: 20
-    // marginLeft: 10,
-    // marginRight: 10
   },
   slideImage: {
     width: windowWidth * 0.6,
@@ -135,15 +137,16 @@ const styles = StyleSheet.create({
   },
   slideTitle: {
     fontSize: 20,
-    backgroundColor: "white",
-    paddingHorizontal: 43
+    backgroundColor: "white"
+    // paddingHorizontal: 43
   },
   slideSubtitle: {
     fontSize: 14,
-    backgroundColor: "white",
-    paddingHorizontal: 53,
-    borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20
+    backgroundColor: "white"
+    // paddingHorizontal: 53,
+    // width: 200,
+    // borderBottomLeftRadius: 20,
+    // borderBottomRightRadius: 20
   },
   pagination: {
     position: "absolute",
