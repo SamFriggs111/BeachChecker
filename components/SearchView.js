@@ -53,6 +53,7 @@ const SearchView = ({ navigation }) => {
         placeholder="Search"
         onChangeText={(text) => searchFilterFunction(text)}
         value={value}
+        style={styles.searchBar}
       />
       <FlatList
         data={data}
@@ -74,12 +75,21 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   item: {
-    backgroundColor: "lavender",
-    padding: 20,
-    marginVertical: 2,
-    marginHorizontal: 1,
+    backgroundColor: "white",
+    padding: 10,
+    marginVertical: 3,
+    marginHorizontal: 10,
+    borderRadius: 10,
+    shadowColor: "#000",
+    shadowOffset: { width: 1, height: 1 },
+    shadowOpacity: 0.4,
+    shadowRadius: 3,
+    elevation: 5,
   },
   title: {
     fontSize: 32,
+  },
+  searchBar: {
+    marginBottom: 5,
   },
 });
