@@ -9,21 +9,14 @@ import {
 } from "@expo/vector-icons";
 
 import LandingPage from "./components/LandingPage";
-import MapsView from "./components/MapsView";
 import SearchView from "./components/SearchView";
+import MapsView from "./components/MapsView";
+import FaqView from "./components/FaqPage";
 
 function Profile() {
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
       <Text>Profile!</Text>
-    </View>
-  );
-}
-
-function Notifications() {
-  return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Notifications!</Text>
     </View>
   );
 }
@@ -75,7 +68,7 @@ function MyTabs() {
       />
       <Tab.Screen
         name="Faq"
-        component={Notifications}
+        component={FaqView}
         options={{
           tabBarLabel: "FAQ",
           tabBarIcon: ({ color }) => (
