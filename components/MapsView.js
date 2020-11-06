@@ -32,6 +32,18 @@ const MapsView = ({ route }) => {
     }
   };
 
+  const CustomCallouts = () => {
+    return beachData.map((data) => (
+      <Marker ref={markerRef} coordinate={region}>
+        <Callout>
+          <Text>Tester123</Text>
+          <Text>Tester123</Text>
+          <Button title="test"></Button>
+        </Callout>
+      </Marker>
+    ));
+  };
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={{ flex: 1, padding: 0 }}>
@@ -42,13 +54,7 @@ const MapsView = ({ route }) => {
             onRegionChangeComplete={onRegionChangeComplete}
           >
             <PolygonViews></PolygonViews>
-            <Marker ref={markerRef} coordinate={region}>
-              <Callout>
-                <Text>Tester123</Text>
-                <Text>Tester123</Text>
-                <Button title="test"></Button>
-              </Callout>
-            </Marker>
+            <CustomCallouts></CustomCallouts>
           </MapView>
         </View>
       </View>
