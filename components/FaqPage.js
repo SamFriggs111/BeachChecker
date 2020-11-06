@@ -101,7 +101,7 @@ const FaqPage = () => {
       <MapView style={styles.mapStyle} region={region}></MapView>
       <FlatList
         data={slideList}
-        style={styles.carousel}
+        style={styles.test}
         renderItem={renderItem}
         pagingEnabled
         horizontal
@@ -118,18 +118,29 @@ const FaqPage = () => {
 export default FaqPage;
 
 const styles = StyleSheet.create({
+  test: {
+    position: "absolute",
+    bottom: 16
+  },
   slide: {
-    height: windowHeight,
+    // height: windowHeight,
     width: windowWidth,
     justifyContent: "center",
-    alignItems: "center",
-    marginTop: 100,
-    zIndex: 99999
+    alignItems: "center"
+    // marginTop: windowHeight - 380
+    // zIndex: 99999
+    // bottom: 80
   },
-  slideImage: { width: windowWidth * 0.9, height: windowHeight * 0.2 },
-  slideTitle: { fontSize: 24 },
-  slideSubtitle: { fontSize: 18 },
-
+  slideImage: {
+    width: windowWidth * 0.9,
+    height: windowHeight * 0.2
+  },
+  slideTitle: {
+    fontSize: 24
+  },
+  slideSubtitle: {
+    fontSize: 18
+  },
   pagination: {
     position: "absolute",
     bottom: 8,
@@ -143,8 +154,12 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     marginHorizontal: 2
   },
-  paginationDotActive: { backgroundColor: "lightblue" },
-  paginationDotInactive: { backgroundColor: "gray" },
+  paginationDotActive: {
+    backgroundColor: "lightblue"
+  },
+  paginationDotInactive: {
+    backgroundColor: "gray"
+  },
   carousel: {
     flex: 1,
     position: "absolute"

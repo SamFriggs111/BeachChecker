@@ -6,7 +6,7 @@ import {
   Text,
   StyleSheet,
   SafeAreaView,
-  TouchableOpacity,
+  TouchableOpacity
 } from "react-native";
 import { getBeachData } from ".././api/api";
 
@@ -22,13 +22,13 @@ const SearchView = ({ navigation }) => {
   const [data, setBeachData] = React.useState(items);
   const refreshing = false;
 
-  const searchFilterFunction = (text) => {
+  const searchFilterFunction = text => {
     onChangeText(text);
     items = getBeachData();
     let newData = items;
 
     if (text) {
-      newData = items.filter((item) => {
+      newData = items.filter(item => {
         const itemData = item.title.toLowerCase();
         const textData = text.toLowerCase();
 
@@ -51,18 +51,19 @@ const SearchView = ({ navigation }) => {
     <SafeAreaView style={styles.container}>
       <Searchbar
         placeholder="Search"
-        onChangeText={(text) => searchFilterFunction(text)}
+        onChangeText={text => searchFilterFunction(text)}
         value={value}
         style={styles.searchBar}
       />
       <FlatList
         data={data}
         renderItem={renderItem}
-        keyExtractor={(item) => item.id}
+        keyExtractor={item => item.id}
         refreshing={refreshing}
         onRefresh={() => {
           setBeachData(getBeachData());
         }}
+        style={styles.test}
       />
     </SafeAreaView>
   );
@@ -71,8 +72,12 @@ const SearchView = ({ navigation }) => {
 export default SearchView;
 
 const styles = StyleSheet.create({
+  // test: {
+  //   position: "absolute",
+  //   bottom: 8
+  // },
   container: {
-    flex: 1,
+    flex: 1
   },
   item: {
     backgroundColor: "white",
@@ -84,12 +89,12 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 1, height: 1 },
     shadowOpacity: 0.4,
     shadowRadius: 3,
-    elevation: 5,
+    elevation: 5
   },
   title: {
-    fontSize: 32,
+    fontSize: 32
   },
   searchBar: {
-    marginBottom: 5,
-  },
+    marginBottom: 5
+  }
 });
