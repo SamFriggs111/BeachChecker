@@ -1,7 +1,6 @@
 import * as React from "react";
 import { Searchbar } from "react-native-paper";
 import {
-  StatusBar,
   FlatList,
   View,
   Text,
@@ -22,7 +21,32 @@ const Item = ({ title }) => (
 const SearchView = ({ navigation }) => {
   const [searchQuery, setSearchQuery] = React.useState("");
   const onChangeSearch = (query) => setSearchQuery(query);
-  console.log("var", searchQuery);
+  // console.log("var", searchQuery);
+
+  let items = getBeachData();
+  const [value, onChangeText] = React.useState("");
+  const [data, setFriendData] = React.useState(items);
+  const [refreshing, setRefreshing] = React.useState(false);
+
+  const searchFilterFunction = (text) => {
+    console.log("var", searchQuery);
+    onChangeText(text);
+    items = getBeachData();
+    let newData = items;
+
+    if (text) {
+      newData = items.filter((item) => {
+        // console.log(item);
+        const itemData = item.title.toLowerCase();
+
+        const textData = text.toLowerCase();
+
+        return itemData.indexOf(textData) > -1;
+      });
+    }
+
+    setFriendData(newData);
+  };
 
   const renderItem = ({ item }) => (
     <TouchableOpacity
@@ -31,17 +55,22 @@ const SearchView = ({ navigation }) => {
       <Item title={item.title} />
     </TouchableOpacity>
   );
+
   return (
     <SafeAreaView style={styles.container}>
       <Searchbar
         placeholder="Search"
-        onChangeText={onChangeSearch}
-        value={searchQuery}
+        onChangeText={(text) => searchFilterFunction(text)}
+        value={value}
       />
       <FlatList
-        data={beachData}
+        data={data}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
+        refreshing={refreshing}
+        onRefresh={() => {
+          setFriendData(getBeachData());
+        }}
       />
     </SafeAreaView>
   );
