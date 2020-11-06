@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import MapView from "react-native-maps";
 import { getDefaultRegion } from ".././api/api";
+import { FontAwesome } from "@expo/vector-icons";
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
@@ -16,8 +17,8 @@ const slideList = Array.from({ length: 8 }).map((_, i) => {
   return {
     id: i,
     image: `https://picsum.photos/1440/2842?random=${i}`,
-    title: `This is the title ${i + 1}!`,
-    subtitle: `This is the subtitle ${i + 1}!`
+    title: `Branksome Chine Beach`,
+    subtitle: `Low congestion`
   };
 });
 
@@ -25,9 +26,12 @@ const Slide = memo(function Slide({ data }) {
   return (
     <View style={styles.slide}>
       <View style={styles.innerSlide}>
-        <Image source={{ uri: data.image }} style={styles.slideImage}></Image>
         <Text style={styles.slideTitle}>{data.title}</Text>
-        <Text style={styles.slideSubtitle}>{data.subtitle}</Text>
+        <Image source={{ uri: data.image }} style={styles.slideImage}></Image>
+        <View style={styles.warning}>
+          <FontAwesome name="circle" size={20} color="red" />
+          <Text style={styles.slideSubtitle}>{data.subtitle}</Text>
+        </View>
       </View>
     </View>
   );
@@ -124,29 +128,31 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   innerSlide: {
-    paddingHorizontal: 50,
+    paddingHorizontal: 25,
     backgroundColor: "white",
     justifyContent: "center",
     alignItems: "center",
     marginVertical: 15,
     borderRadius: 20
   },
+  warning: {
+    flexDirection: "row",
+    marginVertical: 5
+  },
   slideImage: {
-    width: windowWidth * 0.6,
-    height: windowHeight * 0.2
+    width: windowWidth * 0.7,
+    height: windowHeight * 0.2,
+    borderRadius: 5
   },
   slideTitle: {
     fontSize: 20,
-    backgroundColor: "white"
-    // paddingHorizontal: 43
+    backgroundColor: "white",
+    margin: 10
   },
   slideSubtitle: {
     fontSize: 14,
-    backgroundColor: "white"
-    // paddingHorizontal: 53,
-    // width: 200,
-    // borderBottomLeftRadius: 20,
-    // borderBottomRightRadius: 20
+    backgroundColor: "white",
+    marginHorizontal: 10
   },
   pagination: {
     position: "absolute",
