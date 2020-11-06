@@ -10,8 +10,6 @@ import {
 } from "react-native";
 import { getBeachData } from ".././api/api";
 
-const beachData = getBeachData();
-
 const Item = ({ title }) => (
   <View style={styles.item}>
     <Text style={styles.title}>{title}</Text>
@@ -19,33 +17,26 @@ const Item = ({ title }) => (
 );
 
 const SearchView = ({ navigation }) => {
-  const [searchQuery, setSearchQuery] = React.useState("");
-  const onChangeSearch = (query) => setSearchQuery(query);
-  // console.log("var", searchQuery);
-
   let items = getBeachData();
   const [value, onChangeText] = React.useState("");
-  const [data, setFriendData] = React.useState(items);
-  const [refreshing, setRefreshing] = React.useState(false);
+  const [data, setBeachData] = React.useState(items);
+  const refreshing = false;
 
   const searchFilterFunction = (text) => {
-    console.log("var", searchQuery);
     onChangeText(text);
     items = getBeachData();
     let newData = items;
 
     if (text) {
       newData = items.filter((item) => {
-        // console.log(item);
         const itemData = item.title.toLowerCase();
-
         const textData = text.toLowerCase();
 
         return itemData.indexOf(textData) > -1;
       });
     }
 
-    setFriendData(newData);
+    setBeachData(newData);
   };
 
   const renderItem = ({ item }) => (
@@ -69,7 +60,7 @@ const SearchView = ({ navigation }) => {
         keyExtractor={(item) => item.id}
         refreshing={refreshing}
         onRefresh={() => {
-          setFriendData(getBeachData());
+          setBeachData(getBeachData());
         }}
       />
     </SafeAreaView>
@@ -81,7 +72,6 @@ export default SearchView;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // marginTop: StatusBar.currentHeight || 0,
   },
   item: {
     backgroundColor: "lavender",
