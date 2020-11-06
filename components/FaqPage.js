@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
     width: windowWidth,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "white",
+    // backgroundColor: "white",
     // marginHorizontal: 15,
     marginVertical: 15,
     borderRadius: 20
@@ -134,10 +134,16 @@ const styles = StyleSheet.create({
     height: windowHeight * 0.2
   },
   slideTitle: {
-    fontSize: 20
+    fontSize: 20,
+    backgroundColor: "white",
+    paddingHorizontal: 43
   },
   slideSubtitle: {
-    fontSize: 14
+    fontSize: 14,
+    backgroundColor: "white",
+    paddingHorizontal: 53,
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20
   },
   pagination: {
     position: "absolute",
