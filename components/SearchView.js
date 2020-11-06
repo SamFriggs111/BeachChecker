@@ -1,17 +1,14 @@
 import * as React from "react";
+import { Searchbar } from "react-native-paper";
 import {
-  Button,
   StatusBar,
   FlatList,
   View,
   Text,
   StyleSheet,
   SafeAreaView,
-  Dimensions,
   TouchableOpacity,
 } from "react-native";
-import MapView, { Polygon } from "react-native-maps";
-import MapsView from ".././components/MapsView";
 import { getBeachData } from ".././api/api";
 
 const beachData = getBeachData();
@@ -23,6 +20,10 @@ const Item = ({ title }) => (
 );
 
 const SearchView = ({ navigation }) => {
+  const [searchQuery, setSearchQuery] = React.useState("");
+  const onChangeSearch = (query) => setSearchQuery(query);
+  console.log("var", searchQuery);
+
   const renderItem = ({ item }) => (
     <TouchableOpacity
       onPress={() => navigation.navigate("Map", { region: item })}
@@ -32,6 +33,11 @@ const SearchView = ({ navigation }) => {
   );
   return (
     <SafeAreaView style={styles.container}>
+      <Searchbar
+        placeholder="Search"
+        onChangeText={onChangeSearch}
+        value={searchQuery}
+      />
       <FlatList
         data={beachData}
         renderItem={renderItem}
@@ -46,13 +52,13 @@ export default SearchView;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: StatusBar.currentHeight || 0,
+    // marginTop: StatusBar.currentHeight || 0,
   },
   item: {
-    backgroundColor: "#f9c2ff",
+    backgroundColor: "lavender",
     padding: 20,
-    marginVertical: 8,
-    marginHorizontal: 16,
+    marginVertical: 2,
+    marginHorizontal: 1,
   },
   title: {
     fontSize: 32,
