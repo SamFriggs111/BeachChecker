@@ -9,7 +9,12 @@ import {
 } from "react-native";
 import MapView from "react-native-maps";
 import { getDefaultRegion } from ".././api/api";
-import { FontAwesome } from "@expo/vector-icons";
+import {
+  FontAwesome,
+  FontAwesome5,
+  Entypo,
+  MaterialCommunityIcons
+} from "@expo/vector-icons";
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
@@ -31,6 +36,13 @@ const Slide = memo(function Slide({ data }) {
         <View style={styles.warning}>
           <FontAwesome name="circle" size={20} color="red" />
           <Text style={styles.slideSubtitle}>{data.subtitle}</Text>
+        </View>
+        <View style={styles.features}>
+          <FontAwesome5 name="toilet" size={20} color="green" />
+          <Entypo name="lifebuoy" size={20} color="red" />
+          <FontAwesome5 name="dog" size={20} color="green" />
+          <FontAwesome5 name="bicycle" size={20} color="red" />
+          <MaterialCommunityIcons name="grill" size={20} color="green" />
         </View>
       </View>
     </View>
@@ -137,11 +149,24 @@ const styles = StyleSheet.create({
   },
   warning: {
     flexDirection: "row",
-    marginVertical: 5
+    marginTop: 10,
+    borderBottomColor: "rgba(158, 150, 150, .25)",
+    borderTopColor: "rgba(158, 150, 150, .25)",
+    borderBottomWidth: 1,
+    borderTopWidth: 1,
+    height: 35,
+    alignItems: "center"
+  },
+  features: {
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    width: "70%",
+    paddingVertical: 10,
+    paddingHorizontal: 5
   },
   slideImage: {
-    width: windowWidth * 0.7,
-    height: windowHeight * 0.2,
+    width: windowWidth * 0.65,
+    height: windowHeight * 0.15,
     borderRadius: 5
   },
   slideTitle: {
