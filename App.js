@@ -1,25 +1,20 @@
 import * as React from "react";
-import { Text, View, StatusBar, StyleSheet } from "react-native";
+import { Text, View, StatusBar, StyleSheet, Image } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import {
   MaterialCommunityIcons,
   MaterialIcons,
-  FontAwesome5
+  FontAwesome5,
+  FontAwesome,
+  Entypo,
 } from "@expo/vector-icons";
 
 import LandingPage from "./components/LandingPage";
 import SearchView from "./components/SearchView";
 import MapsView from "./components/MapsView";
 import FaqView from "./components/MapsView";
-
-function Profile() {
-  return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Profile!</Text>
-    </View>
-  );
-}
+import BeachDetails from "./components/BeachDetails";
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -38,7 +33,7 @@ function MyTabs() {
           tabBarLabel: "Home",
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="home" color={color} size={26} />
-          )
+          ),
         }}
       />
       <Tab.Screen
@@ -48,7 +43,7 @@ function MyTabs() {
           tabBarLabel: "Search",
           tabBarIcon: ({ color }) => (
             <MaterialIcons name="search" size={24} color={color} size={26} />
-          )
+          ),
         }}
       />
       <Tab.Screen
@@ -63,7 +58,7 @@ function MyTabs() {
               color={color}
               size={26}
             />
-          )
+          ),
         }}
       />
       <Tab.Screen
@@ -78,17 +73,17 @@ function MyTabs() {
               color={color}
               size={26}
             />
-          )
+          ),
         }}
       />
       <Tab.Screen
         name="Feedback"
-        component={Profile}
+        component={BeachDetails}
         options={{
           tabBarLabel: "Feedback",
           tabBarIcon: ({ color }) => (
             <MaterialIcons name="feedback" color={color} size={26} />
-          )
+          ),
         }}
       />
     </Tab.Navigator>
@@ -119,14 +114,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     height: 60,
-    flexDirection: "row"
+    flexDirection: "row",
   },
   title: {
     color: "white",
     fontWeight: "bold",
-    fontSize: 20
+    fontSize: 20,
   },
   titleIcon: {
-    marginRight: 10
-  }
+    marginRight: 10,
+  },
 });
