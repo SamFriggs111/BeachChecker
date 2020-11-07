@@ -1,87 +1,237 @@
-import React, { useRef } from "react";
+import React, { useCallback, memo, useRef, useState } from "react";
 import {
+  FlatList,
   View,
-  StyleSheet,
-  SafeAreaView,
   Dimensions,
   Text,
+  StyleSheet,
   Image
 } from "react-native";
-import { getDefaultRegion, getBeachData } from ".././api/api";
-import MapView, { Callout, Marker, Polygon } from "react-native-maps";
+import {
+  FontAwesome,
+  FontAwesome5,
+  Entypo,
+  MaterialCommunityIcons
+} from "@expo/vector-icons";
+import MapView, { Polygon } from "react-native-maps";
+import { getBeachData } from "../api/api";
+import { useFocusEffect } from "@react-navigation/native";
 
+const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 const beachData = getBeachData();
-// console.log(route.params);
 
-const PolygonViews = () => {
-  return beachData.map(data => (
-    // fillColor="#1dad31"
-    <Polygon fillColor="green" coordinates={data.polygonCoordinates} />
-  ));
-};
+const slideList = Array.from({ length: beachData.length }).map((_, i) => {
+  const beach = beachData[i];
+  return {
+    id: i,
+    image: `https://picsum.photos/1440/2842?random=${i}`,
+    title: beach.title,
+    congestion: `Low congestion`
+  };
+});
 
-const MapsView = ({ route }) => {
-  const defaultRegion = getDefaultRegion();
-  const region = route.params ? route.params.region : defaultRegion;
-  // console.log(region);
-  const markerRef = useRef(null);
+const Slide = memo(function Slide({ data }) {
+  return (
+    <View style={styles.slide}>
+      <View style={styles.innerSlide}>
+        <Text style={styles.slideTitle}>{data.title}</Text>
+        <Image source={{ uri: data.image }} style={styles.slideImage}></Image>
+        <View style={styles.warning}>
+          <FontAwesome name="circle" size={20} color="red" />
+          <Text style={styles.slideSubtitle}>{data.congestion}</Text>
+        </View>
+        <View style={styles.features}>
+          <FontAwesome5 name="toilet" size={20} color="green" />
+          <Entypo name="lifebuoy" size={20} color="red" />
+          <FontAwesome5 name="dog" size={20} color="green" />
+          <FontAwesome5 name="bicycle" size={20} color="red" />
+          <MaterialCommunityIcons name="grill" size={20} color="green" />
+        </View>
+      </View>
+    </View>
+  );
+});
 
-  const onRegionChangeComplete = () => {
-    // if (markerRef && markerRef.current && markerRef.current.showCallout) {
-    markerRef.current.showCallout();
-    // }
+function Pagination({ index }) {
+  return (
+    <View style={styles.pagination} pointerEvents="none">
+      {slideList.map((_, i) => {
+        return (
+          <View
+            key={i}
+            style={[
+              styles.paginationDot,
+              index === i
+                ? styles.paginationDotActive
+                : styles.paginationDotInactive
+            ]}
+          />
+        );
+      })}
+    </View>
+  );
+}
+
+const MapsPage = () => {
+  const [region, setRegion] = useState(beachData[0]);
+  const [index, setIndex] = useState(0);
+  const indexRef = useRef(index);
+  const mapRef = useRef(null);
+  indexRef.current = index;
+
+  useFocusEffect(() => {
+    if (mapRef.current) {
+      mapRef.current.animateCamera(
+        {
+          center: {
+            latitude: region.latitude,
+            longitude: region.longitude
+          },
+          zoom: 15.5
+        },
+        1000
+      );
+    }
+  }, []);
+
+  const onScroll = useCallback(event => {
+    const slideSize = event.nativeEvent.layoutMeasurement.width;
+    const index = event.nativeEvent.contentOffset.x / slideSize;
+
+    const roundIndex = Math.round(index);
+    const distance = Math.abs(roundIndex - index);
+    const isNoMansLand = 0.4 < distance;
+
+    if (roundIndex !== indexRef.current && !isNoMansLand) {
+      setIndex(roundIndex);
+      setRegion(beachData[roundIndex]);
+    }
+  }, []);
+
+  const flatListOptimizationProps = {
+    initialNumToRender: 0,
+    maxToRenderPerBatch: 1,
+    removeClippedSubviews: false,
+    scrollEventThrottle: 16,
+    windowSize: 2,
+    keyExtractor: useCallback(s => String(s.id), []),
+    getItemLayout: useCallback(
+      (_, index) => ({
+        index,
+        length: windowWidth,
+        offset: index * windowWidth
+      }),
+      []
+    )
   };
 
-  const CustomCallouts = () => {
-    return beachData.map(
-      data => (
-        <Marker ref={markerRef} coordinate={data}>
-          <Callout style={styles.callout}>
-            <Text style={styles.calloutTitle}>{data.title}</Text>
-          </Callout>
-        </Marker>
-      ),
-      () => console.log("data")
-    );
+  const renderItem = useCallback(function renderItem({ item }) {
+    return <Slide data={item} />;
+  }, []);
+
+  const PolygonViews = () => {
+    return beachData.map(data => (
+      <Polygon
+        fillColor="rgba(15, 209, 24, 0.4)"
+        coordinates={data.polygonCoordinates}
+      />
+    ));
   };
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <View style={{ flex: 1, padding: 0 }}>
-        <View>
-          <MapView
-            style={styles.mapStyle}
-            region={region}
-            onRegionChangeComplete={onRegionChangeComplete}
-          >
-            <PolygonViews></PolygonViews>
-            <CustomCallouts></CustomCallouts>
-          </MapView>
-        </View>
-      </View>
-    </SafeAreaView>
+    <>
+      <MapView style={styles.mapStyle} region={region} ref={mapRef}>
+        <PolygonViews></PolygonViews>
+      </MapView>
+      <FlatList
+        data={slideList}
+        style={styles.carousel}
+        renderItem={renderItem}
+        pagingEnabled
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        bounces={false}
+        onScroll={onScroll}
+        {...flatListOptimizationProps}
+      />
+      <Pagination index={index}></Pagination>
+    </>
   );
 };
 
-export default MapsView;
+export default MapsPage;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
+  slide: {
+    width: windowWidth,
+    alignItems: "center"
+  },
+  innerSlide: {
+    paddingHorizontal: 25,
+    backgroundColor: "white",
+    justifyContent: "center",
     alignItems: "center",
-    justifyContent: "center"
+    marginVertical: 15,
+    borderRadius: 20
+  },
+  warning: {
+    flexDirection: "row",
+    marginTop: 10,
+    borderBottomColor: "rgba(158, 150, 150, .25)",
+    borderTopColor: "rgba(158, 150, 150, .25)",
+    borderBottomWidth: 1,
+    borderTopWidth: 1,
+    height: 35,
+    alignItems: "center"
+  },
+  features: {
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    width: "70%",
+    paddingVertical: 10,
+    paddingHorizontal: 5
+  },
+  slideImage: {
+    width: windowWidth * 0.65,
+    height: windowHeight * 0.15,
+    borderRadius: 5
+  },
+  slideTitle: {
+    fontSize: 20,
+    backgroundColor: "white",
+    margin: 10
+  },
+  slideSubtitle: {
+    fontSize: 14,
+    backgroundColor: "white",
+    marginHorizontal: 10
+  },
+  pagination: {
+    position: "absolute",
+    bottom: 8,
+    width: "100%",
+    justifyContent: "center",
+    flexDirection: "row"
+  },
+  paginationDot: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    marginHorizontal: 2
+  },
+  paginationDotActive: {
+    backgroundColor: "white"
+  },
+  paginationDotInactive: {
+    backgroundColor: "gray"
+  },
+  carousel: {
+    position: "absolute",
+    bottom: 30
   },
   mapStyle: {
+    zIndex: 0,
     width: Dimensions.get("window").width,
     height: Dimensions.get("window").height
-  },
-  callout: {
-    width: 100
-  },
-  calloutTitle: {
-    textAlign: "center",
-    fontSize: 12,
-    padding: 5
   }
 });

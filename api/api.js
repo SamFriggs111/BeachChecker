@@ -14,23 +14,44 @@ const warnings = [
   { colour: "green", text: "Low congestion" }
 ];
 
-// latitude: 50.711054,
-// longitude: -1.895746,
-// latitudeDelta: 0.008,
-// longitudeDelta: 0.008
-
 const beachData = [
   {
-    id: 1,
+    title: "Branksome Chine Beach",
+    polygonCoordinates: [
+      { name: "topLeft", latitude: 50.704519, longitude: -1.913375 },
+      { name: "bottomLeft", latitude: 50.704329, longitude: -1.913027 },
+      { name: "bottomRight", latitude: 50.707354, longitude: -1.906306 },
+      { name: "topRight", latitude: 50.70766, longitude: -1.906429 }
+    ],
+    latitude: 50.703257,
+    longitude: -1.908429,
+    latitudeDelta: 0.008,
+    longitudeDelta: 0.008,
+    beachInfo: [
+      {
+        congestion: [
+          {
+            severity: "Low",
+            colour: "green"
+          }
+        ]
+      },
+      { lifeguarded: "" },
+      { toilets: "" },
+      { dogs: "" },
+      { cycling: "" },
+      { bbq: "" },
+      { img: "" }
+    ]
+  },
+  {
     title: "Branksome Dene Beach",
     polygonCoordinates: [
-      { name: "topLeft", latitude: 50.70746, longitude: -1.906429 },
+      { name: "topLeft", latitude: 50.70766, longitude: -1.906429 },
       { name: "bottomLeft", latitude: 50.707354, longitude: -1.906306 },
       { name: "bottomRight", latitude: 50.70974, longitude: -1.899223 },
       { name: "topRight", latitude: 50.709998, longitude: -1.899228 }
     ],
-    // latitude: (50.70746 + 50.70974) / 2 - 0.0025,
-    // longitude: (-1.906429 + -1.899223) / 2 - 0.0025,
     latitude: 50.7061,
     longitude: -1.902826,
     latitudeDelta: 0.008,
@@ -53,7 +74,6 @@ const beachData = [
     ]
   },
   {
-    id: 2,
     title: "Alum Chine Beach",
     polygonCoordinates: [
       { name: "topLeft", latitude: 50.709998, longitude: -1.899228 },
