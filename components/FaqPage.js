@@ -7,8 +7,8 @@ import {
   StyleSheet,
   Image
 } from "react-native";
-import MapView from "react-native-maps";
-import { getDefaultRegion } from ".././api/api";
+import MapView, { Polygon } from "react-native-maps";
+import { getDefaultRegion, getBeachData } from ".././api/api";
 import {
   FontAwesome,
   FontAwesome5,
@@ -17,8 +17,9 @@ import {
 } from "@expo/vector-icons";
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
+const beachData = getBeachData();
 
-const slideList = Array.from({ length: 8 }).map((_, i) => {
+const slideList = Array.from({ length: beachData.length }).map((_, i) => {
   return {
     id: i,
     image: `https://picsum.photos/1440/2842?random=${i}`,
@@ -70,7 +71,7 @@ function Pagination({ index }) {
 }
 
 const defaultRegion = getDefaultRegion();
-const region = defaultRegion;
+let region = beachData[1];
 
 const FaqPage = () => {
   const [index, setIndex] = useState(0);
@@ -87,8 +88,8 @@ const FaqPage = () => {
     const isNoMansLand = 0.4 < distance;
 
     if (roundIndex !== indexRef.current && !isNoMansLand) {
-      console.log("roundIndex2", roundIndex);
       setIndex(roundIndex);
+      region = beachData[roundIndex];
     }
   }, []);
 
@@ -113,9 +114,18 @@ const FaqPage = () => {
     return <Slide data={item} />;
   }, []);
 
+  const PolygonViews = () => {
+    return beachData.map(data => (
+      // fillColor="#1dad31"
+      <Polygon fillColor="green" coordinates={data.polygonCoordinates} />
+    ));
+  };
+
   return (
     <>
-      <MapView style={styles.mapStyle} region={region}></MapView>
+      <MapView style={styles.mapStyle} region={region}>
+        <PolygonViews></PolygonViews>
+      </MapView>
       <FlatList
         data={slideList}
         style={styles.carousel}

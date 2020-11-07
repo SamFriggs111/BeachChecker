@@ -2,7 +2,7 @@ const noticeText = {
   Intro:
     "Due to the close of the summer season, congestion statuses will be continually reviewed and updated when required.",
   Desc:
-    "Groyne renewal works are taking place between Alum & Middle Chine until Spring 2021",
+    "Groyne renewal works are taking place between Alum & Middle Chine until Spring 2021"
 }; // Pretend value from database
 
 const helpText =
@@ -11,7 +11,7 @@ const helpText =
 const warnings = [
   { colour: "red", text: "Avoid, safe social distancing not possible" },
   { colour: "orange", text: "Congested, stay alert" },
-  { colour: "green", text: "Low congestion" },
+  { colour: "green", text: "Low congestion" }
 ];
 
 // latitude: 50.711054,
@@ -21,15 +21,18 @@ const warnings = [
 
 const beachData = [
   {
+    id: 1,
     title: "Branksome Dene Beach",
     polygonCoordinates: [
       { name: "topLeft", latitude: 50.70746, longitude: -1.906429 },
       { name: "bottomLeft", latitude: 50.707354, longitude: -1.906306 },
       { name: "bottomRight", latitude: 50.70974, longitude: -1.899223 },
-      { name: "topRight", latitude: 50.709998, longitude: -1.899228 },
+      { name: "topRight", latitude: 50.709998, longitude: -1.899228 }
     ],
-    latitude: (50.70746 + 50.70974) / 2,
-    longitude: (-1.906429 + -1.899223) / 2,
+    // latitude: (50.70746 + 50.70974) / 2 - 0.0025,
+    // longitude: (-1.906429 + -1.899223) / 2 - 0.0025,
+    latitude: 50.7061,
+    longitude: -1.902826,
     latitudeDelta: 0.008,
     longitudeDelta: 0.008,
     beachInfo: [
@@ -37,40 +40,40 @@ const beachData = [
         congestion: [
           {
             severity: "Low",
-            colour: "green",
-          },
-        ],
+            colour: "green"
+          }
+        ]
       },
       { lifeguarded: "" },
       { toilets: "" },
       { dogs: "" },
       { cycling: "" },
       { bbq: "" },
-      { img: "" },
-      { warning: "" },
-    ],
+      { img: "" }
+    ]
   },
   {
+    id: 2,
     title: "Alum Chine Beach",
     polygonCoordinates: [
       { name: "topLeft", latitude: 50.709998, longitude: -1.899228 },
       { name: "bottomLeft", latitude: 50.70974, longitude: -1.899223 },
       { name: "bottomRight", latitude: 50.711558, longitude: -1.893613 },
-      { name: "topRight", latitude: 50.711806, longitude: -1.893869 },
+      { name: "topRight", latitude: 50.711806, longitude: -1.893869 }
     ],
-    latitude: 50.710778,
-    longitude: -1.8964205,
+    latitude: 50.708538,
+    longitude: -1.895851,
     latitudeDelta: 0.008,
-    longitudeDelta: 0.008,
-  },
+    longitudeDelta: 0.008
+  }
 ];
 
 export const getDefaultRegion = () => {
   return {
-    latitude: 50.715733,
+    latitude: 50.715733 - 0.0025,
     longitude: -1.875273,
     latitudeDelta: 0.008,
-    longitudeDelta: 0.008,
+    longitudeDelta: 0.008
   };
 };
 
@@ -83,7 +86,7 @@ export const getNoticeText = () => {
   else
     return {
       Intro: "No notices at this time",
-      Desc: "All updates will be displayed here",
+      Desc: "All updates will be displayed here"
     };
 };
 
