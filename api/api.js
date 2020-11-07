@@ -25,8 +25,10 @@ const beachData = [
     ],
     latitude: 50.703257,
     longitude: -1.908429,
-    latitudeDelta: 0.008,
-    longitudeDelta: 0.008,
+    // latitude: 50.700071,
+    // longitude: -1.921545,
+    latitudeDelta: 0.012,
+    longitudeDelta: 0.012,
     beachInfo: [
       {
         congestion: [
@@ -40,9 +42,9 @@ const beachData = [
       { toilets: "" },
       { dogs: "" },
       { cycling: "" },
-      { bbq: "" },
-      { img: "" }
-    ]
+      { bbq: "" }
+    ],
+    image: require("../assets/beaches/branksome-chine.jpg")
   },
   {
     title: "Branksome Dene Beach",
@@ -50,12 +52,12 @@ const beachData = [
       { name: "topLeft", latitude: 50.70766, longitude: -1.906429 },
       { name: "bottomLeft", latitude: 50.707354, longitude: -1.906306 },
       { name: "bottomRight", latitude: 50.70974, longitude: -1.899223 },
-      { name: "topRight", latitude: 50.709998, longitude: -1.899228 }
+      { name: "topRight", latitude: 50.709998, longitude: -1.899438 }
     ],
     latitude: 50.7061,
     longitude: -1.902826,
-    latitudeDelta: 0.008,
-    longitudeDelta: 0.008,
+    latitudeDelta: 0.012,
+    longitudeDelta: 0.012,
     beachInfo: [
       {
         congestion: [
@@ -69,22 +71,23 @@ const beachData = [
       { toilets: "" },
       { dogs: "" },
       { cycling: "" },
-      { bbq: "" },
-      { img: "" }
-    ]
+      { bbq: "" }
+    ],
+    image: require("../assets/beaches/Branksome-Dene-beach.jpg")
   },
   {
     title: "Alum Chine Beach",
     polygonCoordinates: [
-      { name: "topLeft", latitude: 50.709998, longitude: -1.899228 },
+      { name: "topLeft", latitude: 50.709999, longitude: -1.899438 },
       { name: "bottomLeft", latitude: 50.70974, longitude: -1.899223 },
       { name: "bottomRight", latitude: 50.711558, longitude: -1.893613 },
       { name: "topRight", latitude: 50.711806, longitude: -1.893869 }
     ],
     latitude: 50.708538,
     longitude: -1.895851,
-    latitudeDelta: 0.008,
-    longitudeDelta: 0.008
+    latitudeDelta: 0.012,
+    longitudeDelta: 0.012,
+    image: require("../assets/beaches/alum-chine-beach.jpg")
   }
 ];
 

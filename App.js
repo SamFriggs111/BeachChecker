@@ -106,7 +106,7 @@ export default function App() {
           size={24}
           color="white"
         />
-        <Text style={styles.title}>Beach Checker</Text>
+        <Text style={styles.title}>Beach Congestion</Text>
       </View>
       <MyTabs />
     </NavigationContainer>

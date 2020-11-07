@@ -15,6 +15,7 @@ import {
 } from "@expo/vector-icons";
 import MapView, { Polygon } from "react-native-maps";
 import { getBeachData } from "../api/api";
+// import { getBeachDataz } from "../assets/beaches";
 import { useFocusEffect } from "@react-navigation/native";
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
@@ -22,9 +23,10 @@ const beachData = getBeachData();
 
 const slideList = Array.from({ length: beachData.length }).map((_, i) => {
   const beach = beachData[i];
+  // const image = "../assets/beaches/" + beach.image;
   return {
     id: i,
-    image: `https://picsum.photos/1440/2842?random=${i}`,
+    image: beach.image,
     title: beach.title,
     congestion: `Low congestion`
   };
@@ -35,17 +37,17 @@ const Slide = memo(function Slide({ data }) {
     <View style={styles.slide}>
       <View style={styles.innerSlide}>
         <Text style={styles.slideTitle}>{data.title}</Text>
-        <Image source={{ uri: data.image }} style={styles.slideImage}></Image>
+        <Image source={data.image} style={styles.slideImage}></Image>
         <View style={styles.warning}>
-          <FontAwesome name="circle" size={20} color="red" />
+          <FontAwesome name="circle" size={20} color="#0fd119" />
           <Text style={styles.slideSubtitle}>{data.congestion}</Text>
         </View>
         <View style={styles.features}>
-          <FontAwesome5 name="toilet" size={20} color="green" />
+          <FontAwesome5 name="toilet" size={20} color="#0fd119" />
           <Entypo name="lifebuoy" size={20} color="red" />
-          <FontAwesome5 name="dog" size={20} color="green" />
+          <FontAwesome5 name="dog" size={20} color="#0fd119" />
           <FontAwesome5 name="bicycle" size={20} color="red" />
-          <MaterialCommunityIcons name="grill" size={20} color="green" />
+          <MaterialCommunityIcons name="grill" size={20} color="#0fd119" />
         </View>
       </View>
     </View>
@@ -78,18 +80,17 @@ const MapsPage = () => {
   const indexRef = useRef(index);
   const mapRef = useRef(null);
   indexRef.current = index;
-
+  console.log("test", region.latitudeDelta);
   useFocusEffect(() => {
     if (mapRef.current) {
-      mapRef.current.animateCamera(
+      mapRef.current.animateToRegion(
         {
-          center: {
-            latitude: region.latitude,
-            longitude: region.longitude
-          },
-          zoom: 15.5
+          latitude: region.latitude,
+          longitude: region.longitude,
+          latitudeDelta: 0.01,
+          longitudeDelta: 0.01
         },
-        1000
+        2000
       );
     }
   }, []);
