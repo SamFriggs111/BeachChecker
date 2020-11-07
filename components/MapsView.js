@@ -5,13 +5,13 @@ import {
   Dimensions,
   Text,
   StyleSheet,
-  Image
+  Image,
 } from "react-native";
 import {
   FontAwesome,
   FontAwesome5,
   Entypo,
-  MaterialCommunityIcons
+  MaterialCommunityIcons,
 } from "@expo/vector-icons";
 import MapView, { Polygon } from "react-native-maps";
 import { getBeachData } from "../api/api";
@@ -26,7 +26,7 @@ const slideList = Array.from({ length: beachData.length }).map((_, i) => {
     id: i,
     image: beach.image,
     title: beach.title,
-    congestion: `Low congestion`
+    congestion: `Low congestion`,
   };
 });
 
@@ -63,7 +63,7 @@ function Pagination({ index }) {
               styles.paginationDot,
               index === i
                 ? styles.paginationDotActive
-                : styles.paginationDotInactive
+                : styles.paginationDotInactive,
             ]}
           />
         );
@@ -84,7 +84,7 @@ const MapsPage = ({ route }) => {
   // console.log("region", region);
 
   useFocusEffect(() => {
-    console.log(region);
+    // console.log(region);
     if (mapRef.current) {
       route.params = null;
       mapRef.current.animateToRegion(
@@ -92,52 +92,57 @@ const MapsPage = ({ route }) => {
           latitude: region.latitude,
           longitude: region.longitude,
           latitudeDelta: 0.01,
-          longitudeDelta: 0.01
+          longitudeDelta: 0.01,
         },
         2000
       );
-      // setIndex(region.id + 1);
+      // setIndex(region.id - 1);
     }
   }, []);
 
-  const onScroll = useCallback(event => {
+  const onScroll = useCallback((event) => {
     const slideSize = event.nativeEvent.layoutMeasurement.width;
     const index = event.nativeEvent.contentOffset.x / slideSize;
 
     const roundIndex = Math.round(index);
     const distance = Math.abs(roundIndex - index);
     const isNoMansLand = 0.4 < distance;
+    // console.log(indexRef.current);
 
     if (roundIndex !== indexRef.current && !isNoMansLand) {
-      // console.log(roundIndex + 1);
+      // console.log("slideSize", slideSize);
+      console.log("index", event);
+      // console.log("roundIndex", roundIndex);
+      // console.log("distance", distance);
+      // console.log("isNoMansLand", isNoMansLand);
+
+      // console.log(indexRef.current);
       setIndex(roundIndex);
       setRegion(beachData[roundIndex]);
     }
   }, []);
 
   const flatListOptimizationProps = {
-    initialNumToRender: 0,
-    maxToRenderPerBatch: 1,
-    removeClippedSubviews: false,
     scrollEventThrottle: 16,
     windowSize: 2,
-    keyExtractor: useCallback(s => String(s.id), []),
+    keyExtractor: useCallback((s) => String(s.id), []),
     getItemLayout: useCallback(
       (_, index) => ({
         index,
         length: windowWidth,
-        offset: index * windowWidth
+        offset: index * windowWidth,
       }),
       []
-    )
+    ),
   };
 
   const renderItem = useCallback(function renderItem({ item }) {
+    // console.log("item", item);
     return <Slide data={item} />;
   }, []);
 
   const PolygonViews = () => {
-    return beachData.map(data => (
+    return beachData.map((data) => (
       <Polygon
         fillColor="rgba(15, 209, 24, 0.4)"
         coordinates={data.polygonCoordinates}
@@ -171,7 +176,7 @@ export default MapsPage;
 const styles = StyleSheet.create({
   slide: {
     width: windowWidth,
-    alignItems: "center"
+    alignItems: "center",
   },
   innerSlide: {
     paddingHorizontal: 25,
@@ -179,7 +184,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginVertical: 15,
-    borderRadius: 20
+    borderRadius: 20,
   },
   warning: {
     flexDirection: "row",
@@ -189,56 +194,56 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderTopWidth: 1,
     height: 35,
-    alignItems: "center"
+    alignItems: "center",
   },
   features: {
     flexDirection: "row",
     justifyContent: "space-evenly",
     width: "70%",
     paddingVertical: 10,
-    paddingHorizontal: 5
+    paddingHorizontal: 5,
   },
   slideImage: {
     width: windowWidth * 0.65,
     height: windowHeight * 0.15,
-    borderRadius: 5
+    borderRadius: 5,
   },
   slideTitle: {
     fontSize: 20,
     backgroundColor: "white",
-    margin: 10
+    margin: 10,
   },
   slideSubtitle: {
     fontSize: 14,
     backgroundColor: "white",
-    marginHorizontal: 10
+    marginHorizontal: 10,
   },
   pagination: {
     position: "absolute",
     bottom: 8,
     width: "100%",
     justifyContent: "center",
-    flexDirection: "row"
+    flexDirection: "row",
   },
   paginationDot: {
     width: 8,
     height: 8,
     borderRadius: 4,
-    marginHorizontal: 2
+    marginHorizontal: 2,
   },
   paginationDotActive: {
-    backgroundColor: "white"
+    backgroundColor: "white",
   },
   paginationDotInactive: {
-    backgroundColor: "gray"
+    backgroundColor: "gray",
   },
   carousel: {
     position: "absolute",
-    bottom: 30
+    bottom: 30,
   },
   mapStyle: {
     zIndex: 0,
     width: Dimensions.get("window").width,
-    height: Dimensions.get("window").height
-  }
+    height: Dimensions.get("window").height,
+  },
 });
