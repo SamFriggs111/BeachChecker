@@ -15,7 +15,6 @@ import {
 } from "@expo/vector-icons";
 import MapView, { Polygon } from "react-native-maps";
 import { getBeachData } from "../api/api";
-// import { getBeachDataz } from "../assets/beaches";
 import { useFocusEffect } from "@react-navigation/native";
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
@@ -23,7 +22,6 @@ const beachData = getBeachData();
 
 const slideList = Array.from({ length: beachData.length }).map((_, i) => {
   const beach = beachData[i];
-  // const image = "../assets/beaches/" + beach.image;
   return {
     id: i,
     image: beach.image,
@@ -74,15 +72,21 @@ function Pagination({ index }) {
   );
 }
 
-const MapsPage = () => {
-  const [region, setRegion] = useState(beachData[0]);
+const MapsPage = ({ route }) => {
+  let [region, setRegion] = useState(beachData[0]);
   const [index, setIndex] = useState(0);
   const indexRef = useRef(index);
   const mapRef = useRef(null);
+
   indexRef.current = index;
-  console.log("test", region.latitudeDelta);
+  if (route.params) region = route.params.region;
+  // console.log("region.route", route.params.region);
+  // console.log("region", region);
+
   useFocusEffect(() => {
+    console.log(region);
     if (mapRef.current) {
+      route.params = null;
       mapRef.current.animateToRegion(
         {
           latitude: region.latitude,
@@ -92,6 +96,7 @@ const MapsPage = () => {
         },
         2000
       );
+      // setIndex(region.id + 1);
     }
   }, []);
 
@@ -104,6 +109,7 @@ const MapsPage = () => {
     const isNoMansLand = 0.4 < distance;
 
     if (roundIndex !== indexRef.current && !isNoMansLand) {
+      // console.log(roundIndex + 1);
       setIndex(roundIndex);
       setRegion(beachData[roundIndex]);
     }

@@ -76,6 +76,7 @@ const beachData = [
     image: require("../assets/beaches/Branksome-Dene-beach.jpg")
   },
   {
+    id: 1,
     title: "Alum Chine Beach",
     polygonCoordinates: [
       { name: "topLeft", latitude: 50.709999, longitude: -1.899438 },
