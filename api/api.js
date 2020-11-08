@@ -26,11 +26,10 @@ const beachData = [
       { name: "topRight", latitude: 50.692025, longitude: -1.933362 },
       { name: "middleTop", latitude: 50.687437, longitude: -1.939664 },
     ],
-    latitude: 50.703257,
-    longitude: -1.908429,
-    latitudeDelta: 0.012,
-    longitudeDelta: 0.012,
+    latitude: 50.684374,
+    longitude: -1.93533,
     image: require("../assets/beaches/sandbanks.jpg"),
+    congestion: "Low",
   },
   {
     id: 2,
@@ -41,10 +40,8 @@ const beachData = [
       { name: "bottomRight", latitude: 50.698219, longitude: -1.923943 },
       { name: "topRight", latitude: 50.698389, longitude: -1.924319 },
     ],
-    latitude: 50.703257,
-    longitude: -1.908429,
-    latitudeDelta: 0.012,
-    longitudeDelta: 0.012,
+    latitude: 50.691949,
+    longitude: -1.926466,
     image: require("../assets/beaches/shore-road.jpg"),
   },
   {
@@ -57,10 +54,8 @@ const beachData = [
       { name: "topRight", latitude: 50.704519, longitude: -1.913375 },
       { name: "middleTop", latitude: 50.701721, longitude: -1.91912 },
     ],
-    latitude: 50.703257,
-    longitude: -1.908429,
-    latitudeDelta: 0.012,
-    longitudeDelta: 0.012,
+    latitude: 50.699198,
+    longitude: -1.916598,
     image: require("../assets/beaches/canford.jpg"),
   },
   {
@@ -74,10 +69,6 @@ const beachData = [
     ],
     latitude: 50.703257,
     longitude: -1.908429,
-    // latitude: 50.700071,
-    // longitude: -1.921545,
-    latitudeDelta: 0.012,
-    longitudeDelta: 0.012,
     image: require("../assets/beaches/branksome-chine.jpg"),
   },
   {
@@ -91,8 +82,6 @@ const beachData = [
     ],
     latitude: 50.7061,
     longitude: -1.902826,
-    latitudeDelta: 0.012,
-    longitudeDelta: 0.012,
     image: require("../assets/beaches/Branksome-Dene-beach.jpg"),
   },
   {
@@ -106,8 +95,6 @@ const beachData = [
     ],
     latitude: 50.708538,
     longitude: -1.895851,
-    latitudeDelta: 0.012,
-    longitudeDelta: 0.012,
     image: require("../assets/beaches/alum-chine-beach.jpg"),
   },
 ];
@@ -122,6 +109,28 @@ export const getDefaultRegion = () => {
 };
 
 export const getBeachData = () => {
+  beachData.forEach((element) => {
+    let topLeft, bottomRight;
+
+    element.polygonCoordinates.forEach((point) => {
+      // console.log("points", point);
+      if (point.name == "topLeft" && !topLeft) {
+        topLeft = { lat: point.latitude, lng: point.longitude };
+      }
+      if (point.name == "bottomRight" && !bottomRight) {
+        bottomRight = { lat: point.latitude, lng: point.longitude };
+      }
+    });
+    if (topLeft && bottomRight) {
+      let marker = {
+        latitude: (topLeft.lat + bottomRight.lat) / 2,
+        longitude: (topLeft.lng + bottomRight.lng) / 2,
+      };
+      element.marker = marker;
+      console.log(marker);
+    }
+  });
+  // console.log(beachData);
   return beachData;
 };
 

@@ -12,8 +12,9 @@ import {
   FontAwesome5,
   Entypo,
   MaterialCommunityIcons,
+  Ionicons,
 } from "@expo/vector-icons";
-import MapView, { Polygon } from "react-native-maps";
+import MapView, { Polygon, Marker, Callout } from "react-native-maps";
 import { getBeachData } from "../api/api";
 import { useFocusEffect } from "@react-navigation/native";
 import * as Animatable from "react-native-animatable";
@@ -28,6 +29,7 @@ const MapsPage = ({ route }) => {
 
   const indexRef = useRef(index);
   const mapRef = useRef(null);
+  const markerRef = useRef(null);
   const AnimationRef = useRef(null);
 
   const slideList = Array.from({ length: beachData.length }).map((_, i) => {
@@ -70,11 +72,15 @@ const MapsPage = ({ route }) => {
         style={[styles.slide, styles.carousel]}
       >
         <TouchableNativeFeedback
-          style={styles.sliderArrow}
           underlayColor="white"
           onPress={() => changeBeachDirection("left")}
         >
-          <Entypo name="arrow-left" size={32} color="white" />
+          <Ionicons
+            style={styles.sliderArrow}
+            name="ios-arrow-back"
+            size={32}
+            color="white"
+          />
         </TouchableNativeFeedback>
         <View style={styles.innerSlide}>
           <Text style={styles.slideTitle}>{cardData.title}</Text>
@@ -97,11 +103,15 @@ const MapsPage = ({ route }) => {
           </View>
         </View>
         <TouchableNativeFeedback
-          style={styles.sliderArrow}
           underlayColor="white"
           onPress={() => changeBeachDirection("right")}
         >
-          <Entypo name="arrow-right" size={32} color="white" />
+          <Ionicons
+            style={styles.sliderArrow}
+            name="ios-arrow-forward"
+            size={32}
+            color="white"
+          />
         </TouchableNativeFeedback>
       </Animatable.View>
     );
@@ -112,13 +122,12 @@ const MapsPage = ({ route }) => {
     if (route.params) setCard(route.params.region);
     if (mapRef.current) {
       route.params = null;
-      console.log("trigger");
       mapRef.current.animateToRegion(
         {
           latitude: cardData.latitude,
           longitude: cardData.longitude,
-          latitudeDelta: 0.01,
-          longitudeDelta: 0.01,
+          latitudeDelta: 0.017,
+          longitudeDelta: 0.017,
         },
         2000
       );
@@ -127,11 +136,23 @@ const MapsPage = ({ route }) => {
   }, []);
 
   const PolygonViews = () => {
+    let colour = "white";
     return beachData.map((data) => (
       <Polygon
         fillColor="rgba(15, 209, 24, 0.4)"
+        strokeColor="#0fd118"
         coordinates={data.polygonCoordinates}
       />
+    ));
+  };
+
+  const CustomCallouts = () => {
+    return beachData.map((data) => (
+      <Marker ref={markerRef} coordinate={data.marker}>
+        <Callout style={styles.callout}>
+          <Text style={styles.calloutTitle}>{data.title}</Text>
+        </Callout>
+      </Marker>
     ));
   };
 
@@ -157,6 +178,7 @@ const MapsPage = ({ route }) => {
         // onPress={test}
       >
         <PolygonViews></PolygonViews>
+        {/* <CustomCallouts /> */}
       </MapView>
       <AnimatedCard></AnimatedCard>
       <Pagination index={index}></Pagination>
@@ -168,16 +190,15 @@ export default MapsPage;
 
 const styles = StyleSheet.create({
   slide: {
-    width: windowWidth,
+    width: "100%",
     alignItems: "center",
-    // backgroundColor: "white",
     flexDirection: "row",
-    marginHorizontal: 20,
+    marginHorizontal: 0,
+    justifyContent: "center",
   },
   innerSlide: {
     paddingHorizontal: 10,
     backgroundColor: "white",
-    justifyContent: "center",
     alignItems: "center",
     marginVertical: 15,
     borderRadius: 20,
@@ -201,22 +222,20 @@ const styles = StyleSheet.create({
   },
   slideImage: {
     width: windowWidth * 0.55,
-    height: windowHeight * 0.15,
+    height: windowHeight * 0.125,
     borderRadius: 5,
   },
   slideTitle: {
     fontSize: 20,
-    backgroundColor: "white",
     margin: 10,
   },
   slideSubtitle: {
     fontSize: 14,
-    backgroundColor: "white",
     marginHorizontal: 10,
   },
   pagination: {
     position: "absolute",
-    bottom: 140,
+    bottom: 150,
     width: "100%",
     justifyContent: "center",
     flexDirection: "row",
@@ -247,6 +266,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   sliderArrow: {
-    padding: 10,
+    margin: 15,
   },
 });
