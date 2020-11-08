@@ -5,7 +5,7 @@ import {
   Text,
   StyleSheet,
   Image,
-  TouchableHighlight,
+  TouchableNativeFeedback,
 } from "react-native";
 import {
   FontAwesome,
@@ -23,9 +23,10 @@ const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 const beachData = getBeachData();
 
 const MapsPage = ({ route }) => {
-  let region = beachData[0];
-  const [index, setIndex] = useState(0);
-  const indexRef = useRef(index);
+  // let region = beachData[0];
+  const [cardData, setCard] = useState(beachData[4]);
+  // const [index, setIndex] = useState(0);
+  // const indexRef = useRef(index);
   const mapRef = useRef(null);
   const AnimationRef = useRef(null);
 
@@ -39,23 +40,29 @@ const MapsPage = ({ route }) => {
         style={[styles.slide, styles.carousel]}
       >
         <View style={styles.innerSlide}>
-          <Text style={styles.slideTitle}>{region.title}</Text>
+          <Text style={styles.slideTitle}>
+            {/* {typeof cardData !== "undefined" ? cardData.title : "teST"} */}
+            {cardData.title}
+          </Text>
           <View style={styles.sliders}>
-            <TouchableHighlight
+            <TouchableNativeFeedback
               style={styles.sliderArrow}
               underlayColor="white"
-              onPress={changeBeach("left")}
+              onPress={changeBeach}
             >
               <Entypo name="arrow-left" size={32} color="black" />
-            </TouchableHighlight>
-            <Image source={region.image} style={styles.slideImage}></Image>
-            <TouchableHighlight
+            </TouchableNativeFeedback>
+            <Image
+              source={cardData.image ? cardData.image : null}
+              style={styles.slideImage}
+            ></Image>
+            {/* <TouchableHighlight
               style={styles.sliderArrow}
               underlayColor="white"
               onPress={changeBeach("right")}
             >
               <Entypo name="arrow-right" size={32} color="black" />
-            </TouchableHighlight>
+            </TouchableHighlight> */}
           </View>
           <View style={styles.warning}>
             <FontAwesome name="circle" size={20} color="#0fd119" />
@@ -73,16 +80,24 @@ const MapsPage = ({ route }) => {
     );
   };
 
-  indexRef.current = index;
-  if (route.params) region = route.params.region;
+  // indexRef.current = index;
+  // if (route.params) setCard(route.params.region);
 
   useFocusEffect(() => {
+    if (route.params) {
+      console.log("region", route.params.region);
+      setCard(route.params.region);
+    }
+    // console.log("region", route.params.region);
+    // setCard(region);
+    // setCard(route.params.region);
     if (mapRef.current) {
+      // console.log("focus2", region);
       route.params = null;
       mapRef.current.animateToRegion(
         {
-          latitude: region.latitude,
-          longitude: region.longitude,
+          latitude: cardData.latitude,
+          longitude: cardData.longitude,
           latitudeDelta: 0.01,
           longitudeDelta: 0.01,
         },
@@ -100,8 +115,10 @@ const MapsPage = ({ route }) => {
     ));
   };
 
-  const changeBeach = (direction) => {
-    console.log(direction);
+  const changeBeach = () => {
+    console.log("changed to", beachData[5]);
+    setCard(beachData[5]);
+    // console.log(region);
     // AnimationRef.current.flipOutY();
     // AnimationRef.current.flipInY();
   };
@@ -110,7 +127,7 @@ const MapsPage = ({ route }) => {
     <View>
       <MapView
         style={styles.mapStyle}
-        region={region}
+        region={cardData}
         ref={mapRef}
         // onPress={test}
       >
