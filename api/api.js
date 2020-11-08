@@ -43,6 +43,7 @@ const beachData = [
     latitude: 50.691949,
     longitude: -1.926466,
     image: require("../assets/beaches/shore-road.jpg"),
+    congestion: "Fair",
   },
   {
     id: 3,
@@ -57,6 +58,7 @@ const beachData = [
     latitude: 50.699198,
     longitude: -1.916598,
     image: require("../assets/beaches/canford.jpg"),
+    congestion: "Low",
   },
   {
     id: 4,
@@ -70,6 +72,7 @@ const beachData = [
     latitude: 50.703257,
     longitude: -1.908429,
     image: require("../assets/beaches/branksome-chine.jpg"),
+    congestion: "Low",
   },
   {
     id: 5,
@@ -83,6 +86,7 @@ const beachData = [
     latitude: 50.7061,
     longitude: -1.902826,
     image: require("../assets/beaches/Branksome-Dene-beach.jpg"),
+    congestion: "High",
   },
   {
     id: 6,
@@ -96,6 +100,7 @@ const beachData = [
     latitude: 50.708538,
     longitude: -1.895851,
     image: require("../assets/beaches/alum-chine-beach.jpg"),
+    congestion: "Fair",
   },
 ];
 
@@ -108,12 +113,10 @@ export const getDefaultRegion = () => {
   };
 };
 
-export const getBeachData = () => {
+const addMarkers = () => {
   beachData.forEach((element) => {
     let topLeft, bottomRight;
-
     element.polygonCoordinates.forEach((point) => {
-      // console.log("points", point);
       if (point.name == "topLeft" && !topLeft) {
         topLeft = { lat: point.latitude, lng: point.longitude };
       }
@@ -127,10 +130,28 @@ export const getBeachData = () => {
         longitude: (topLeft.lng + bottomRight.lng) / 2,
       };
       element.marker = marker;
-      console.log(marker);
     }
   });
-  // console.log(beachData);
+};
+
+const addPolygonColours = () => {
+  beachData.forEach((element) => {
+    if (element.congestion == "Low") {
+      element.polygonColour = "rgba(15, 209, 24, 0.4)";
+      element.iconColour = "#0fd118";
+    } else if (element.congestion == "Fair") {
+      element.polygonColour = "rgba(230, 226, 16, 0.4)";
+      element.iconColour = "#fff429";
+    } else if (element.congestion == "High") {
+      element.polygonColour = "rgba(194, 16, 16, 0.6)";
+      element.iconColour = "#c21010";
+    }
+  });
+};
+
+export const getBeachData = () => {
+  addPolygonColours();
+  console.log(beachData);
   return beachData;
 };
 

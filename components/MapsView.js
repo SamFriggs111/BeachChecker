@@ -18,12 +18,17 @@ import MapView, { Polygon, Marker, Callout } from "react-native-maps";
 import { getBeachData } from "../api/api";
 import { useFocusEffect } from "@react-navigation/native";
 import * as Animatable from "react-native-animatable";
+import { set } from "react-native-reanimated";
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 const beachData = getBeachData();
 
 const MapsPage = ({ route }) => {
-  const startingBeach = beachData[4];
+  const startingBeach = () => {
+    beachData[4].latitudeDelta = 0.017;
+    beachData[4].longitudeDelta = 0.017;
+    return beachData[4];
+  };
   const [cardData, setCard] = useState(startingBeach);
   const [index, setIndex] = useState(startingBeach.id - 1);
 
@@ -91,15 +96,17 @@ const MapsPage = ({ route }) => {
             ></Image>
           </View>
           <View style={styles.warning}>
-            <FontAwesome name="circle" size={20} color="#0fd119" />
-            <Text style={styles.slideSubtitle}>No congestion</Text>
+            <FontAwesome name="circle" size={20} color={cardData.iconColour} />
+            <Text style={styles.slideSubtitle}>
+              {cardData.congestion} congestion
+            </Text>
           </View>
           <View style={styles.features}>
-            <FontAwesome5 name="toilet" size={20} color="#0fd119" />
-            <Entypo name="lifebuoy" size={20} color="red" />
-            <FontAwesome5 name="dog" size={20} color="#0fd119" />
-            <FontAwesome5 name="bicycle" size={20} color="red" />
-            <MaterialCommunityIcons name="grill" size={20} color="#0fd119" />
+            <FontAwesome5 name="toilet" size={20} color="black" />
+            <Entypo name="lifebuoy" size={20} color="black" />
+            <FontAwesome5 name="dog" size={20} color="black" />
+            <FontAwesome5 name="bicycle" size={20} color="black" />
+            <MaterialCommunityIcons name="grill" size={20} color="black" />
           </View>
         </View>
         <TouchableNativeFeedback
@@ -119,6 +126,7 @@ const MapsPage = ({ route }) => {
   indexRef.current = index;
 
   useFocusEffect(() => {
+    console.log(cardData);
     if (route.params) setCard(route.params.region);
     if (mapRef.current) {
       route.params = null;
@@ -136,10 +144,9 @@ const MapsPage = ({ route }) => {
   }, []);
 
   const PolygonViews = () => {
-    let colour = "white";
     return beachData.map((data) => (
       <Polygon
-        fillColor="rgba(15, 209, 24, 0.4)"
+        fillColor={data.polygonColour}
         strokeColor="#0fd118"
         coordinates={data.polygonCoordinates}
       />
@@ -165,7 +172,6 @@ const MapsPage = ({ route }) => {
       setCard(beachData[index + 1]);
       setIndex(beachData[index + 1].id - 1);
     }
-
     AnimationRef.current.flipInY();
   };
 
