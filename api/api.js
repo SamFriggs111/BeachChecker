@@ -16,7 +16,7 @@ const warnings = [
 
 const beachData = [
   {
-    // id: 1,
+    id: 1,
     title: "Sandbanks Beach",
     polygonCoordinates: [
       { name: "topLeft", latitude: 50.684458, longitude: -1.943336 },
@@ -30,10 +30,10 @@ const beachData = [
     longitude: -1.908429,
     latitudeDelta: 0.012,
     longitudeDelta: 0.012,
-    image: require("../assets/beaches/alum-chine-beach.jpg"),
+    image: require("../assets/beaches/sandbanks.jpg"),
   },
   {
-    // id: 1,
+    id: 2,
     title: "Shore Road Beach",
     polygonCoordinates: [
       { name: "topLeft", latitude: 50.692025, longitude: -1.933362 },
@@ -45,11 +45,11 @@ const beachData = [
     longitude: -1.908429,
     latitudeDelta: 0.012,
     longitudeDelta: 0.012,
-    image: require("../assets/beaches/alum-chine-beach.jpg"),
+    image: require("../assets/beaches/shore-road.jpg"),
   },
   {
-    // id: 1,
-    title: "Hand ball Beach",
+    id: 3,
+    title: "Canford Cliffs Beach",
     polygonCoordinates: [
       { name: "topLeft", latitude: 50.698389, longitude: -1.924319 },
       { name: "bottomLeft", latitude: 50.698219, longitude: -1.923943 },
@@ -61,10 +61,10 @@ const beachData = [
     longitude: -1.908429,
     latitudeDelta: 0.012,
     longitudeDelta: 0.012,
-    image: require("../assets/beaches/alum-chine-beach.jpg"),
+    image: require("../assets/beaches/canford.jpg"),
   },
   {
-    // id: 2,
+    id: 4,
     title: "Branksome Chine Beach",
     polygonCoordinates: [
       { name: "topLeft", latitude: 50.704519, longitude: -1.913375 },
@@ -81,7 +81,7 @@ const beachData = [
     image: require("../assets/beaches/branksome-chine.jpg"),
   },
   {
-    // id: 3,
+    id: 5,
     title: "Branksome Dene Beach",
     polygonCoordinates: [
       { name: "topLeft", latitude: 50.70766, longitude: -1.906429 },
@@ -96,7 +96,7 @@ const beachData = [
     image: require("../assets/beaches/Branksome-Dene-beach.jpg"),
   },
   {
-    // id: 3,
+    id: 6,
     title: "Alum Chine Beach",
     polygonCoordinates: [
       { name: "topLeft", latitude: 50.709999, longitude: -1.899438 },

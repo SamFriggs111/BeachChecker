@@ -61,6 +61,7 @@ export default function BeachDetails() {
           </View>
         </View>
         <Button onPress={_onPress} title="test"></Button>
+        <Pagination index={index}></Pagination>
       </Animatable.View>
     </TouchableWithoutFeedback>
   );

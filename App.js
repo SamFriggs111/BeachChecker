@@ -14,7 +14,7 @@ import LandingPage from "./components/LandingPage";
 import SearchView from "./components/SearchView";
 import MapsView from "./components/MapsView";
 import FaqView from "./components/MapsView";
-import BeachDetails from "./components/BeachDetails";
+import BeachDetails from "./components/old/MapsView";
 
 const Tab = createMaterialBottomTabNavigator();
 

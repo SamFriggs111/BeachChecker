@@ -7,7 +7,7 @@ import {
   Text,
   Image
 } from "react-native";
-import { getDefaultRegion, getBeachData } from "../api/api";
+import { getDefaultRegion, getBeachData } from "../../api/api";
 import MapView, { Callout, Marker, Polygon } from "react-native-maps";
 
 const beachData = getBeachData();

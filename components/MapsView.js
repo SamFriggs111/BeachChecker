@@ -12,7 +12,6 @@ import {
   FontAwesome5,
   Entypo,
   MaterialCommunityIcons,
-  AntDesign,
 } from "@expo/vector-icons";
 import MapView, { Polygon } from "react-native-maps";
 import { getBeachData } from "../api/api";
@@ -23,12 +22,43 @@ const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 const beachData = getBeachData();
 
 const MapsPage = ({ route }) => {
-  // let region = beachData[0];
-  const [cardData, setCard] = useState(beachData[4]);
-  // const [index, setIndex] = useState(0);
-  // const indexRef = useRef(index);
+  const startingBeach = beachData[4];
+  const [cardData, setCard] = useState(startingBeach);
+  const [index, setIndex] = useState(startingBeach.id - 1);
+
+  const indexRef = useRef(index);
   const mapRef = useRef(null);
   const AnimationRef = useRef(null);
+
+  const slideList = Array.from({ length: beachData.length }).map((_, i) => {
+    const beach = beachData[i];
+    return {
+      id: i,
+      image: beach.image,
+      title: beach.title,
+      congestion: `Low congestion`,
+    };
+  });
+
+  function Pagination({ index }) {
+    return (
+      <View style={styles.pagination} pointerEvents="none">
+        {slideList.map((_, i) => {
+          return (
+            <View
+              key={i}
+              style={[
+                styles.paginationDot,
+                index === i
+                  ? styles.paginationDotActive
+                  : styles.paginationDotInactive,
+              ]}
+            />
+          );
+        })}
+      </View>
+    );
+  }
 
   const AnimatedCard = () => {
     return (
@@ -39,30 +69,20 @@ const MapsPage = ({ route }) => {
         direction="alternate"
         style={[styles.slide, styles.carousel]}
       >
+        <TouchableNativeFeedback
+          style={styles.sliderArrow}
+          underlayColor="white"
+          onPress={() => changeBeachDirection("left")}
+        >
+          <Entypo name="arrow-left" size={32} color="white" />
+        </TouchableNativeFeedback>
         <View style={styles.innerSlide}>
-          <Text style={styles.slideTitle}>
-            {/* {typeof cardData !== "undefined" ? cardData.title : "teST"} */}
-            {cardData.title}
-          </Text>
+          <Text style={styles.slideTitle}>{cardData.title}</Text>
           <View style={styles.sliders}>
-            <TouchableNativeFeedback
-              style={styles.sliderArrow}
-              underlayColor="white"
-              onPress={changeBeach}
-            >
-              <Entypo name="arrow-left" size={32} color="black" />
-            </TouchableNativeFeedback>
             <Image
               source={cardData.image ? cardData.image : null}
               style={styles.slideImage}
             ></Image>
-            {/* <TouchableHighlight
-              style={styles.sliderArrow}
-              underlayColor="white"
-              onPress={changeBeach("right")}
-            >
-              <Entypo name="arrow-right" size={32} color="black" />
-            </TouchableHighlight> */}
           </View>
           <View style={styles.warning}>
             <FontAwesome name="circle" size={20} color="#0fd119" />
@@ -76,24 +96,23 @@ const MapsPage = ({ route }) => {
             <MaterialCommunityIcons name="grill" size={20} color="#0fd119" />
           </View>
         </View>
+        <TouchableNativeFeedback
+          style={styles.sliderArrow}
+          underlayColor="white"
+          onPress={() => changeBeachDirection("right")}
+        >
+          <Entypo name="arrow-right" size={32} color="white" />
+        </TouchableNativeFeedback>
       </Animatable.View>
     );
   };
-
-  // indexRef.current = index;
-  // if (route.params) setCard(route.params.region);
+  indexRef.current = index;
 
   useFocusEffect(() => {
-    if (route.params) {
-      console.log("region", route.params.region);
-      setCard(route.params.region);
-    }
-    // console.log("region", route.params.region);
-    // setCard(region);
-    // setCard(route.params.region);
+    if (route.params) setCard(route.params.region);
     if (mapRef.current) {
-      // console.log("focus2", region);
       route.params = null;
+      console.log("trigger");
       mapRef.current.animateToRegion(
         {
           latitude: cardData.latitude,
@@ -103,6 +122,7 @@ const MapsPage = ({ route }) => {
         },
         2000
       );
+      setIndex(cardData.id - 1);
     }
   }, []);
 
@@ -115,12 +135,17 @@ const MapsPage = ({ route }) => {
     ));
   };
 
-  const changeBeach = () => {
-    console.log("changed to", beachData[5]);
-    setCard(beachData[5]);
-    // console.log(region);
-    // AnimationRef.current.flipOutY();
-    // AnimationRef.current.flipInY();
+  const changeBeachDirection = (direction) => {
+    let index = cardData.id - 1;
+    if (direction == "left") {
+      setCard(beachData[index - 1]);
+      setIndex(beachData[index - 1].id - 1);
+    } else if (direction == "right") {
+      setCard(beachData[index + 1]);
+      setIndex(beachData[index + 1].id - 1);
+    }
+
+    AnimationRef.current.flipInY();
   };
 
   return (
@@ -134,6 +159,7 @@ const MapsPage = ({ route }) => {
         <PolygonViews></PolygonViews>
       </MapView>
       <AnimatedCard></AnimatedCard>
+      <Pagination index={index}></Pagination>
     </View>
   );
 };
@@ -144,6 +170,9 @@ const styles = StyleSheet.create({
   slide: {
     width: windowWidth,
     alignItems: "center",
+    // backgroundColor: "white",
+    flexDirection: "row",
+    marginHorizontal: 20,
   },
   innerSlide: {
     paddingHorizontal: 10,
@@ -185,9 +214,28 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     marginHorizontal: 10,
   },
-  carousel: {
+  pagination: {
     position: "absolute",
     bottom: 140,
+    width: "100%",
+    justifyContent: "center",
+    flexDirection: "row",
+  },
+  paginationDot: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    marginHorizontal: 2,
+  },
+  paginationDotActive: {
+    backgroundColor: "white",
+  },
+  paginationDotInactive: {
+    backgroundColor: "gray",
+  },
+  carousel: {
+    position: "absolute",
+    bottom: 160,
   },
   mapStyle: {
     zIndex: 0,
