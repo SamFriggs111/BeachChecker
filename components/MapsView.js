@@ -1,10 +1,18 @@
 import React, { useRef, useState } from "react";
-import { View, Dimensions, Text, StyleSheet, Image } from "react-native";
+import {
+  View,
+  Dimensions,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableHighlight,
+} from "react-native";
 import {
   FontAwesome,
   FontAwesome5,
   Entypo,
   MaterialCommunityIcons,
+  AntDesign,
 } from "@expo/vector-icons";
 import MapView, { Polygon } from "react-native-maps";
 import { getBeachData } from "../api/api";
@@ -32,7 +40,23 @@ const MapsPage = ({ route }) => {
       >
         <View style={styles.innerSlide}>
           <Text style={styles.slideTitle}>{region.title}</Text>
-          <Image source={region.image} style={styles.slideImage}></Image>
+          <View style={styles.sliders}>
+            <TouchableHighlight
+              style={styles.sliderArrow}
+              underlayColor="white"
+              onPress={changeBeach("left")}
+            >
+              <Entypo name="arrow-left" size={32} color="black" />
+            </TouchableHighlight>
+            <Image source={region.image} style={styles.slideImage}></Image>
+            <TouchableHighlight
+              style={styles.sliderArrow}
+              underlayColor="white"
+              onPress={changeBeach("right")}
+            >
+              <Entypo name="arrow-right" size={32} color="black" />
+            </TouchableHighlight>
+          </View>
           <View style={styles.warning}>
             <FontAwesome name="circle" size={20} color="#0fd119" />
             <Text style={styles.slideSubtitle}>No congestion</Text>
@@ -76,9 +100,10 @@ const MapsPage = ({ route }) => {
     ));
   };
 
-  const test = () => {
-    console.log("test123");
-    AnimationRef.current.flipOutY();
+  const changeBeach = (direction) => {
+    console.log(direction);
+    // AnimationRef.current.flipOutY();
+    // AnimationRef.current.flipInY();
   };
 
   return (
@@ -87,7 +112,7 @@ const MapsPage = ({ route }) => {
         style={styles.mapStyle}
         region={region}
         ref={mapRef}
-        onPress={test}
+        // onPress={test}
       >
         <PolygonViews></PolygonViews>
       </MapView>
@@ -104,7 +129,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   innerSlide: {
-    paddingHorizontal: 25,
+    paddingHorizontal: 10,
     backgroundColor: "white",
     justifyContent: "center",
     alignItems: "center",
@@ -129,7 +154,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 5,
   },
   slideImage: {
-    width: windowWidth * 0.65,
+    width: windowWidth * 0.55,
     height: windowHeight * 0.15,
     borderRadius: 5,
   },
@@ -151,5 +176,12 @@ const styles = StyleSheet.create({
     zIndex: 0,
     width: Dimensions.get("window").width,
     height: Dimensions.get("window").height,
+  },
+  sliders: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  sliderArrow: {
+    padding: 10,
   },
 });

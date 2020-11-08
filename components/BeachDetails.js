@@ -44,7 +44,12 @@ export default function BeachDetails() {
           <Text style={styles.slideTitle}>{beachData[0].title}</Text>
           <Image source={beachData[0].image} style={styles.slideImage}></Image>
           <View style={styles.warning}>
-            <FontAwesome name="circle" size={20} color="#0fd119" />
+            <FontAwesome
+              onPress={console.log("test")}
+              name="circle"
+              size={20}
+              color="#0fd119"
+            />
             <Text style={styles.slideSubtitle}>No congestion</Text>
           </View>
           <View style={styles.features}>
