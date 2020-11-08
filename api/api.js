@@ -30,6 +30,8 @@ const beachData = [
     longitude: -1.93533,
     image: require("../assets/beaches/sandbanks.jpg"),
     congestion: "Low",
+    polygonColour: "rgba(15, 209, 24, 0.4)",
+    iconColour: "#0fd118",
   },
   {
     id: 2,
@@ -44,6 +46,8 @@ const beachData = [
     longitude: -1.926466,
     image: require("../assets/beaches/shore-road.jpg"),
     congestion: "Fair",
+    polygonColour: "rgba(230, 226, 16, 0.4)",
+    iconColour: "#fff429",
   },
   {
     id: 3,
@@ -59,6 +63,8 @@ const beachData = [
     longitude: -1.916598,
     image: require("../assets/beaches/canford.jpg"),
     congestion: "Low",
+    polygonColour: "rgba(15, 209, 24, 0.4)",
+    iconColour: "#0fd118",
   },
   {
     id: 4,
@@ -73,6 +79,8 @@ const beachData = [
     longitude: -1.908429,
     image: require("../assets/beaches/branksome-chine.jpg"),
     congestion: "Low",
+    polygonColour: "rgba(15, 209, 24, 0.4)",
+    iconColour: "#0fd118",
   },
   {
     id: 5,
@@ -87,6 +95,8 @@ const beachData = [
     longitude: -1.902826,
     image: require("../assets/beaches/Branksome-Dene-beach.jpg"),
     congestion: "High",
+    polygonColour: "rgba(194, 16, 16, 0.6)",
+    iconColour: "#c21010",
   },
   {
     id: 6,
@@ -101,6 +111,8 @@ const beachData = [
     longitude: -1.895851,
     image: require("../assets/beaches/alum-chine-beach.jpg"),
     congestion: "Fair",
+    polygonColour: "rgba(230, 226, 16, 0.4)",
+    iconColour: "#fff429",
   },
 ];
 
@@ -136,21 +148,21 @@ const addMarkers = () => {
 
 const addPolygonColours = () => {
   beachData.forEach((element) => {
-    if (element.congestion == "Low") {
-      element.polygonColour = "rgba(15, 209, 24, 0.4)";
-      element.iconColour = "#0fd118";
+    if (element.congestion == "High") {
+      element.polygonColour = "rgba(194, 16, 16, 0.6)";
+      element.iconColour = "#c21010";
     } else if (element.congestion == "Fair") {
       element.polygonColour = "rgba(230, 226, 16, 0.4)";
       element.iconColour = "#fff429";
-    } else if (element.congestion == "High") {
-      element.polygonColour = "rgba(194, 16, 16, 0.6)";
-      element.iconColour = "#c21010";
+    } else if (element.congestion == "Low") {
+      element.polygonColour = "rgba(15, 209, 24, 0.4)";
+      element.iconColour = "#0fd118";
     }
   });
 };
 
 export const getBeachData = () => {
-  addPolygonColours();
+  // addPolygonColours();
   console.log(beachData);
   return beachData;
 };

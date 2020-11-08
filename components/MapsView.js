@@ -13,22 +13,34 @@ import {
   Entypo,
   MaterialCommunityIcons,
   Ionicons,
+  AntDesign,
 } from "@expo/vector-icons";
 import MapView, { Polygon, Marker, Callout } from "react-native-maps";
 import { getBeachData } from "../api/api";
 import { useFocusEffect } from "@react-navigation/native";
 import * as Animatable from "react-native-animatable";
-import { set } from "react-native-reanimated";
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 const beachData = getBeachData();
 
+const PolygonViews = () => {
+  console.log("poly");
+  return beachData.map((data) => (
+    <Polygon
+      fillColor={data.polygonColour}
+      strokeColor={data.polygonColour}
+      coordinates={data.polygonCoordinates}
+    />
+  ));
+};
+
+const startingBeach = () => {
+  beachData[4].latitudeDelta = 0.017;
+  beachData[4].longitudeDelta = 0.017;
+  return beachData[4];
+};
+
 const MapsPage = ({ route }) => {
-  const startingBeach = () => {
-    beachData[4].latitudeDelta = 0.017;
-    beachData[4].longitudeDelta = 0.017;
-    return beachData[4];
-  };
   const [cardData, setCard] = useState(startingBeach);
   const [index, setIndex] = useState(startingBeach.id - 1);
 
@@ -83,12 +95,23 @@ const MapsPage = ({ route }) => {
           <Ionicons
             style={styles.sliderArrow}
             name="ios-arrow-back"
-            size={32}
+            size={54}
             color="white"
           />
         </TouchableNativeFeedback>
         <View style={styles.innerSlide}>
-          <Text style={styles.slideTitle}>{cardData.title}</Text>
+          <TouchableNativeFeedback underlayColor="white" onPress={closeWindow}>
+            <AntDesign
+              style={styles.close}
+              name="close"
+              size={30}
+              color="red"
+            />
+          </TouchableNativeFeedback>
+          <AntDesign style={styles.close} name="close" size={30} color="red" />
+          <View style={styles.titleView}>
+            <Text style={styles.slideTitle}>{cardData.title}</Text>
+          </View>
           <View style={styles.sliders}>
             <Image
               source={cardData.image ? cardData.image : null}
@@ -116,7 +139,7 @@ const MapsPage = ({ route }) => {
           <Ionicons
             style={styles.sliderArrow}
             name="ios-arrow-forward"
-            size={32}
+            size={54}
             color="white"
           />
         </TouchableNativeFeedback>
@@ -143,16 +166,6 @@ const MapsPage = ({ route }) => {
     }
   }, []);
 
-  const PolygonViews = () => {
-    return beachData.map((data) => (
-      <Polygon
-        fillColor={data.polygonColour}
-        strokeColor="#0fd118"
-        coordinates={data.polygonCoordinates}
-      />
-    ));
-  };
-
   const CustomCallouts = () => {
     return beachData.map((data) => (
       <Marker ref={markerRef} coordinate={data.marker}>
@@ -161,6 +174,11 @@ const MapsPage = ({ route }) => {
         </Callout>
       </Marker>
     ));
+  };
+
+  const closeWindow = () => {
+    console.log("test win");
+    AnimationRef.current.flipOutY();
   };
 
   const changeBeachDirection = (direction) => {
@@ -234,6 +252,11 @@ const styles = StyleSheet.create({
   slideTitle: {
     fontSize: 20,
     margin: 10,
+  },
+  close: {
+    position: "absolute",
+    right: 10,
+    top: 5,
   },
   slideSubtitle: {
     fontSize: 14,
