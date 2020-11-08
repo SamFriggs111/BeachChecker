@@ -5,7 +5,8 @@ import {
   Text,
   StyleSheet,
   Image,
-  TouchableNativeFeedback
+  TouchableNativeFeedback,
+  SafeAreaView
 } from "react-native";
 import {
   FontAwesome,
@@ -22,6 +23,7 @@ import * as Animatable from "react-native-animatable";
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 const beachData = getBeachData();
+// const [beachData, setBeachData] = useState(getBeachData());
 
 const PolygonViews = () => {
   return beachData.map(data => (
@@ -201,7 +203,7 @@ const MapsPage = ({ route }) => {
         // onPress={test}
       >
         <PolygonViews></PolygonViews>
-        <CustomCallouts />
+        {/* <CustomCallouts /> */}
       </MapView>
       <AnimatedCard></AnimatedCard>
       <Pagination index={index}></Pagination>
