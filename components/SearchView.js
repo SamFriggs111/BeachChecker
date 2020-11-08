@@ -58,7 +58,7 @@ const SearchView = ({ navigation }) => {
       <FlatList
         data={data}
         renderItem={renderItem}
-        keyExtractor={item => item.id}
+        keyExtractor={item => "item" + item.id}
         refreshing={refreshing}
         onRefresh={() => {
           setBeachData(getBeachData());
