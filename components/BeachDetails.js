@@ -1,5 +1,13 @@
-import * as React from "react";
-import { Text, View, StyleSheet, Image, Dimensions } from "react-native";
+import React, { useRef } from "react";
+import {
+  Text,
+  View,
+  StyleSheet,
+  Image,
+  Dimensions,
+  Button,
+  TouchableWithoutFeedback,
+} from "react-native";
 import {
   MaterialCommunityIcons,
   FontAwesome5,
@@ -13,29 +21,43 @@ const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 const beachData = getBeachData();
 
 export default function BeachDetails() {
+  const AnimationRef = useRef(null);
+  //   console.log(AnimationRef);
+
+  const _onPress = () => {
+    if (AnimationRef) {
+      //   console.log("testt", AnimationRef.current.flipInY());
+      AnimationRef.current.flipOutY();
+    }
+  };
+
   return (
-    <Animatable.View
-      animation="flipInY"
-      iterationCount={1}
-      direction="alternate"
-      style={[styles.slide, styles.carousel]}
-    >
-      <View style={styles.innerSlide}>
-        <Text style={styles.slideTitle}>{beachData[0].title}</Text>
-        <Image source={beachData[0].image} style={styles.slideImage}></Image>
-        <View style={styles.warning}>
-          <FontAwesome name="circle" size={20} color="#0fd119" />
-          <Text style={styles.slideSubtitle}>No congestion</Text>
+    <TouchableWithoutFeedback onPress={_onPress}>
+      <Animatable.View
+        ref={AnimationRef}
+        animation="flipInY"
+        iterationCount={1}
+        direction="alternate"
+        style={[styles.slide, styles.carousel]}
+      >
+        <View style={styles.innerSlide}>
+          <Text style={styles.slideTitle}>{beachData[0].title}</Text>
+          <Image source={beachData[0].image} style={styles.slideImage}></Image>
+          <View style={styles.warning}>
+            <FontAwesome name="circle" size={20} color="#0fd119" />
+            <Text style={styles.slideSubtitle}>No congestion</Text>
+          </View>
+          <View style={styles.features}>
+            <FontAwesome5 name="toilet" size={20} color="#0fd119" />
+            <Entypo name="lifebuoy" size={20} color="red" />
+            <FontAwesome5 name="dog" size={20} color="#0fd119" />
+            <FontAwesome5 name="bicycle" size={20} color="red" />
+            <MaterialCommunityIcons name="grill" size={20} color="#0fd119" />
+          </View>
         </View>
-        <View style={styles.features}>
-          <FontAwesome5 name="toilet" size={20} color="#0fd119" />
-          <Entypo name="lifebuoy" size={20} color="red" />
-          <FontAwesome5 name="dog" size={20} color="#0fd119" />
-          <FontAwesome5 name="bicycle" size={20} color="red" />
-          <MaterialCommunityIcons name="grill" size={20} color="#0fd119" />
-        </View>
-      </View>
-    </Animatable.View>
+        <Button onPress={_onPress} title="test"></Button>
+      </Animatable.View>
+    </TouchableWithoutFeedback>
   );
 }
 
