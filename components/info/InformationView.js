@@ -25,29 +25,14 @@ const HelpTextView = () => {
   );
 };
 
-const CongestionTextView = () => {
-  const congestion = getCongestion();
-  return congestion.map(warning => (
-    <View style={({ width: 500 }, [styles.congestionView, styles.textPadding])}>
-      <FontAwesome name="circle" size={24} color={warning.colour} />
-      <Text style={[styles.textPadding, styles.congestionText]}>
-        {warning.text}
-      </Text>
-    </View>
-  ));
-};
-
-const LandingView = () => {
+const InformationView = () => {
   return (
     <View style={{ flex: 1, padding: 0 }}>
       <NoticeTextView style={{ flex: 1 }}></NoticeTextView>
       <HelpTextView></HelpTextView>
-      {/* <View style={[styles.textPadding, styles.congestionColour]}>
-        <CongestionTextView></CongestionTextView>
-      </View> */}
       <View style={[styles.congestionColour, { flex: 1.5 }]}></View>
     </View>
   );
 };
 
-export default LandingView;
+export default InformationView;

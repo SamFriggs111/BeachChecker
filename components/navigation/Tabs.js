@@ -2,7 +2,7 @@ import * as React from "react";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { Entypo, MaterialIcons, Feather } from "@expo/vector-icons";
 
-import LandingPage from "../landing/LandingView";
+import InfoView from "../info/InformationView";
 import SearchView from "../search/SearchView";
 import MapView from "../map/MapView";
 
@@ -48,7 +48,7 @@ const Tabs = () => {
       />
       <Tab.Screen
         name="Faq"
-        component={MapView}
+        component={InfoView}
         options={{
           tabBarLabel: "Info",
           tabBarIcon: ({ color }) => (

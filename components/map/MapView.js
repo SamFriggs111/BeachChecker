@@ -14,7 +14,6 @@ const beachData = getBeachData();
 const MapsView = ({ route }) => {
   const [region, setCard] = useState(getDefaultRegion());
   const [index, setIndex] = useState(null);
-
   const [welcomeMesIsDisplayed, setWelcomeMessage] = useState(true);
   const [beachIsDisplayed, setBeach] = useState(false);
   const [time, setTime] = useState(1);
