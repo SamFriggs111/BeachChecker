@@ -10,7 +10,7 @@ const helpText =
   "Colour coded maps are for guidance only and predict likely crowding of promenade and beach areas today based on previous footfall, CCTV, weather patterns and observation. Information is then updated via live observation by the Seafront Team between 11am - 5pm.";
 
 const warnings = [
-  { colour: "red", text: "Avoid, safe social distancing not possible" },
+  { colour: "red", text: "Avoid at all costs" },
   { colour: "orange", text: "Congested, stay alert" },
   { colour: "green", text: "Low congestion" },
 ];
@@ -186,9 +186,9 @@ const beachData = [
 
 export const getDefaultRegion = () => {
   return {
-    latitude: 50.715766,
-    longitude: -1.875427,
-    latitudeDelta: 0.01,
+    latitude: 50.711602,
+    longitude: -1.874435,
+    latitudeDelta: 0.02,
     longitudeDelta: 0.01,
   };
 };

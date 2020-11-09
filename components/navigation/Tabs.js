@@ -5,6 +5,7 @@ import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 import LandingPage from "../landing/LandingView";
 import SearchView from "../SearchView";
 import MapView from "../map/MapView";
+import FaqView from "../faq/FaqView";
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -68,7 +69,7 @@ const Tabs = () => {
       />
       <Tab.Screen
         name="Feedback"
-        component={MapView}
+        component={FaqView}
         options={{
           tabBarLabel: "Feedback",
           tabBarIcon: ({ color }) => (
