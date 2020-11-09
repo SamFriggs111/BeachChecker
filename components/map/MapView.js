@@ -1,24 +1,13 @@
 import React, { useRef, useState } from "react";
-import {
-  View,
-  Text,
-  TouchableNativeFeedback,
-  SafeAreaView
-} from "react-native";
-import {
-  FontAwesome,
-  FontAwesome5,
-  Entypo,
-  MaterialCommunityIcons,
-  Ionicons,
-  AntDesign
-} from "@expo/vector-icons";
+import { View, TouchableNativeFeedback, SafeAreaView } from "react-native";
+import { Ionicons, AntDesign } from "@expo/vector-icons";
 import MapView, { Polygon } from "react-native-maps";
-import { getBeachData, getDefaultRegion, getCongestion } from "../../api/api";
+import { getBeachData, getDefaultRegion } from "../../api/api";
 import { useFocusEffect } from "@react-navigation/native";
 import * as Animatable from "react-native-animatable";
-import { styles, welcomeMessage } from "./styles";
+import { styles } from "./styles";
 import BeachDetailView from "./overlay/BeachDetailView";
+import WelcomeDetailView from "./overlay/WelcomeDetailView";
 
 const beachData = getBeachData();
 
@@ -30,7 +19,6 @@ const MapsView = ({ route }) => {
   const [beachIsDisplayed, setBeach] = useState(false);
   const [time, setTime] = useState(1);
 
-  const indexRef = useRef(index);
   const mapRef = useRef(null);
   const beachRef = useRef(null);
   const welcomeRef = useRef(null);
@@ -59,7 +47,7 @@ const MapsView = ({ route }) => {
     ));
   };
 
-  function Pagination({ index }) {
+  const Pagination = ({ index }) => {
     return (
       <View>
         {beachIsDisplayed ? (
@@ -81,23 +69,6 @@ const MapsView = ({ route }) => {
         ) : null}
       </View>
     );
-  }
-
-  const CongestionTextView = () => {
-    const congestion = getCongestion();
-    return congestion.map(warning => (
-      <View
-        key={warning.id}
-        style={[welcomeMessage.congestionView, welcomeMessage.textPadding]}
-      >
-        <FontAwesome name="circle" size={20} color={warning.colour} />
-        <Text
-          style={[welcomeMessage.textPadding, welcomeMessage.congestionText]}
-        >
-          {warning.text}
-        </Text>
-      </View>
-    ));
   };
 
   const AnimatedCard = () => {
@@ -153,7 +124,7 @@ const MapsView = ({ route }) => {
     );
   };
 
-  const WelcomeView = () => {
+  const WelcomeViewCard = () => {
     return (
       <View>
         {welcomeMesIsDisplayed ? (
@@ -172,22 +143,7 @@ const MapsView = ({ route }) => {
                 color="white"
               />
             </TouchableNativeFeedback>
-            <View style={styles.innerSlide}>
-              <View style={styles.titleView}>
-                <Text style={welcomeMessage.slideTitle}>
-                  Welcome to the south coast
-                </Text>
-              </View>
-              <View style={styles.sliders}>
-                <Text style={welcomeMessage.slideDesc}>
-                  Simply interact with a beach of your choice to view congestion
-                </Text>
-              </View>
-              <View style={welcomeMessage.warning}>
-                <Text style={welcomeMessage.signal}>Congestion signals</Text>
-              </View>
-              <CongestionTextView />
-            </View>
+            <WelcomeDetailView />
             <TouchableNativeFeedback
               underlayColor="white"
               onPress={() => changeBeachDirection(null, 10)}
@@ -204,8 +160,6 @@ const MapsView = ({ route }) => {
       </View>
     );
   };
-
-  indexRef.current = index;
 
   useFocusEffect(() => {
     if (route.params) {
@@ -255,58 +209,6 @@ const MapsView = ({ route }) => {
     }
   };
 
-  const BeachOverlay = () => {
-    return (
-      <View ref={beachRef}>
-        {beachIsDisplayed ? (
-          <Animatable.View
-            animation="flipInY"
-            iterationCount={1}
-            direction="alternate"
-            style={[styles.slide, styles.carousel]}
-          >
-            <TouchableNativeFeedback
-              underlayColor="white"
-              onPress={() => changeBeachDirection("left")}
-            >
-              <Ionicons
-                style={styles.sliderArrow}
-                name="ios-arrow-back"
-                size={54}
-                color="white"
-              />
-            </TouchableNativeFeedback>
-            <View style={styles.innerSlide}>
-              <TouchableNativeFeedback
-                underlayColor="white"
-                onPress={closeWindow}
-              >
-                <AntDesign
-                  style={styles.close}
-                  name="close"
-                  size={30}
-                  color="red"
-                />
-              </TouchableNativeFeedback>
-              {/* <BeachDetailView region={region} /> */}
-            </View>
-            <TouchableNativeFeedback
-              underlayColor="white"
-              onPress={() => changeBeachDirection("right")}
-            >
-              <Ionicons
-                style={styles.sliderArrow}
-                name="ios-arrow-forward"
-                size={54}
-                color="white"
-              />
-            </TouchableNativeFeedback>
-          </Animatable.View>
-        ) : null}
-      </View>
-    );
-  };
-
   return (
     <SafeAreaView>
       <MapView
@@ -321,9 +223,8 @@ const MapsView = ({ route }) => {
       >
         <PolygonViews></PolygonViews>
       </MapView>
-      {/* <BeachOverlay /> */}
       <AnimatedCard />
-      <WelcomeView />
+      <WelcomeViewCard />
       <Pagination index={index}></Pagination>
     </SafeAreaView>
   );
