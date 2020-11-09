@@ -19,7 +19,7 @@ import {
   AntDesign,
 } from "@expo/vector-icons";
 import * as Animatable from "react-native-animatable";
-import styles from "./styles";
+import styles from "./Styles";
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 const FaqView = () => {

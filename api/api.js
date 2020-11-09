@@ -1,10 +1,11 @@
+// Dont forget welcome card
 const noticeText = {
   Title: "Notice:",
   Intro:
     "Due to the close of the summer season, congestion statuses will be continually reviewed and updated when required.",
   Desc:
     "Groyne renewal works are taking place between Alum & Middle Chine until Spring 2021"
-}; // Pretend value from database
+};
 
 const helpText =
   "Colour coded maps are for guidance only and predict likely crowding of promenade and beach areas today based on previous footfall, CCTV, weather patterns and observation. Information is then updated via live observation by the Seafront Team between 11am - 5pm.";
@@ -29,10 +30,14 @@ const beachData = [
     ],
     latitude: 50.684374,
     longitude: -1.93533,
-    image: require("../assets/beaches/sandbanks.jpg"),
-    congestion: "Low",
+    congestion: "Low congestion",
     polygonColour: "rgba(15, 209, 24, 0.4)",
-    iconColour: "#0fd118"
+    iconColour: "#0fd118",
+    lifeguarded: "Lifeguarded: No",
+    toilets: "Public toilets: Yes",
+    dogs: "Dogs may exercise: No",
+    cycling: "Cycling: Permitted",
+    bbq: "BBQs: Permitted in the designated area only"
   },
   {
     id: 2,
@@ -45,10 +50,14 @@ const beachData = [
     ],
     latitude: 50.691949,
     longitude: -1.926466,
-    image: require("../assets/beaches/shore-road.jpg"),
-    congestion: "Fair",
+    congestion: "Fair congestion",
     polygonColour: "rgba(230, 226, 16, 0.4)",
-    iconColour: "#fff429"
+    iconColour: "#fff429",
+    lifeguarded: "Lifeguarded: Yes",
+    toilets: "Public toilets: No",
+    dogs: "Dogs may exercise: No",
+    cycling: "Cycling: Not permitted",
+    bbq: "BBQs: After 6PM only"
   },
   {
     id: 3,
@@ -62,10 +71,14 @@ const beachData = [
     ],
     latitude: 50.699198,
     longitude: -1.916598,
-    image: require("../assets/beaches/canford.jpg"),
-    congestion: "Low",
+    congestion: "Low congestion",
     polygonColour: "rgba(15, 209, 24, 0.4)",
-    iconColour: "#0fd118"
+    iconColour: "#0fd118",
+    lifeguarded: "Lifeguarded: Yes",
+    toilets: "Public toilets: Yes",
+    dogs: "Dogs may exercise: Yes",
+    cycling: "Cycling: Permitted",
+    bbq: "BBQs: Permitted in the designated area only"
   },
   {
     id: 4,
@@ -78,10 +91,14 @@ const beachData = [
     ],
     latitude: 50.703257,
     longitude: -1.908429,
-    image: require("../assets/beaches/branksome-chine.jpg"),
-    congestion: "Low",
+    congestion: "Low congestion",
     polygonColour: "rgba(15, 209, 24, 0.4)",
-    iconColour: "#0fd118"
+    iconColour: "#0fd118",
+    lifeguarded: "Lifeguarded: No",
+    toilets: "Public toilets: No",
+    dogs: "Dogs may exercise: No",
+    cycling: "Cycling: Permitted",
+    bbq: "BBQs: Permitted in the designated area only"
   },
   {
     id: 5,
@@ -94,10 +111,15 @@ const beachData = [
     ],
     latitude: 50.7061,
     longitude: -1.902826,
-    image: require("../assets/beaches/Branksome-Dene-beach.jpg"),
-    congestion: "High",
+
+    congestion: "High congestion",
     polygonColour: "rgba(194, 16, 16, 0.6)",
-    iconColour: "#c21010"
+    iconColour: "#c21010",
+    lifeguarded: "Lifeguarded: Yes",
+    toilets: "Public toilets: No",
+    dogs: "Dogs may exercise: No",
+    cycling: "Cycling: Not permitted",
+    bbq: "BBQs: After 6PM only"
   },
   {
     id: 6,
@@ -110,10 +132,14 @@ const beachData = [
     ],
     latitude: 50.708538,
     longitude: -1.895851,
-    image: require("../assets/beaches/alum-chine-beach.jpg"),
-    congestion: "Fair",
+    congestion: "Fair congestion",
     polygonColour: "rgba(230, 226, 16, 0.4)",
-    iconColour: "#fff429"
+    iconColour: "#fff429",
+    lifeguarded: "Lifeguarded: No",
+    toilets: "Public toilets: No",
+    dogs: "Dogs may exercise: No",
+    cycling: "Cycling: Permitted",
+    bbq: "BBQs: Permitted in the designated area only"
   },
   {
     id: 7,
@@ -126,10 +152,14 @@ const beachData = [
     ],
     latitude: 50.710574,
     longitude: -1.890481,
-    image: require("../assets/beaches/middle-chine.jpg"),
-    congestion: "High",
+    congestion: "High congestion",
     polygonColour: "rgba(194, 16, 16, 0.6)",
-    iconColour: "#c21010"
+    iconColour: "#c21010",
+    lifeguarded: "Lifeguarded: Yes",
+    toilets: "Public toilets: No",
+    dogs: "Dogs may exercise: No",
+    cycling: "Cycling: Not permitted",
+    bbq: "BBQs: After 6PM only"
   },
   {
     id: 8,
@@ -142,10 +172,14 @@ const beachData = [
     ],
     latitude: 50.712379,
     longitude: -1.88556,
-    image: require("../assets/beaches/durley-chine.jpg"),
-    congestion: "Fair",
+    congestion: "Fair congestion",
     polygonColour: "rgba(230, 226, 16, 0.4)",
-    iconColour: "#fff429"
+    iconColour: "#fff429",
+    lifeguarded: "Lifeguarded: No",
+    toilets: "Public toilets: No",
+    dogs: "Dogs may exercise: Yes",
+    cycling: "Cycling: Permitted",
+    bbq: "BBQs: Permitted"
   },
   {
     id: 9,
@@ -158,10 +192,14 @@ const beachData = [
     ],
     latitude: 50.712309,
     longitude: -1.879122,
-    image: require("../assets/beaches/bm-west.jpg"),
-    congestion: "High",
+    congestion: "High congestion",
     polygonColour: "rgba(194, 16, 16, 0.6)",
-    iconColour: "#c21010"
+    iconColour: "#c21010",
+    lifeguarded: "Lifeguarded: Yes",
+    toilets: "Public toilets: No",
+    dogs: "Dogs may exercise: No",
+    cycling: "Cycling: Not permitted",
+    bbq: "BBQs: After 6PM only"
   },
   {
     id: 10,
@@ -174,10 +212,14 @@ const beachData = [
     ],
     latitude: 50.71391,
     longitude: -1.87043,
-    image: require("../assets/beaches/bm-east.jpg"),
-    congestion: "Fair",
+    congestion: "Fair congestion",
     polygonColour: "rgba(230, 226, 16, 0.4)",
-    iconColour: "#fff429"
+    iconColour: "#fff429",
+    lifeguarded: "Lifeguarded: No",
+    toilets: "Public toilets: No",
+    dogs: "Dogs may exercise: No",
+    cycling: "Cycling: Permitted",
+    bbq: "BBQs: Permitted in the designated area only"
   },
   {
     id: 11,
@@ -190,10 +232,14 @@ const beachData = [
     ],
     latitude: 50.716129,
     longitude: -1.864576,
-    image: require("../assets/beaches/east-cliff.jpg"),
-    congestion: "High",
+    congestion: "High congestion",
     polygonColour: "rgba(194, 16, 16, 0.6)",
-    iconColour: "#c21010"
+    iconColour: "#c21010",
+    lifeguarded: "Lifeguarded: Yes",
+    toilets: "Public toilets: Yes",
+    dogs: "Dogs may exercise: Yes",
+    cycling: "Cycling: Permitted",
+    bbq: "BBQs: Permitted in the designated area only"
   },
   {
     id: 12,
@@ -206,10 +252,14 @@ const beachData = [
     ],
     latitude: 50.716195,
     longitude: -1.85691,
-    image: require("../assets/beaches/boscombe-west.jpg"),
-    congestion: "Low",
+    congestion: "Low congestion",
     polygonColour: "rgba(15, 209, 24, 0.4)",
-    iconColour: "#0fd118"
+    iconColour: "#0fd118",
+    lifeguarded: "Lifeguarded: No",
+    toilets: "Public toilets: No",
+    dogs: "Dogs may exercise: Yes",
+    cycling: "Cycling: Permitted",
+    bbq: "BBQs: Permitted in the designated area only"
   },
   {
     id: 13,
@@ -222,10 +272,14 @@ const beachData = [
     ],
     latitude: 50.715191,
     longitude: -1.842264,
-    image: require("../assets/beaches/boscombe-east.jpg"),
-    congestion: "Fair",
+    congestion: "Fair congestion",
     polygonColour: "rgba(230, 226, 16, 0.4)",
-    iconColour: "#fff429"
+    iconColour: "#fff429",
+    lifeguarded: "Lifeguarded: Yes",
+    toilets: "Public toilets: No",
+    dogs: "Dogs may exercise: No",
+    cycling: "Cycling: Not permitted",
+    bbq: "BBQs: After 6PM only"
   }
 ];
 
@@ -238,45 +292,7 @@ export const getDefaultRegion = () => {
   };
 };
 
-const addMarkers = () => {
-  beachData.forEach(element => {
-    let topLeft, bottomRight;
-    element.polygonCoordinates.forEach(point => {
-      if (point.name == "topLeft" && !topLeft) {
-        topLeft = { lat: point.latitude, lng: point.longitude };
-      }
-      if (point.name == "bottomRight" && !bottomRight) {
-        bottomRight = { lat: point.latitude, lng: point.longitude };
-      }
-    });
-    if (topLeft && bottomRight) {
-      let marker = {
-        latitude: (topLeft.lat + bottomRight.lat) / 2,
-        longitude: (topLeft.lng + bottomRight.lng) / 2
-      };
-      element.marker = marker;
-    }
-  });
-};
-
-const addPolygonColours = () => {
-  beachData.forEach(element => {
-    if (element.congestion == "High") {
-      element.polygonColour = "rgba(194, 16, 16, 0.6)";
-      element.iconColour = "#c21010";
-    } else if (element.congestion == "Fair") {
-      element.polygonColour = "rgba(230, 226, 16, 0.4)";
-      element.iconColour = "#fff429";
-    } else if (element.congestion == "Low") {
-      element.polygonColour = "rgba(15, 209, 24, 0.4)";
-      element.iconColour = "#0fd118";
-    }
-  });
-};
-
 export const getBeachData = () => {
-  // addPolygonColours();
-  // console.log(beachData);
   return beachData;
 };
 

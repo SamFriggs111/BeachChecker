@@ -28,10 +28,21 @@ export const styles = StyleSheet.create({
   },
   features: {
     flexDirection: "row",
-    justifyContent: "space-evenly",
-    width: "70%",
-    paddingVertical: 10,
-    paddingHorizontal: 5
+    alignItems: "center",
+    paddingHorizontal: 50,
+    width: 225,
+    marginBottom: 8
+  },
+  featureIcon: {
+    width: 20,
+    textAlign: "center"
+  },
+  featureView: {
+    marginTop: 10
+  },
+  featureText: {
+    marginLeft: 5,
+    fontSize: 10
   },
   slideImage: {
     width: windowWidth * 0.55,
@@ -39,8 +50,12 @@ export const styles = StyleSheet.create({
     borderRadius: 5
   },
   slideTitle: {
-    fontSize: 20,
-    margin: 10
+    fontSize: 14,
+    marginTop: 10
+  },
+  titleView: {
+    justifyContent: "center",
+    backgroundColor: "red"
   },
   close: {
     position: "absolute",
@@ -48,7 +63,7 @@ export const styles = StyleSheet.create({
     top: 5
   },
   slideSubtitle: {
-    fontSize: 14,
+    fontSize: 12,
     marginHorizontal: 10
   },
   pagination: {
@@ -119,8 +134,6 @@ export const welcomeMessage = StyleSheet.create({
     paddingHorizontal: 50,
     width: 225,
     marginBottom: 8
-    // paddingHorizontal: 40,
-    // backgroundColor: "grey"
   },
   signal: {
     fontSize: 13
@@ -128,7 +141,6 @@ export const welcomeMessage = StyleSheet.create({
   congestionText: {
     marginLeft: 10,
     fontSize: 12
-    // backgroundColor: "green"
   },
   close: {
     position: "absolute",

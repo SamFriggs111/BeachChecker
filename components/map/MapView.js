@@ -1,10 +1,7 @@
 import React, { useRef, useState } from "react";
 import {
   View,
-  Dimensions,
   Text,
-  StyleSheet,
-  Image,
   TouchableNativeFeedback,
   SafeAreaView
 } from "react-native";
@@ -16,15 +13,16 @@ import {
   Ionicons,
   AntDesign
 } from "@expo/vector-icons";
-import MapView, { Polygon, Marker, Callout } from "react-native-maps";
+import MapView, { Polygon } from "react-native-maps";
 import { getBeachData, getDefaultRegion, getCongestion } from "../../api/api";
 import { useFocusEffect } from "@react-navigation/native";
 import * as Animatable from "react-native-animatable";
-import { styles, welcomeMessage } from "./styles";
+import { styles, welcomeMessage } from "./Styles";
+import BeachDetailView from "./overlay/BeachDetailView";
 
 const beachData = getBeachData();
 
-const MapsPage = ({ route }) => {
+const MapsView = ({ route }) => {
   const [region, setCard] = useState(getDefaultRegion());
   const [index, setIndex] = useState(null);
 
@@ -154,83 +152,6 @@ const MapsPage = ({ route }) => {
     );
   };
 
-  const AnimatedCard = () => {
-    return (
-      <View>
-        {beachIsDisplayed ? (
-          <Animatable.View
-            ref={beachRef}
-            animation="flipInY"
-            iterationCount={1}
-            direction="alternate"
-            style={[styles.slide, styles.carousel]}
-          >
-            <TouchableNativeFeedback
-              underlayColor="white"
-              onPress={() => changeBeachDirection("left")}
-            >
-              <Ionicons
-                style={styles.sliderArrow}
-                name="ios-arrow-back"
-                size={54}
-                color="white"
-              />
-            </TouchableNativeFeedback>
-            <View style={styles.innerSlide}>
-              <TouchableNativeFeedback
-                underlayColor="white"
-                onPress={closeWindow}
-              >
-                <AntDesign
-                  style={styles.close}
-                  name="close"
-                  size={30}
-                  color="red"
-                />
-              </TouchableNativeFeedback>
-              <View style={styles.titleView}>
-                <Text style={styles.slideTitle}>{region.title}</Text>
-              </View>
-              <View style={styles.sliders}>
-                {/* <Image
-                  source={region.image ? region.image : null}
-                  style={styles.slideImage}
-                ></Image> */}
-              </View>
-              <View style={styles.warning}>
-                <FontAwesome
-                  name="circle"
-                  size={20}
-                  color={region.iconColour}
-                />
-                <Text style={styles.slideSubtitle}>
-                  {region.congestion} congestion
-                </Text>
-              </View>
-              <View style={styles.features}>
-                <FontAwesome5 name="toilet" size={20} color="black" />
-                <Entypo name="lifebuoy" size={20} color="black" />
-                <FontAwesome5 name="dog" size={20} color="black" />
-                <FontAwesome5 name="bicycle" size={20} color="black" />
-                <MaterialCommunityIcons name="grill" size={20} color="black" />
-              </View>
-            </View>
-            <TouchableNativeFeedback
-              underlayColor="white"
-              onPress={() => changeBeachDirection("right")}
-            >
-              <Ionicons
-                style={styles.sliderArrow}
-                name="ios-arrow-forward"
-                size={54}
-                color="white"
-              />
-            </TouchableNativeFeedback>
-          </Animatable.View>
-        ) : null}
-      </View>
-    );
-  };
   indexRef.current = index;
 
   useFocusEffect(() => {
@@ -281,6 +202,58 @@ const MapsPage = ({ route }) => {
     }
   };
 
+  const BeachOverlay = () => {
+    return (
+      <View ref={beachRef}>
+        {beachIsDisplayed ? (
+          <Animatable.View
+            animation="flipInY"
+            iterationCount={1}
+            direction="alternate"
+            style={[styles.slide, styles.carousel]}
+          >
+            <TouchableNativeFeedback
+              underlayColor="white"
+              onPress={() => changeBeachDirection("left")}
+            >
+              <Ionicons
+                style={styles.sliderArrow}
+                name="ios-arrow-back"
+                size={54}
+                color="white"
+              />
+            </TouchableNativeFeedback>
+            <View style={styles.innerSlide}>
+              <TouchableNativeFeedback
+                underlayColor="white"
+                onPress={closeWindow}
+              >
+                <AntDesign
+                  style={styles.close}
+                  name="close"
+                  size={30}
+                  color="red"
+                />
+              </TouchableNativeFeedback>
+              <BeachDetailView region={region} />
+            </View>
+            <TouchableNativeFeedback
+              underlayColor="white"
+              onPress={() => changeBeachDirection("right")}
+            >
+              <Ionicons
+                style={styles.sliderArrow}
+                name="ios-arrow-forward"
+                size={54}
+                color="white"
+              />
+            </TouchableNativeFeedback>
+          </Animatable.View>
+        ) : null}
+      </View>
+    );
+  };
+
   return (
     <SafeAreaView>
       <MapView
@@ -295,11 +268,11 @@ const MapsPage = ({ route }) => {
       >
         <PolygonViews></PolygonViews>
       </MapView>
-      <AnimatedCard></AnimatedCard>
+      <BeachOverlay />
       <WelcomeView />
       <Pagination index={index}></Pagination>
     </SafeAreaView>
   );
 };
 
-export default MapsPage;
+export default MapsView;

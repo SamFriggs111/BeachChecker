@@ -3,7 +3,7 @@ import { Text, View } from "react-native";
 
 import { getNoticeText, getHelpText, getCongestion } from "../../api/api.js";
 import { FontAwesome } from "@expo/vector-icons";
-import styles from "./styles";
+import styles from "./Styles";
 
 const NoticeTextView = () => {
   const notice = getNoticeText();
