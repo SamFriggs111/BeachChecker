@@ -43,7 +43,7 @@ const MapsPage = ({ route }) => {
   const AnimationRef2 = useRef(null);
   const polyRef = useRef(null);
 
-  const onPolygonPress = (key) => {
+  const switchToBeach = (key) => {
     setCard(beachData[key - 1]);
     setIndex(beachData[key - 1].id - 1);
   };
@@ -53,7 +53,7 @@ const MapsPage = ({ route }) => {
       <Polygon
         ref={polyRef}
         key={data.id}
-        onPress={() => onPolygonPress(data.id)}
+        onPress={() => switchToBeach(data.id)}
         tappable={true}
         fillColor={data.polygonColour}
         strokeColor={data.polygonColour}
@@ -62,30 +62,16 @@ const MapsPage = ({ route }) => {
     ));
   };
 
-  const slideList = Array.from({ length: beachData.length }).map((_, i) => {
-    const beach = beachData[i];
-    return {
-      id: i,
-      image: beach.image,
-      title: beach.title,
-      congestion: `Low congestion`,
-    };
-  });
-
   function Pagination({ index }) {
     return (
-      <Animatable.View
-        ref={AnimationRef2}
-        style={styles.pagination}
-        pointerEvents="none"
-      >
-        {slideList.map((_, i) => {
+      <Animatable.View ref={AnimationRef2} style={styles.pagination}>
+        {beachData.map((_, key) => {
           return (
             <View
-              key={i}
+              key={key}
               style={[
                 styles.paginationDot,
-                index === i
+                index === key
                   ? styles.paginationDotActive
                   : styles.paginationDotInactive,
               ]}
@@ -125,7 +111,6 @@ const MapsPage = ({ route }) => {
               color="red"
             />
           </TouchableNativeFeedback>
-          {/* <AntDesign style={styles.close} name="close" size={30} color="red" /> */}
           <View style={styles.titleView}>
             <Text style={styles.slideTitle}>{region.title}</Text>
           </View>
@@ -173,7 +158,7 @@ const MapsPage = ({ route }) => {
   };
 
   useFocusEffect(() => {
-    console.log(region);
+    // console.log(region);
     hideOverlay();
     if (route.params) setCard(route.params.region);
     if (mapRef.current) {
@@ -191,18 +176,7 @@ const MapsPage = ({ route }) => {
     }
   }, []);
 
-  const CustomCallouts = () => {
-    return beachData.map((data) => (
-      <Marker ref={markerRef} coordinate={data.marker}>
-        <Callout style={styles.callout}>
-          <Text style={styles.calloutTitle}>{data.title}</Text>
-        </Callout>
-      </Marker>
-    ));
-  };
-
   const closeWindow = () => {
-    console.log("test win");
     AnimationRef.current.flipOutY();
     AnimationRef2.current.flipOutY();
   };
@@ -225,12 +199,10 @@ const MapsPage = ({ route }) => {
         style={styles.mapStyle}
         region={region}
         ref={mapRef}
-        // onPress={test}
+        onPress={closeWindow}
       >
         <PolygonViews></PolygonViews>
-        {/* <CustomCallouts /> */}
       </MapView>
-
       <AnimatedCard></AnimatedCard>
       <Pagination index={index}></Pagination>
     </SafeAreaView>
