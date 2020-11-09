@@ -1,9 +1,9 @@
 import React from "react";
 import { View, Text } from "react-native";
 import { FontAwesome, FontAwesome5 } from "@expo/vector-icons";
-import { styles } from "../Styles";
+import { styles } from "../styles";
 
-const BeachFeature = (props) => {
+const BeachFeature = props => {
   return (
     <View style={styles.features}>
       <FontAwesome5
@@ -17,7 +17,7 @@ const BeachFeature = (props) => {
   );
 };
 
-const BeachDetailView = (props) => {
+const BeachDetailView = props => {
   return (
     <View>
       <View style={styles.titleView}>

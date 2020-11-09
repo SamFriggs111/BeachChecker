@@ -3,7 +3,7 @@ import { Text, View, StatusBar } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { FontAwesome5 } from "@expo/vector-icons";
 import Tabs from "./components/navigation/Tabs";
-import styles from "./components/navigation/Styles";
+import styles from "./components/navigation/styles";
 
 export default function App() {
   return (

@@ -3,7 +3,7 @@ import {
   View,
   Text,
   TouchableNativeFeedback,
-  SafeAreaView,
+  SafeAreaView
 } from "react-native";
 import {
   FontAwesome,
@@ -11,13 +11,13 @@ import {
   Entypo,
   MaterialCommunityIcons,
   Ionicons,
-  AntDesign,
+  AntDesign
 } from "@expo/vector-icons";
 import MapView, { Polygon } from "react-native-maps";
 import { getBeachData, getDefaultRegion, getCongestion } from "../../api/api";
 import { useFocusEffect } from "@react-navigation/native";
 import * as Animatable from "react-native-animatable";
-import { styles, welcomeMessage } from "./Styles";
+import { styles, welcomeMessage } from "./styles";
 import BeachDetailView from "./overlay/BeachDetailView";
 
 const beachData = getBeachData();
@@ -37,7 +37,7 @@ const MapsView = ({ route }) => {
   const paginationRef = useRef(null);
   const polyRef = useRef(null);
 
-  const switchToBeach = (key) => {
+  const switchToBeach = key => {
     setTime(2000);
     setCard(beachData[key - 1]);
     setIndex(beachData[key - 1].id - 1);
@@ -46,7 +46,7 @@ const MapsView = ({ route }) => {
   };
 
   const PolygonViews = () => {
-    return beachData.map((data) => (
+    return beachData.map(data => (
       <Polygon
         ref={polyRef}
         key={data.id}
@@ -72,7 +72,7 @@ const MapsView = ({ route }) => {
                     styles.paginationDot,
                     index === key
                       ? styles.paginationDotActive
-                      : styles.paginationDotInactive,
+                      : styles.paginationDotInactive
                   ]}
                 />
               );
@@ -85,7 +85,7 @@ const MapsView = ({ route }) => {
 
   const CongestionTextView = () => {
     const congestion = getCongestion();
-    return congestion.map((warning) => (
+    return congestion.map(warning => (
       <View
         key={warning.id}
         style={[welcomeMessage.congestionView, welcomeMessage.textPadding]}
@@ -167,7 +167,7 @@ const MapsView = ({ route }) => {
           latitude: region.latitude,
           longitude: region.longitude,
           latitudeDelta: 0.017,
-          longitudeDelta: 0.017,
+          longitudeDelta: 0.017
         },
         time
       );
@@ -177,7 +177,8 @@ const MapsView = ({ route }) => {
 
   const closeWindow = () => {
     if (beachIsDisplayed) {
-      beachRef.current.flipOutY();
+      console.log(beachRef.current.flipOutY());
+      // beachRef.current.flipOutY();
       paginationRef.current.flipOutY();
     }
     if (welcomeMesIsDisplayed) welcomeRef.current.flipOutY();
@@ -262,7 +263,7 @@ const MapsView = ({ route }) => {
           latitude: region.latitude,
           longitude: region.latitude,
           latitudeDelta: 0.0017,
-          longitudeDelta: 0.0017,
+          longitudeDelta: 0.0017
         }}
         ref={mapRef}
       >
