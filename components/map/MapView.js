@@ -90,7 +90,10 @@ const MapsPage = ({ route }) => {
   const CongestionTextView = () => {
     const congestion = getCongestion();
     return congestion.map((warning) => (
-      <View style={[welcomeMessage.congestionView, welcomeMessage.textPadding]}>
+      <View
+        key={warning.id}
+        style={[welcomeMessage.congestionView, welcomeMessage.textPadding]}
+      >
         <FontAwesome name="circle" size={24} color={warning.colour} />
         <Text
           style={[welcomeMessage.textPadding, welcomeMessage.congestionText]}
@@ -121,14 +124,6 @@ const MapsPage = ({ route }) => {
               />
             </TouchableNativeFeedback>
             <View style={styles.innerSlide}>
-              {/* <TouchableNativeFeedback underlayColor="white">
-                <AntDesign
-                  style={welcomeMessage.close}
-                  name="close"
-                  size={30}
-                  color="red"
-                />
-              </TouchableNativeFeedback> */}
               <View style={styles.titleView}>
                 <Text style={welcomeMessage.slideTitle}>
                   Welcome to the south coast
@@ -249,6 +244,11 @@ const MapsPage = ({ route }) => {
 
     if (mapRef.current) {
       route.params = null;
+      // console.log("region", region);
+      // let newRegion = region;
+      // newRegion.latitudeDelta = 0.017;
+      // newRegion.longitudeDelta = 0.017;
+
       mapRef.current.animateToRegion(
         {
           latitude: region.latitude,

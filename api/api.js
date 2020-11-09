@@ -10,9 +10,9 @@ const helpText =
   "Colour coded maps are for guidance only and predict likely crowding of promenade and beach areas today based on previous footfall, CCTV, weather patterns and observation. Information is then updated via live observation by the Seafront Team between 11am - 5pm.";
 
 const warnings = [
-  { colour: "red", text: "Avoid at all costs" },
-  { colour: "orange", text: "Congested, stay alert" },
-  { colour: "green", text: "Low congestion" },
+  { id: 1, colour: "red", text: "Avoid at all costs" },
+  { id: 2, colour: "orange", text: "Congested, stay alert" },
+  { id: 3, colour: "green", text: "Low congestion" },
 ];
 
 const beachData = [
@@ -29,6 +29,8 @@ const beachData = [
     ],
     latitude: 50.684374,
     longitude: -1.93533,
+    latitudeDelta: 0.017,
+    longitudeDelta: 0.017,
     image: require("../assets/beaches/sandbanks.jpg"),
     congestion: "Low",
     polygonColour: "rgba(15, 209, 24, 0.4)",
@@ -276,7 +278,7 @@ const addPolygonColours = () => {
 
 export const getBeachData = () => {
   // addPolygonColours();
-  console.log(beachData);
+  // console.log(beachData);
   return beachData;
 };
 
