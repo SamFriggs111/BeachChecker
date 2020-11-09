@@ -233,8 +233,8 @@ export const getDefaultRegion = () => {
   return {
     latitude: 50.711602,
     longitude: -1.874435,
-    latitudeDelta: 0.02,
-    longitudeDelta: 0.01
+    latitudeDelta: 0.0017,
+    longitudeDelta: 0.0017
   };
 };
 

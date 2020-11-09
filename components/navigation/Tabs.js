@@ -50,7 +50,7 @@ const Tabs = () => {
         name="Faq"
         component={MapView}
         options={{
-          tabBarLabel: "FAQ",
+          tabBarLabel: "Info",
           tabBarIcon: ({ color }) => (
             <Entypo name="info-with-circle" color={color} size={22} />
           )

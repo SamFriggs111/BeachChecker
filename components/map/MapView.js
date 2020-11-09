@@ -24,26 +24,23 @@ import { styles, welcomeMessage } from "./styles";
 
 const beachData = getBeachData();
 
-// const [beachData, setBeachData] = useState(getBeachData());
-
 const MapsPage = ({ route }) => {
   const [region, setCard] = useState(getDefaultRegion());
   const [index, setIndex] = useState(null);
 
   const [welcomeMesIsDisplayed, setWelcomeMessage] = useState(true);
   const [beachIsDisplayed, setBeach] = useState(false);
-  const [time, setTime] = useState(2000);
+  const [time, setTime] = useState(1);
 
   const indexRef = useRef(index);
   const mapRef = useRef(null);
-  const markerRef = useRef(null);
   const beachRef = useRef(null);
   const welcomeRef = useRef(null);
   const paginationRef = useRef(null);
   const polyRef = useRef(null);
 
   const switchToBeach = key => {
-    setTime(4000);
+    setTime(2000);
     setCard(beachData[key - 1]);
     setIndex(beachData[key - 1].id - 1);
     setWelcomeMessage(false);
@@ -242,11 +239,8 @@ const MapsPage = ({ route }) => {
       setWelcomeMessage(false);
       setBeach(true);
     }
-
     if (mapRef.current) {
       route.params = null;
-      if (welcomeMesIsDisplayed) setTime(1);
-      else setTime(2000);
       mapRef.current.animateToRegion(
         {
           latitude: region.latitude,
@@ -269,7 +263,7 @@ const MapsPage = ({ route }) => {
   };
 
   const changeBeachDirection = (direction, jumpTo) => {
-    setTime(4000);
+    setTime(2000);
     if (!jumpTo) {
       let index = region.id - 1;
       if (direction == "left") {
