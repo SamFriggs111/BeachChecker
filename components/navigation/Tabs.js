@@ -4,7 +4,7 @@ import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 
 import LandingPage from "../landing/LandingPage";
 import SearchView from "../SearchView";
-import MapsView from "../MapsView";
+import MapsView from "../map/MapsView";
 
 const Tab = createMaterialBottomTabNavigator();
 

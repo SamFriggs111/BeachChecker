@@ -119,10 +119,10 @@ const beachData = [
 
 export const getDefaultRegion = () => {
   return {
-    latitude: 50.715733 - 0.0025,
-    longitude: -1.875273,
-    latitudeDelta: 0.008,
-    longitudeDelta: 0.008
+    latitude: 50.715766,
+    longitude: -1.875427,
+    latitudeDelta: 0.01,
+    longitudeDelta: 0.01
   };
 };
 
@@ -185,5 +185,3 @@ export const getHelpText = () => {
 export const getCongestion = () => {
   if (typeof warnings !== "undefined") return warnings;
 };
-
-// export default getNoticeText;

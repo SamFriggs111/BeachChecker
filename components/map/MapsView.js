@@ -17,39 +17,49 @@ import {
   AntDesign
 } from "@expo/vector-icons";
 import MapView, { Polygon, Marker, Callout } from "react-native-maps";
-import { getBeachData } from "../api/api";
+import { getBeachData, getDefaultRegion } from "../../api/api";
 import { useFocusEffect } from "@react-navigation/native";
 import * as Animatable from "react-native-animatable";
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 const beachData = getBeachData();
+
 // const [beachData, setBeachData] = useState(getBeachData());
 
-const PolygonViews = () => {
-  return beachData.map(data => (
-    <Polygon
-      key={data.id}
-      fillColor={data.polygonColour}
-      strokeColor={data.polygonColour}
-      coordinates={data.polygonCoordinates}
-    />
-  ));
-};
-
-const startingBeach = () => {
-  beachData[4].latitudeDelta = 0.017;
-  beachData[4].longitudeDelta = 0.017;
-  return beachData[4];
-};
+// const startingBeach = () => {
+//   beachData[4].latitudeDelta = 0.017;
+//   beachData[4].longitudeDelta = 0.017;
+//   return beachData[4];
+// };
 
 const MapsPage = ({ route }) => {
-  const [cardData, setCard] = useState(startingBeach);
-  const [index, setIndex] = useState(startingBeach.id - 1);
+  const [region, setCard] = useState(getDefaultRegion());
+  const [index, setIndex] = useState(null);
 
   const indexRef = useRef(index);
   const mapRef = useRef(null);
   const markerRef = useRef(null);
   const AnimationRef = useRef(null);
+  const polyRef = useRef(null);
+
+  const onPolygonPress = key => {
+    setCard(beachData[key - 1]);
+    setIndex(beachData[key - 1].id - 1);
+  };
+
+  const PolygonViews = () => {
+    return beachData.map(data => (
+      <Polygon
+        ref={polyRef}
+        key={data.id}
+        onPress={() => onPolygonPress(data.id)}
+        tappable={true}
+        fillColor={data.polygonColour}
+        strokeColor={data.polygonColour}
+        coordinates={data.polygonCoordinates}
+      />
+    ));
+  };
 
   const slideList = Array.from({ length: beachData.length }).map((_, i) => {
     const beach = beachData[i];
@@ -110,20 +120,20 @@ const MapsPage = ({ route }) => {
               color="red"
             />
           </TouchableNativeFeedback>
-          <AntDesign style={styles.close} name="close" size={30} color="red" />
+          {/* <AntDesign style={styles.close} name="close" size={30} color="red" /> */}
           <View style={styles.titleView}>
-            <Text style={styles.slideTitle}>{cardData.title}</Text>
+            <Text style={styles.slideTitle}>{region.title}</Text>
           </View>
           <View style={styles.sliders}>
             <Image
-              source={cardData.image ? cardData.image : null}
+              source={region.image ? region.image : null}
               style={styles.slideImage}
             ></Image>
           </View>
           <View style={styles.warning}>
-            <FontAwesome name="circle" size={20} color={cardData.iconColour} />
+            <FontAwesome name="circle" size={20} color={region.iconColour} />
             <Text style={styles.slideSubtitle}>
-              {cardData.congestion} congestion
+              {region.congestion} congestion
             </Text>
           </View>
           <View style={styles.features}>
@@ -150,21 +160,26 @@ const MapsPage = ({ route }) => {
   };
   indexRef.current = index;
 
+  const hideOverlay = () => {
+    if (!index) AnimationRef.current.flipOutY();
+  };
+
   useFocusEffect(() => {
-    console.log(cardData);
+    console.log(region);
+    hideOverlay();
     if (route.params) setCard(route.params.region);
     if (mapRef.current) {
       route.params = null;
       mapRef.current.animateToRegion(
         {
-          latitude: cardData.latitude,
-          longitude: cardData.longitude,
+          latitude: region.latitude,
+          longitude: region.longitude,
           latitudeDelta: 0.017,
           longitudeDelta: 0.017
         },
         2000
       );
-      setIndex(cardData.id - 1);
+      setIndex(region.id - 1);
     }
   }, []);
 
@@ -184,7 +199,7 @@ const MapsPage = ({ route }) => {
   };
 
   const changeBeachDirection = direction => {
-    let index = cardData.id - 1;
+    let index = region.id - 1;
     if (direction == "left") {
       setCard(beachData[index - 1]);
       setIndex(beachData[index - 1].id - 1);
@@ -199,13 +214,14 @@ const MapsPage = ({ route }) => {
     <SafeAreaView>
       <MapView
         style={styles.mapStyle}
-        region={cardData}
+        region={region}
         ref={mapRef}
         // onPress={test}
       >
-        <PolygonViews></PolygonViews>
+        <PolygonViews onPress={closeWindow}></PolygonViews>
         {/* <CustomCallouts /> */}
       </MapView>
+
       <AnimatedCard></AnimatedCard>
       <Pagination index={index}></Pagination>
     </SafeAreaView>
