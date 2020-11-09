@@ -3,7 +3,7 @@ import { createMaterialBottomTabNavigator } from "@react-navigation/material-bot
 import { Entypo, MaterialIcons, Feather } from "@expo/vector-icons";
 
 import LandingPage from "../landing/LandingView";
-import SearchView from "../SearchView";
+import SearchView from "../search/SearchView";
 import MapView from "../map/MapView";
 
 const Tab = createMaterialBottomTabNavigator();

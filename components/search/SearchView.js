@@ -8,7 +8,7 @@ import {
   SafeAreaView,
   TouchableOpacity
 } from "react-native";
-import { getBeachData } from ".././api/api";
+import { getBeachData } from "../../api/api";
 
 const Item = ({ title }) => (
   <View style={styles.item}>

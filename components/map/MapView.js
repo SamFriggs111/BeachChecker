@@ -161,27 +161,6 @@ const MapsView = ({ route }) => {
     );
   };
 
-  useFocusEffect(() => {
-    if (route.params) {
-      setCard(route.params.region);
-      setWelcomeMessage(false);
-      setBeach(true);
-    }
-    if (mapRef.current) {
-      route.params = null;
-      mapRef.current.animateToRegion(
-        {
-          latitude: region.latitude,
-          longitude: region.longitude,
-          latitudeDelta: 0.017,
-          longitudeDelta: 0.017
-        },
-        time
-      );
-      setIndex(region.id - 1);
-    }
-  }, []);
-
   const closeWindow = () => {
     if (beachIsDisplayed) {
       beachRef.current.flipOutY();
@@ -208,6 +187,27 @@ const MapsView = ({ route }) => {
       setBeach(true);
     }
   };
+
+  useFocusEffect(() => {
+    if (route.params) {
+      setCard(route.params.region);
+      setWelcomeMessage(false);
+      setBeach(true);
+    }
+    if (mapRef.current) {
+      route.params = null;
+      mapRef.current.animateToRegion(
+        {
+          latitude: region.latitude,
+          longitude: region.longitude,
+          latitudeDelta: 0.017,
+          longitudeDelta: 0.017
+        },
+        time
+      );
+      setIndex(region.id - 1);
+    }
+  }, []);
 
   return (
     <SafeAreaView>
