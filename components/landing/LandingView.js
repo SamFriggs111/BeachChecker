@@ -3,7 +3,7 @@ import { Text, View } from "react-native";
 
 import { getNoticeText, getHelpText, getCongestion } from "../../api/api.js";
 import { FontAwesome } from "@expo/vector-icons";
-import styles from "./Styles";
+import styles from "./styles";
 
 const NoticeTextView = () => {
   const notice = getNoticeText();
@@ -27,7 +27,7 @@ const HelpTextView = () => {
 
 const CongestionTextView = () => {
   const congestion = getCongestion();
-  return congestion.map((warning) => (
+  return congestion.map(warning => (
     <View style={({ width: 500 }, [styles.congestionView, styles.textPadding])}>
       <FontAwesome name="circle" size={24} color={warning.colour} />
       <Text style={[styles.textPadding, styles.congestionText]}>

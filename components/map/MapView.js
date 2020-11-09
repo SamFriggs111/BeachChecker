@@ -100,6 +100,59 @@ const MapsView = ({ route }) => {
     ));
   };
 
+  const AnimatedCard = () => {
+    return (
+      <View>
+        {beachIsDisplayed ? (
+          <Animatable.View
+            ref={beachRef}
+            animation="flipInY"
+            iterationCount={1}
+            direction="alternate"
+            style={[styles.slide, styles.carousel]}
+          >
+            <TouchableNativeFeedback
+              underlayColor="white"
+              onPress={() => changeBeachDirection("left")}
+            >
+              <Ionicons
+                style={styles.sliderArrow}
+                name="ios-arrow-back"
+                size={54}
+                color="white"
+              />
+            </TouchableNativeFeedback>
+            <View style={styles.innerSlide}>
+              <TouchableNativeFeedback
+                underlayColor="white"
+                onPress={closeWindow}
+              >
+                <AntDesign
+                  style={styles.close}
+                  name="close"
+                  size={30}
+                  color="red"
+                />
+              </TouchableNativeFeedback>
+              <BeachDetailView region={region} />
+            </View>
+            <TouchableNativeFeedback
+              underlayColor="white"
+              onPress={() => changeBeachDirection("right")}
+            >
+              <Ionicons
+                style={styles.sliderArrow}
+                name="ios-arrow-forward"
+                size={54}
+                color="white"
+              />
+            </TouchableNativeFeedback>
+          </Animatable.View>
+        ) : null}
+      </View>
+    );
+  };
+
   const WelcomeView = () => {
     return (
       <View>
@@ -177,8 +230,7 @@ const MapsView = ({ route }) => {
 
   const closeWindow = () => {
     if (beachIsDisplayed) {
-      console.log(beachRef.current.flipOutY());
-      // beachRef.current.flipOutY();
+      beachRef.current.flipOutY();
       paginationRef.current.flipOutY();
     }
     if (welcomeMesIsDisplayed) welcomeRef.current.flipOutY();
@@ -236,7 +288,7 @@ const MapsView = ({ route }) => {
                   color="red"
                 />
               </TouchableNativeFeedback>
-              <BeachDetailView region={region} />
+              {/* <BeachDetailView region={region} /> */}
             </View>
             <TouchableNativeFeedback
               underlayColor="white"
@@ -269,7 +321,8 @@ const MapsView = ({ route }) => {
       >
         <PolygonViews></PolygonViews>
       </MapView>
-      <BeachOverlay />
+      {/* <BeachOverlay /> */}
+      <AnimatedCard />
       <WelcomeView />
       <Pagination index={index}></Pagination>
     </SafeAreaView>
