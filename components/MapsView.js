@@ -28,6 +28,7 @@ const beachData = getBeachData();
 const PolygonViews = () => {
   return beachData.map(data => (
     <Polygon
+      key={data.id}
       fillColor={data.polygonColour}
       strokeColor={data.polygonColour}
       coordinates={data.polygonCoordinates}

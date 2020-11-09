@@ -1,12 +1,6 @@
 import * as React from "react";
-import { Text, View, StatusBar, StyleSheet, Image } from "react-native";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
-import {
-  MaterialCommunityIcons,
-  MaterialIcons,
-  FontAwesome5
-} from "@expo/vector-icons";
-import styles from "./styles";
+import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 
 import LandingPage from "../landing/LandingPage";
 import SearchView from "../SearchView";
@@ -86,17 +80,4 @@ const Tabs = () => {
   );
 };
 
-export default function Navigation() {
-  return (
-    <View style={styles.menu}>
-      <FontAwesome5
-        style={styles.titleIcon}
-        name="umbrella-beach"
-        size={24}
-        color="white"
-      />
-      <Text style={styles.title}>Beach Congestion</Text>
-      <Tabs />
-    </View>
-  );
-}
+export default Tabs;
