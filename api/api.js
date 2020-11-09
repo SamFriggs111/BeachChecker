@@ -4,7 +4,7 @@ const noticeText = {
   Intro:
     "Due to the close of the summer season, congestion statuses will be continually reviewed and updated when required.",
   Desc:
-    "Groyne renewal works are taking place between Alum & Middle Chine until Spring 2021"
+    "Groyne renewal works are taking place between Alum & Middle Chine until Spring 2021",
 };
 
 const helpText =
@@ -13,7 +13,7 @@ const helpText =
 const warnings = [
   { id: 1, colour: "red", text: "Avoid at all costs" },
   { id: 2, colour: "orange", text: "Congested, stay alert" },
-  { id: 3, colour: "green", text: "Low congestion" }
+  { id: 3, colour: "green", text: "Low congestion" },
 ];
 
 const beachData = [
@@ -26,7 +26,7 @@ const beachData = [
       { name: "middleBottom", latitude: 50.686721, longitude: -1.938336 },
       { name: "bottomRight", latitude: 50.691848, longitude: -1.932911 },
       { name: "topRight", latitude: 50.692025, longitude: -1.933362 },
-      { name: "middleTop", latitude: 50.687437, longitude: -1.939664 }
+      { name: "middleTop", latitude: 50.687437, longitude: -1.939664 },
     ],
     latitude: 50.684374,
     longitude: -1.93533,
@@ -37,7 +37,7 @@ const beachData = [
     toilets: "Public toilets: Yes",
     dogs: "Dogs may exercise: No",
     cycling: "Cycling: Permitted",
-    bbq: "BBQs: Permitted in the designated area only"
+    bbq: "BBQs: Permitted in the designated area only",
   },
   {
     id: 2,
@@ -46,7 +46,7 @@ const beachData = [
       { name: "topLeft", latitude: 50.692025, longitude: -1.933362 },
       { name: "bottomLeft", latitude: 50.691848, longitude: -1.932911 },
       { name: "bottomRight", latitude: 50.698219, longitude: -1.923943 },
-      { name: "topRight", latitude: 50.698389, longitude: -1.924319 }
+      { name: "topRight", latitude: 50.698389, longitude: -1.924319 },
     ],
     latitude: 50.691949,
     longitude: -1.926466,
@@ -57,7 +57,7 @@ const beachData = [
     toilets: "Public toilets: No",
     dogs: "Dogs may exercise: No",
     cycling: "Cycling: Not permitted",
-    bbq: "BBQs: After 6PM only"
+    bbq: "BBQs: After 6PM only",
   },
   {
     id: 3,
@@ -67,7 +67,7 @@ const beachData = [
       { name: "bottomLeft", latitude: 50.698219, longitude: -1.923943 },
       { name: "bottomRight", latitude: 50.704329, longitude: -1.913027 },
       { name: "topRight", latitude: 50.704519, longitude: -1.913375 },
-      { name: "middleTop", latitude: 50.701721, longitude: -1.91912 }
+      { name: "middleTop", latitude: 50.701721, longitude: -1.91912 },
     ],
     latitude: 50.699198,
     longitude: -1.916598,
@@ -78,7 +78,7 @@ const beachData = [
     toilets: "Public toilets: Yes",
     dogs: "Dogs may exercise: Yes",
     cycling: "Cycling: Permitted",
-    bbq: "BBQs: Permitted in the designated area only"
+    bbq: "BBQs: Permitted in the designated area only",
   },
   {
     id: 4,
@@ -87,7 +87,7 @@ const beachData = [
       { name: "topLeft", latitude: 50.704519, longitude: -1.913375 },
       { name: "bottomLeft", latitude: 50.704329, longitude: -1.913027 },
       { name: "bottomRight", latitude: 50.707354, longitude: -1.906306 },
-      { name: "topRight", latitude: 50.70766, longitude: -1.906429 }
+      { name: "topRight", latitude: 50.70766, longitude: -1.906429 },
     ],
     latitude: 50.703257,
     longitude: -1.908429,
@@ -98,7 +98,7 @@ const beachData = [
     toilets: "Public toilets: No",
     dogs: "Dogs may exercise: No",
     cycling: "Cycling: Permitted",
-    bbq: "BBQs: Permitted in the designated area only"
+    bbq: "BBQs: Permitted in the designated area only",
   },
   {
     id: 5,
@@ -107,7 +107,7 @@ const beachData = [
       { name: "topLeft", latitude: 50.70766, longitude: -1.906429 },
       { name: "bottomLeft", latitude: 50.707354, longitude: -1.906306 },
       { name: "bottomRight", latitude: 50.70974, longitude: -1.899223 },
-      { name: "topRight", latitude: 50.709998, longitude: -1.899438 }
+      { name: "topRight", latitude: 50.709998, longitude: -1.899438 },
     ],
     latitude: 50.7061,
     longitude: -1.902826,
@@ -119,7 +119,7 @@ const beachData = [
     toilets: "Public toilets: No",
     dogs: "Dogs may exercise: No",
     cycling: "Cycling: Not permitted",
-    bbq: "BBQs: After 6PM only"
+    bbq: "BBQs: After 6PM only",
   },
   {
     id: 6,
@@ -128,7 +128,7 @@ const beachData = [
       { name: "topLeft", latitude: 50.709999, longitude: -1.899438 },
       { name: "bottomLeft", latitude: 50.70974, longitude: -1.899223 },
       { name: "bottomRight", latitude: 50.711558, longitude: -1.893613 },
-      { name: "topRight", latitude: 50.711806, longitude: -1.893869 }
+      { name: "topRight", latitude: 50.711806, longitude: -1.893869 },
     ],
     latitude: 50.708538,
     longitude: -1.895851,
@@ -139,7 +139,7 @@ const beachData = [
     toilets: "Public toilets: No",
     dogs: "Dogs may exercise: No",
     cycling: "Cycling: Permitted",
-    bbq: "BBQs: Permitted in the designated area only"
+    bbq: "BBQs: Permitted in the designated area only",
   },
   {
     id: 7,
@@ -148,7 +148,7 @@ const beachData = [
       { name: "topLeft", latitude: 50.711806, longitude: -1.893869 },
       { name: "bottomLeft", latitude: 50.711558, longitude: -1.893613 },
       { name: "bottomRight", latitude: 50.712605, longitude: -1.890202 },
-      { name: "topRight", latitude: 50.71289, longitude: -1.890403 }
+      { name: "topRight", latitude: 50.71289, longitude: -1.890403 },
     ],
     latitude: 50.710574,
     longitude: -1.890481,
@@ -159,7 +159,7 @@ const beachData = [
     toilets: "Public toilets: No",
     dogs: "Dogs may exercise: No",
     cycling: "Cycling: Not permitted",
-    bbq: "BBQs: After 6PM only"
+    bbq: "BBQs: After 6PM only",
   },
   {
     id: 8,
@@ -168,7 +168,7 @@ const beachData = [
       { name: "topLeft", latitude: 50.71289, longitude: -1.890403 },
       { name: "bottomLeft", latitude: 50.712605, longitude: -1.890202 },
       { name: "bottomRight", latitude: 50.713961, longitude: -1.883971 },
-      { name: "topRight", latitude: 50.714348, longitude: -1.88425 }
+      { name: "topRight", latitude: 50.714348, longitude: -1.88425 },
     ],
     latitude: 50.712379,
     longitude: -1.88556,
@@ -179,7 +179,7 @@ const beachData = [
     toilets: "Public toilets: No",
     dogs: "Dogs may exercise: Yes",
     cycling: "Cycling: Permitted",
-    bbq: "BBQs: Permitted"
+    bbq: "BBQs: Permitted",
   },
   {
     id: 9,
@@ -188,7 +188,7 @@ const beachData = [
       { name: "topLeft", latitude: 50.714348, longitude: -1.88425 },
       { name: "bottomLeft", latitude: 50.713961, longitude: -1.883971 },
       { name: "bottomRight", latitude: 50.715626, longitude: -1.875517 },
-      { name: "topRight", latitude: 50.715949, longitude: -1.875681 }
+      { name: "topRight", latitude: 50.715949, longitude: -1.875681 },
     ],
     latitude: 50.712309,
     longitude: -1.879122,
@@ -199,7 +199,7 @@ const beachData = [
     toilets: "Public toilets: No",
     dogs: "Dogs may exercise: No",
     cycling: "Cycling: Not permitted",
-    bbq: "BBQs: After 6PM only"
+    bbq: "BBQs: After 6PM only",
   },
   {
     id: 10,
@@ -208,7 +208,7 @@ const beachData = [
       { name: "topLeft", latitude: 50.715949, longitude: -1.875681 },
       { name: "bottomLeft", latitude: 50.715626, longitude: -1.875517 },
       { name: "bottomRight", latitude: 50.716917, longitude: -1.868381 },
-      { name: "topRight", latitude: 50.717216, longitude: -1.868456 }
+      { name: "topRight", latitude: 50.717216, longitude: -1.868456 },
     ],
     latitude: 50.71391,
     longitude: -1.87043,
@@ -219,7 +219,7 @@ const beachData = [
     toilets: "Public toilets: No",
     dogs: "Dogs may exercise: No",
     cycling: "Cycling: Permitted",
-    bbq: "BBQs: Permitted in the designated area only"
+    bbq: "BBQs: Permitted in the designated area only",
   },
   {
     id: 11,
@@ -228,7 +228,7 @@ const beachData = [
       { name: "topLeft", latitude: 50.717216, longitude: -1.868456 },
       { name: "bottomLeft", latitude: 50.716917, longitude: -1.868381 },
       { name: "bottomRight", latitude: 50.717542, longitude: -1.863511 },
-      { name: "topRight", latitude: 50.717844, longitude: -1.863618 }
+      { name: "topRight", latitude: 50.717844, longitude: -1.863618 },
     ],
     latitude: 50.716129,
     longitude: -1.864576,
@@ -239,7 +239,7 @@ const beachData = [
     toilets: "Public toilets: Yes",
     dogs: "Dogs may exercise: Yes",
     cycling: "Cycling: Permitted",
-    bbq: "BBQs: Permitted in the designated area only"
+    bbq: "BBQs: Permitted in the designated area only",
   },
   {
     id: 12,
@@ -248,7 +248,7 @@ const beachData = [
       { name: "topLeft", latitude: 50.717844, longitude: -1.863618 },
       { name: "bottomLeft", latitude: 50.717542, longitude: -1.863511 },
       { name: "bottomRight", latitude: 50.718916, longitude: -1.851067 },
-      { name: "topRight", latitude: 50.719235, longitude: -1.851099 }
+      { name: "topRight", latitude: 50.719235, longitude: -1.851099 },
     ],
     latitude: 50.716195,
     longitude: -1.85691,
@@ -259,7 +259,7 @@ const beachData = [
     toilets: "Public toilets: No",
     dogs: "Dogs may exercise: Yes",
     cycling: "Cycling: Permitted",
-    bbq: "BBQs: Permitted in the designated area only"
+    bbq: "BBQs: Permitted in the designated area only",
   },
   {
     id: 13,
@@ -268,7 +268,7 @@ const beachData = [
       { name: "topLeft", latitude: 50.719235, longitude: -1.851099 },
       { name: "bottomLeft", latitude: 50.718916, longitude: -1.851067 },
       { name: "bottomRight", latitude: 50.720073, longitude: -1.83492 },
-      { name: "topRight", latitude: 50.720468, longitude: -1.834999 }
+      { name: "topRight", latitude: 50.720468, longitude: -1.834999 },
     ],
     latitude: 50.715191,
     longitude: -1.842264,
@@ -279,8 +279,8 @@ const beachData = [
     toilets: "Public toilets: No",
     dogs: "Dogs may exercise: No",
     cycling: "Cycling: Not permitted",
-    bbq: "BBQs: After 6PM only"
-  }
+    bbq: "BBQs: After 6PM only",
+  },
 ];
 
 export const getDefaultRegion = () => {
@@ -288,7 +288,7 @@ export const getDefaultRegion = () => {
     latitude: 50.711602,
     longitude: -1.874435,
     latitudeDelta: 0.0017,
-    longitudeDelta: 0.0017
+    longitudeDelta: 0.0017,
   };
 };
 
@@ -301,7 +301,7 @@ export const getNoticeText = () => {
   else
     return {
       Intro: "No notices at this time",
-      Desc: "All updates will be displayed here"
+      Desc: "All updates will be displayed here",
     };
 };
 

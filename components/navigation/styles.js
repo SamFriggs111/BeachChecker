@@ -6,16 +6,16 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     height: 60,
-    flexDirection: "row"
+    flexDirection: "row",
   },
   title: {
     color: "white",
     fontWeight: "bold",
-    fontSize: 20
+    fontSize: 20,
   },
   titleIcon: {
-    marginRight: 10
-  }
+    marginRight: 10,
+  },
 });
 
 export default styles;
