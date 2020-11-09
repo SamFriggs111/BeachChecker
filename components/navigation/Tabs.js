@@ -2,9 +2,9 @@ import * as React from "react";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 
-import LandingPage from "../landing/LandingPage";
+import LandingPage from "../landing/LandingView";
 import SearchView from "../SearchView";
-import MapsView from "../map/MapsView";
+import MapView from "../map/MapView";
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -23,7 +23,7 @@ const Tabs = () => {
           tabBarLabel: "Home",
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="home" color={color} size={26} />
-          )
+          ),
         }}
       />
       <Tab.Screen
@@ -33,12 +33,12 @@ const Tabs = () => {
           tabBarLabel: "Search",
           tabBarIcon: ({ color }) => (
             <MaterialIcons name="search" size={24} color={color} size={26} />
-          )
+          ),
         }}
       />
       <Tab.Screen
         name="Map"
-        component={MapsView}
+        component={MapView}
         options={{
           tabBarLabel: "Map",
           tabBarIcon: ({ color }) => (
@@ -48,12 +48,12 @@ const Tabs = () => {
               color={color}
               size={26}
             />
-          )
+          ),
         }}
       />
       <Tab.Screen
         name="Faq"
-        component={MapsView}
+        component={MapView}
         options={{
           tabBarLabel: "FAQ",
           tabBarIcon: ({ color }) => (
@@ -63,17 +63,17 @@ const Tabs = () => {
               color={color}
               size={26}
             />
-          )
+          ),
         }}
       />
       <Tab.Screen
         name="Feedback"
-        component={MapsView}
+        component={MapView}
         options={{
           tabBarLabel: "Feedback",
           tabBarIcon: ({ color }) => (
             <MaterialIcons name="feedback" color={color} size={26} />
-          )
+          ),
         }}
       />
     </Tab.Navigator>

@@ -6,7 +6,7 @@ import {
   StyleSheet,
   Image,
   TouchableNativeFeedback,
-  SafeAreaView
+  SafeAreaView,
 } from "react-native";
 import {
   FontAwesome,
@@ -14,7 +14,7 @@ import {
   Entypo,
   MaterialCommunityIcons,
   Ionicons,
-  AntDesign
+  AntDesign,
 } from "@expo/vector-icons";
 import MapView, { Polygon, Marker, Callout } from "react-native-maps";
 import { getBeachData, getDefaultRegion } from "../../api/api";
@@ -40,15 +40,16 @@ const MapsPage = ({ route }) => {
   const mapRef = useRef(null);
   const markerRef = useRef(null);
   const AnimationRef = useRef(null);
+  const AnimationRef2 = useRef(null);
   const polyRef = useRef(null);
 
-  const onPolygonPress = key => {
+  const onPolygonPress = (key) => {
     setCard(beachData[key - 1]);
     setIndex(beachData[key - 1].id - 1);
   };
 
   const PolygonViews = () => {
-    return beachData.map(data => (
+    return beachData.map((data) => (
       <Polygon
         ref={polyRef}
         key={data.id}
@@ -67,13 +68,17 @@ const MapsPage = ({ route }) => {
       id: i,
       image: beach.image,
       title: beach.title,
-      congestion: `Low congestion`
+      congestion: `Low congestion`,
     };
   });
 
   function Pagination({ index }) {
     return (
-      <View style={styles.pagination} pointerEvents="none">
+      <Animatable.View
+        ref={AnimationRef2}
+        style={styles.pagination}
+        pointerEvents="none"
+      >
         {slideList.map((_, i) => {
           return (
             <View
@@ -82,12 +87,12 @@ const MapsPage = ({ route }) => {
                 styles.paginationDot,
                 index === i
                   ? styles.paginationDotActive
-                  : styles.paginationDotInactive
+                  : styles.paginationDotInactive,
               ]}
             />
           );
         })}
-      </View>
+      </Animatable.View>
     );
   }
 
@@ -161,7 +166,10 @@ const MapsPage = ({ route }) => {
   indexRef.current = index;
 
   const hideOverlay = () => {
-    if (!index) AnimationRef.current.flipOutY();
+    if (!index && index !== 0) {
+      AnimationRef.current.flipOutY();
+      AnimationRef2.current.flipOutY();
+    }
   };
 
   useFocusEffect(() => {
@@ -175,7 +183,7 @@ const MapsPage = ({ route }) => {
           latitude: region.latitude,
           longitude: region.longitude,
           latitudeDelta: 0.017,
-          longitudeDelta: 0.017
+          longitudeDelta: 0.017,
         },
         2000
       );
@@ -184,7 +192,7 @@ const MapsPage = ({ route }) => {
   }, []);
 
   const CustomCallouts = () => {
-    return beachData.map(data => (
+    return beachData.map((data) => (
       <Marker ref={markerRef} coordinate={data.marker}>
         <Callout style={styles.callout}>
           <Text style={styles.calloutTitle}>{data.title}</Text>
@@ -196,9 +204,10 @@ const MapsPage = ({ route }) => {
   const closeWindow = () => {
     console.log("test win");
     AnimationRef.current.flipOutY();
+    AnimationRef2.current.flipOutY();
   };
 
-  const changeBeachDirection = direction => {
+  const changeBeachDirection = (direction) => {
     let index = region.id - 1;
     if (direction == "left") {
       setCard(beachData[index - 1]);
@@ -218,7 +227,7 @@ const MapsPage = ({ route }) => {
         ref={mapRef}
         // onPress={test}
       >
-        <PolygonViews onPress={closeWindow}></PolygonViews>
+        <PolygonViews></PolygonViews>
         {/* <CustomCallouts /> */}
       </MapView>
 
@@ -236,14 +245,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
     marginHorizontal: 0,
-    justifyContent: "center"
+    justifyContent: "center",
   },
   innerSlide: {
     paddingHorizontal: 10,
     backgroundColor: "white",
     alignItems: "center",
     marginVertical: 15,
-    borderRadius: 20
+    borderRadius: 20,
   },
   warning: {
     flexDirection: "row",
@@ -253,66 +262,66 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderTopWidth: 1,
     height: 35,
-    alignItems: "center"
+    alignItems: "center",
   },
   features: {
     flexDirection: "row",
     justifyContent: "space-evenly",
     width: "70%",
     paddingVertical: 10,
-    paddingHorizontal: 5
+    paddingHorizontal: 5,
   },
   slideImage: {
     width: windowWidth * 0.55,
     height: windowHeight * 0.125,
-    borderRadius: 5
+    borderRadius: 5,
   },
   slideTitle: {
     fontSize: 20,
-    margin: 10
+    margin: 10,
   },
   close: {
     position: "absolute",
     right: 10,
-    top: 5
+    top: 5,
   },
   slideSubtitle: {
     fontSize: 14,
-    marginHorizontal: 10
+    marginHorizontal: 10,
   },
   pagination: {
     position: "absolute",
     bottom: 150,
     width: "100%",
     justifyContent: "center",
-    flexDirection: "row"
+    flexDirection: "row",
   },
   paginationDot: {
     width: 8,
     height: 8,
     borderRadius: 4,
-    marginHorizontal: 2
+    marginHorizontal: 2,
   },
   paginationDotActive: {
-    backgroundColor: "white"
+    backgroundColor: "white",
   },
   paginationDotInactive: {
-    backgroundColor: "gray"
+    backgroundColor: "gray",
   },
   carousel: {
     position: "absolute",
-    bottom: 160
+    bottom: 160,
   },
   mapStyle: {
     zIndex: 0,
     width: Dimensions.get("window").width,
-    height: Dimensions.get("window").height
+    height: Dimensions.get("window").height,
   },
   sliders: {
     flexDirection: "row",
-    alignItems: "center"
+    alignItems: "center",
   },
   sliderArrow: {
-    margin: 15
-  }
+    margin: 15,
+  },
 });
