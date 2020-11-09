@@ -6,7 +6,7 @@ import {
   StyleSheet,
   Image,
   TouchableNativeFeedback,
-  SafeAreaView,
+  SafeAreaView
 } from "react-native";
 import {
   FontAwesome,
@@ -14,7 +14,7 @@ import {
   Entypo,
   MaterialCommunityIcons,
   Ionicons,
-  AntDesign,
+  AntDesign
 } from "@expo/vector-icons";
 import MapView, { Polygon, Marker, Callout } from "react-native-maps";
 import { getBeachData, getDefaultRegion, getCongestion } from "../../api/api";
@@ -22,7 +22,6 @@ import { useFocusEffect } from "@react-navigation/native";
 import * as Animatable from "react-native-animatable";
 import { styles, welcomeMessage } from "./styles";
 
-const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 const beachData = getBeachData();
 
 // const [beachData, setBeachData] = useState(getBeachData());
@@ -33,6 +32,7 @@ const MapsPage = ({ route }) => {
 
   const [welcomeMesIsDisplayed, setWelcomeMessage] = useState(true);
   const [beachIsDisplayed, setBeach] = useState(false);
+  const [time, setTime] = useState(2000);
 
   const indexRef = useRef(index);
   const mapRef = useRef(null);
@@ -42,7 +42,8 @@ const MapsPage = ({ route }) => {
   const paginationRef = useRef(null);
   const polyRef = useRef(null);
 
-  const switchToBeach = (key) => {
+  const switchToBeach = key => {
+    setTime(4000);
     setCard(beachData[key - 1]);
     setIndex(beachData[key - 1].id - 1);
     setWelcomeMessage(false);
@@ -50,7 +51,7 @@ const MapsPage = ({ route }) => {
   };
 
   const PolygonViews = () => {
-    return beachData.map((data) => (
+    return beachData.map(data => (
       <Polygon
         ref={polyRef}
         key={data.id}
@@ -76,7 +77,7 @@ const MapsPage = ({ route }) => {
                     styles.paginationDot,
                     index === key
                       ? styles.paginationDotActive
-                      : styles.paginationDotInactive,
+                      : styles.paginationDotInactive
                   ]}
                 />
               );
@@ -89,12 +90,12 @@ const MapsPage = ({ route }) => {
 
   const CongestionTextView = () => {
     const congestion = getCongestion();
-    return congestion.map((warning) => (
+    return congestion.map(warning => (
       <View
         key={warning.id}
         style={[welcomeMessage.congestionView, welcomeMessage.textPadding]}
       >
-        <FontAwesome name="circle" size={24} color={warning.colour} />
+        <FontAwesome name="circle" size={20} color={warning.colour} />
         <Text
           style={[welcomeMessage.textPadding, welcomeMessage.congestionText]}
         >
@@ -135,7 +136,7 @@ const MapsPage = ({ route }) => {
                 </Text>
               </View>
               <View style={welcomeMessage.warning}>
-                <Text style={styles.slideSubtitle}>Congestion signals</Text>
+                <Text style={welcomeMessage.signal}>Congestion signals</Text>
               </View>
               <CongestionTextView />
             </View>
@@ -194,10 +195,10 @@ const MapsPage = ({ route }) => {
                 <Text style={styles.slideTitle}>{region.title}</Text>
               </View>
               <View style={styles.sliders}>
-                <Image
+                {/* <Image
                   source={region.image ? region.image : null}
                   style={styles.slideImage}
-                ></Image>
+                ></Image> */}
               </View>
               <View style={styles.warning}>
                 <FontAwesome
@@ -244,19 +245,16 @@ const MapsPage = ({ route }) => {
 
     if (mapRef.current) {
       route.params = null;
-      // console.log("region", region);
-      // let newRegion = region;
-      // newRegion.latitudeDelta = 0.017;
-      // newRegion.longitudeDelta = 0.017;
-
+      if (welcomeMesIsDisplayed) setTime(1);
+      else setTime(2000);
       mapRef.current.animateToRegion(
         {
           latitude: region.latitude,
           longitude: region.longitude,
           latitudeDelta: 0.017,
-          longitudeDelta: 0.017,
+          longitudeDelta: 0.017
         },
-        2000
+        time
       );
       setIndex(region.id - 1);
     }
@@ -271,6 +269,7 @@ const MapsPage = ({ route }) => {
   };
 
   const changeBeachDirection = (direction, jumpTo) => {
+    setTime(4000);
     if (!jumpTo) {
       let index = region.id - 1;
       if (direction == "left") {
@@ -292,9 +291,13 @@ const MapsPage = ({ route }) => {
     <SafeAreaView>
       <MapView
         style={styles.mapStyle}
-        region={region}
+        defaultRegion={{
+          latitude: region.latitude,
+          longitude: region.latitude,
+          latitudeDelta: 0.0017,
+          longitudeDelta: 0.0017
+        }}
         ref={mapRef}
-        // onPress={closeWindow()}
       >
         <PolygonViews></PolygonViews>
       </MapView>

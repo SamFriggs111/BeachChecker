@@ -7,14 +7,14 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
     marginHorizontal: 0,
-    justifyContent: "center",
+    justifyContent: "center"
   },
   innerSlide: {
     paddingHorizontal: 10,
     backgroundColor: "white",
     alignItems: "center",
     marginVertical: 15,
-    borderRadius: 20,
+    borderRadius: 20
   },
   warning: {
     flexDirection: "row",
@@ -24,68 +24,68 @@ export const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderTopWidth: 1,
     height: 35,
-    alignItems: "center",
+    alignItems: "center"
   },
   features: {
     flexDirection: "row",
     justifyContent: "space-evenly",
     width: "70%",
     paddingVertical: 10,
-    paddingHorizontal: 5,
+    paddingHorizontal: 5
   },
   slideImage: {
     width: windowWidth * 0.55,
     height: windowHeight * 0.125,
-    borderRadius: 5,
+    borderRadius: 5
   },
   slideTitle: {
     fontSize: 20,
-    margin: 10,
+    margin: 10
   },
   close: {
     position: "absolute",
     right: 10,
-    top: 5,
+    top: 5
   },
   slideSubtitle: {
     fontSize: 14,
-    marginHorizontal: 10,
+    marginHorizontal: 10
   },
   pagination: {
     position: "absolute",
     bottom: 150,
     width: "100%",
     justifyContent: "center",
-    flexDirection: "row",
+    flexDirection: "row"
   },
   paginationDot: {
     width: 8,
     height: 8,
     borderRadius: 4,
-    marginHorizontal: 2,
+    marginHorizontal: 2
   },
   paginationDotActive: {
-    backgroundColor: "white",
+    backgroundColor: "white"
   },
   paginationDotInactive: {
-    backgroundColor: "gray",
+    backgroundColor: "gray"
   },
   carousel: {
     position: "absolute",
-    bottom: 160,
+    bottom: 160
   },
   mapStyle: {
     zIndex: 0,
     width: Dimensions.get("window").width,
-    height: Dimensions.get("window").height,
+    height: Dimensions.get("window").height
   },
   sliders: {
     flexDirection: "row",
-    alignItems: "center",
+    alignItems: "center"
   },
   sliderArrow: {
-    margin: 15,
-  },
+    margin: 15
+  }
 });
 
 export const welcomeMessage = StyleSheet.create({
@@ -94,11 +94,13 @@ export const welcomeMessage = StyleSheet.create({
     fontSize: 20,
     margin: 5,
     textDecorationLine: "underline",
+    fontSize: 16
   },
   slideDesc: {
     paddingVertical: 10,
     width: 200,
     textAlign: "center",
+    fontSize: 13
   },
   warning: {
     flexDirection: "row",
@@ -109,22 +111,28 @@ export const welcomeMessage = StyleSheet.create({
     height: 30,
     alignItems: "center",
     textAlign: "left",
-    marginBottom: 10,
+    marginBottom: 10
   },
   congestionView: {
     flexDirection: "row",
     alignItems: "center",
-    paddingHorizontal: 40,
+    paddingHorizontal: 50,
     width: 225,
-    marginBottom: 8,
+    marginBottom: 8
+    // paddingHorizontal: 40,
+    // backgroundColor: "grey"
+  },
+  signal: {
+    fontSize: 13
   },
   congestionText: {
     marginLeft: 10,
-    fontSize: 14,
+    fontSize: 12
+    // backgroundColor: "green"
   },
   close: {
     position: "absolute",
     right: 10,
-    top: 5,
-  },
+    top: 5
+  }
 });
