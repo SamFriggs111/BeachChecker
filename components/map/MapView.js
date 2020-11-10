@@ -28,7 +28,15 @@ const MapsView = ({ route }) => {
     setRegion(beachData[key - 1]);
     setNavIndex(beachData[key - 1].id - 1);
     setWelcomeMessageOverlay(false);
-    setBeachOverlay(true);
+    updatePolygonStrokeColour(key - 1);
+  };
+
+  const updatePolygonStrokeColour = (key) => {
+    beachData.forEach((index) =>
+      setBeachOverlay((beachData[index.id - 1].strokeColour = null))
+    );
+    let strokeColour = "black";
+    setBeachOverlay((beachData[key].strokeColour = strokeColour));
   };
 
   const PolygonViews = () => {
@@ -39,7 +47,7 @@ const MapsView = ({ route }) => {
         onPress={() => switchToBeach(data.id)}
         tappable={true}
         fillColor={data.polygonColour}
-        strokeColor={data.polygonColour}
+        strokeColor={data.strokeColour ? data.strokeColour : data.polygonColour}
         coordinates={data.polygonCoordinates}
       />
     ));
