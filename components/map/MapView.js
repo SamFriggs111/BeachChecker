@@ -16,7 +16,6 @@ const MapsView = ({ route }) => {
   const [navIndex, setNavIndex] = useState(null);
   const [welcomeMesIsDisplayed, setWelcomeMessageOverlay] = useState(true);
   const [beachIsDisplayed, setBeachOverlay] = useState(false);
-  const [animationTime, setAnimationTime] = useState(1);
 
   const mapRef = useRef(null);
   const beachRef = useRef(null);
@@ -25,7 +24,6 @@ const MapsView = ({ route }) => {
   const polyRef = useRef(null);
 
   const switchToBeach = key => {
-    setAnimationTime(2000);
     setRegion(beachData[key - 1]);
     setNavIndex(beachData[key - 1].id - 1);
     setWelcomeMessageOverlay(false);
@@ -124,6 +122,7 @@ const MapsView = ({ route }) => {
   };
 
   const WelcomeViewCard = () => {
+    console.log(region);
     return (
       <View>
         {welcomeMesIsDisplayed ? (
@@ -169,7 +168,6 @@ const MapsView = ({ route }) => {
   };
 
   const changeBeachDirection = (direction, jumpTo) => {
-    setAnimationTime(2000);
     if (!jumpTo) {
       let navIndex = region.id - 1;
       if (direction == "left") {
@@ -202,7 +200,7 @@ const MapsView = ({ route }) => {
           latitudeDelta: 0.017,
           longitudeDelta: 0.017
         },
-        animationTime
+        2000
       );
       setNavIndex(region.id - 1);
     }
@@ -212,11 +210,11 @@ const MapsView = ({ route }) => {
     <SafeAreaView>
       <MapView
         style={styles.mapStyle}
-        defaultRegion={{
+        initialRegion={{
           latitude: region.latitude,
-          longitude: region.latitude,
-          latitudeDelta: 0.0017,
-          longitudeDelta: 0.0017
+          longitude: region.longitude,
+          latitudeDelta: 0.017,
+          longitudeDelta: 0.017
         }}
         ref={mapRef}
       >

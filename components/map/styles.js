@@ -53,7 +53,8 @@ export const styles = StyleSheet.create({
   slideTitle: {
     fontSize: 14,
     marginTop: 10,
-    textAlign: "center"
+    textAlign: "center",
+    textDecorationLine: "underline"
   },
   titleView: {
     justifyContent: "center"
