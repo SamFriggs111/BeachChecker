@@ -12,11 +12,11 @@ import WelcomeDetailView from "./overlay/WelcomeDetailView";
 const beachData = getBeachData();
 
 const MapsView = ({ route }) => {
-  const [region, setCard] = useState(getDefaultRegion());
-  const [index, setIndex] = useState(null);
-  const [welcomeMesIsDisplayed, setWelcomeMessage] = useState(true);
-  const [beachIsDisplayed, setBeach] = useState(false);
-  const [time, setTime] = useState(1);
+  const [region, setRegion] = useState(getDefaultRegion());
+  const [navIndex, setNavIndex] = useState(null);
+  const [welcomeMesIsDisplayed, setWelcomeMessageOverlay] = useState(true);
+  const [beachIsDisplayed, setBeachOverlay] = useState(false);
+  const [animationTime, setAnimationTime] = useState(1);
 
   const mapRef = useRef(null);
   const beachRef = useRef(null);
@@ -25,11 +25,11 @@ const MapsView = ({ route }) => {
   const polyRef = useRef(null);
 
   const switchToBeach = key => {
-    setTime(2000);
-    setCard(beachData[key - 1]);
-    setIndex(beachData[key - 1].id - 1);
-    setWelcomeMessage(false);
-    setBeach(true);
+    setAnimationTime(2000);
+    setRegion(beachData[key - 1]);
+    setNavIndex(beachData[key - 1].id - 1);
+    setWelcomeMessageOverlay(false);
+    setBeachOverlay(true);
   };
 
   const PolygonViews = () => {
@@ -46,7 +46,7 @@ const MapsView = ({ route }) => {
     ));
   };
 
-  const Pagination = ({ index }) => {
+  const Pagination = ({ navIndex }) => {
     return (
       <View>
         {beachIsDisplayed ? (
@@ -57,7 +57,7 @@ const MapsView = ({ route }) => {
                   key={key}
                   style={[
                     styles.paginationDot,
-                    index === key
+                    navIndex === key
                       ? styles.paginationDotActive
                       : styles.paginationDotInactive
                   ]}
@@ -169,29 +169,29 @@ const MapsView = ({ route }) => {
   };
 
   const changeBeachDirection = (direction, jumpTo) => {
-    setTime(2000);
+    setAnimationTime(2000);
     if (!jumpTo) {
-      let index = region.id - 1;
+      let navIndex = region.id - 1;
       if (direction == "left") {
-        setCard(beachData[index - 1]);
-        setIndex(beachData[index - 1].id - 1);
+        setRegion(beachData[navIndex - 1]);
+        setNavIndex(beachData[navIndex - 1].id - 1);
       } else if (direction == "right") {
-        setCard(beachData[index + 1]);
-        setIndex(beachData[index + 1].id - 1);
+        setRegion(beachData[navIndex + 1]);
+        setNavIndex(beachData[navIndex + 1].id - 1);
       }
     } else {
-      setCard(beachData[jumpTo - 1]);
-      setIndex(beachData[jumpTo - 1].id - 1);
-      setWelcomeMessage(false);
-      setBeach(true);
+      setRegion(beachData[jumpTo - 1]);
+      setNavIndex(beachData[jumpTo - 1].id - 1);
+      setWelcomeMessageOverlay(false);
+      setBeachOverlay(true);
     }
   };
 
   useFocusEffect(() => {
     if (route.params) {
-      setCard(route.params.region);
-      setWelcomeMessage(false);
-      setBeach(true);
+      setRegion(route.params.region);
+      setWelcomeMessageOverlay(false);
+      setBeachOverlay(true);
     }
     if (mapRef.current) {
       route.params = null;
@@ -202,9 +202,9 @@ const MapsView = ({ route }) => {
           latitudeDelta: 0.017,
           longitudeDelta: 0.017
         },
-        time
+        animationTime
       );
-      setIndex(region.id - 1);
+      setNavIndex(region.id - 1);
     }
   }, []);
 
@@ -224,7 +224,7 @@ const MapsView = ({ route }) => {
       </MapView>
       <AnimatedCard />
       <WelcomeViewCard />
-      <Pagination index={index}></Pagination>
+      <Pagination navIndex={navIndex}></Pagination>
     </SafeAreaView>
   );
 };
