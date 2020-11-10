@@ -9,13 +9,14 @@ import { styles } from "./styles";
 import BeachDetailView from "./overlay/BeachDetailView";
 import WelcomeDetailView from "./overlay/WelcomeDetailView";
 
-const beachData = getBeachData();
+const beaches = getBeachData();
 
 const MapsView = ({ route }) => {
   const [region, setRegion] = useState(getDefaultRegion());
   const [navIndex, setNavIndex] = useState(null);
   const [welcomeMesIsDisplayed, setWelcomeMessageOverlay] = useState(true);
   const [beachIsDisplayed, setBeachOverlay] = useState(false);
+  const [beachData, updateBeachData] = useState(beaches);
 
   const mapRef = useRef(null);
   const beachRef = useRef(null);
@@ -23,7 +24,7 @@ const MapsView = ({ route }) => {
   const paginationRef = useRef(null);
   const polyRef = useRef(null);
 
-  const switchToBeach = key => {
+  const switchToBeach = (key) => {
     setRegion(beachData[key - 1]);
     setNavIndex(beachData[key - 1].id - 1);
     setWelcomeMessageOverlay(false);
@@ -31,7 +32,7 @@ const MapsView = ({ route }) => {
   };
 
   const PolygonViews = () => {
-    return beachData.map(data => (
+    return beachData.map((data) => (
       <Polygon
         ref={polyRef}
         key={data.id}
@@ -57,7 +58,7 @@ const MapsView = ({ route }) => {
                     styles.paginationDot,
                     navIndex === key
                       ? styles.paginationDotActive
-                      : styles.paginationDotInactive
+                      : styles.paginationDotInactive,
                   ]}
                 />
               );
@@ -79,17 +80,28 @@ const MapsView = ({ route }) => {
             direction="alternate"
             style={[styles.slide, styles.carousel]}
           >
-            <TouchableNativeFeedback
-              underlayColor="white"
-              onPress={() => changeBeachDirection("left")}
-            >
-              <Ionicons
-                style={styles.sliderArrow}
-                name="ios-arrow-back"
-                size={54}
-                color="white"
-              />
-            </TouchableNativeFeedback>
+            {navIndex !== 0 ? (
+              <TouchableNativeFeedback
+                underlayColor="white"
+                onPress={() => changeBeachDirection("left")}
+              >
+                <Ionicons
+                  style={styles.sliderArrow}
+                  name="ios-arrow-back"
+                  size={54}
+                  color="white"
+                />
+              </TouchableNativeFeedback>
+            ) : (
+              <TouchableNativeFeedback underlayColor="white">
+                <Ionicons
+                  style={styles.sliderArrow}
+                  name="ios-arrow-back"
+                  size={54}
+                  color="red"
+                />
+              </TouchableNativeFeedback>
+            )}
             <View style={styles.innerSlide}>
               <TouchableNativeFeedback
                 underlayColor="white"
@@ -104,17 +116,28 @@ const MapsView = ({ route }) => {
               </TouchableNativeFeedback>
               <BeachDetailView region={region} />
             </View>
-            <TouchableNativeFeedback
-              underlayColor="white"
-              onPress={() => changeBeachDirection("right")}
-            >
-              <Ionicons
-                style={styles.sliderArrow}
-                name="ios-arrow-forward"
-                size={54}
-                color="white"
-              />
-            </TouchableNativeFeedback>
+            {navIndex !== beachData.length - 1 ? (
+              <TouchableNativeFeedback
+                underlayColor="white"
+                onPress={() => changeBeachDirection("right")}
+              >
+                <Ionicons
+                  style={styles.sliderArrow}
+                  name="ios-arrow-forward"
+                  size={54}
+                  color="white"
+                />
+              </TouchableNativeFeedback>
+            ) : (
+              <TouchableNativeFeedback underlayColor="white">
+                <Ionicons
+                  style={styles.sliderArrow}
+                  name="ios-arrow-forward"
+                  size={54}
+                  color="red"
+                />
+              </TouchableNativeFeedback>
+            )}
           </Animatable.View>
         ) : null}
       </View>
@@ -122,7 +145,6 @@ const MapsView = ({ route }) => {
   };
 
   const WelcomeViewCard = () => {
-    console.log(region);
     return (
       <View>
         {welcomeMesIsDisplayed ? (
@@ -198,7 +220,7 @@ const MapsView = ({ route }) => {
           latitude: region.latitude,
           longitude: region.longitude,
           latitudeDelta: 0.017,
-          longitudeDelta: 0.017
+          longitudeDelta: 0.017,
         },
         2000
       );
@@ -214,7 +236,7 @@ const MapsView = ({ route }) => {
           latitude: region.latitude,
           longitude: region.longitude,
           latitudeDelta: 0.017,
-          longitudeDelta: 0.017
+          longitudeDelta: 0.017,
         }}
         ref={mapRef}
       >
