@@ -17,6 +17,10 @@ const styles = StyleSheet.create({
     color: "red",
     fontSize: 24,
   },
+  textFaq: {
+    color: "black",
+    fontSize: 24,
+  },
   congestionView: {
     flexDirection: "row",
     paddingRight: 75,

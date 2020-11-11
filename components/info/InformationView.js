@@ -1,8 +1,7 @@
 import * as React from "react";
 import { Text, View, SafeAreaView, ScrollView } from "react-native";
 
-import { getNoticeText, getHelpText, getCongestion } from "../../api/api.js";
-import { FontAwesome } from "@expo/vector-icons";
+import { getNoticeText, getHelpText } from "../../api/api.js";
 import styles from "./styles";
 
 const NoticeTextView = () => {
@@ -18,8 +17,8 @@ const NoticeTextView = () => {
 
 const FaqView = () => {
   const faqs = getHelpText();
-  return faqs.map((data) => (
-    <View>
+  return faqs.map((data, i) => (
+    <View key={i}>
       <Text style={styles.textPadding}>{data.Q}</Text>
       <Text style={styles.textPadding}>{data.Answer}</Text>
     </View>
@@ -31,6 +30,7 @@ const InformationView = () => {
     <View style={{ flex: 1, padding: 0 }}>
       <NoticeTextView />
       <View style={[styles.textContainer, styles.helpFlex]}>
+        <Text style={styles.textFaq}>FAQ's</Text>
         <SafeAreaView>
           <ScrollView>
             <FaqView />

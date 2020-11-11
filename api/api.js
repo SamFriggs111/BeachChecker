@@ -41,9 +41,9 @@ const helpText = [
 ];
 
 const warnings = [
-  { id: 1, colour: "red", text: "Avoid at all costs" },
-  { id: 2, colour: "orange", text: "Congested, stay alert" },
-  { id: 3, colour: "green", text: "Low congestion" },
+  { id: 1, colour: "#c21010", text: "Avoid at all costs" },
+  { id: 2, colour: "#fff429", text: "Congested, stay alert" },
+  { id: 3, colour: "#0fd118", text: "Low congestion" },
 ];
 
 const beachData = [
