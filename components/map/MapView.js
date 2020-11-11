@@ -9,14 +9,11 @@ import { styles } from "./styles";
 import BeachDetailView from "./overlay/BeachDetailView";
 import WelcomeDetailView from "./overlay/WelcomeDetailView";
 
-const beaches = getBeachData();
-
 const MapsView = ({ route }) => {
   const [region, setRegion] = useState(getDefaultRegion());
   const [navIndex, setNavIndex] = useState(null);
   const [welcomeMesIsDisplayed, setWelcomeMessageOverlay] = useState(true);
   const [beachIsDisplayed, setBeachOverlay] = useState(false);
-  const [beachData, updateBeachData] = useState(beaches);
 
   const mapRef = useRef(null);
   const beachRef = useRef(null);
@@ -24,23 +21,27 @@ const MapsView = ({ route }) => {
   const paginationRef = useRef(null);
   const polyRef = useRef(null);
 
-  const switchToBeach = (key) => {
+  const beachData = getBeachData();
+
+  const switchToBeach = key => {
     setRegion(beachData[key - 1]);
     setNavIndex(beachData[key - 1].id - 1);
     setWelcomeMessageOverlay(false);
     updatePolygonStrokeColour(key - 1);
   };
 
-  const updatePolygonStrokeColour = (key) => {
-    beachData.forEach((index) =>
+  const updatePolygonStrokeColour = key => {
+    beachData.forEach(index =>
       setBeachOverlay((beachData[index.id - 1].strokeColour = null))
     );
-    let strokeColour = "black";
-    setBeachOverlay((beachData[key].strokeColour = strokeColour));
+    if (key || key == 0) {
+      let strokeColour = "black";
+      setBeachOverlay((beachData[key].strokeColour = strokeColour));
+    }
   };
 
   const PolygonViews = () => {
-    return beachData.map((data) => (
+    return beachData.map(data => (
       <Polygon
         ref={polyRef}
         key={data.id}
@@ -66,7 +67,7 @@ const MapsView = ({ route }) => {
                     styles.paginationDot,
                     navIndex === key
                       ? styles.paginationDotActive
-                      : styles.paginationDotInactive,
+                      : styles.paginationDotInactive
                   ]}
                 />
               );
@@ -190,24 +191,27 @@ const MapsView = ({ route }) => {
   };
 
   const closeWindow = () => {
+    updatePolygonStrokeColour(null);
     if (beachIsDisplayed) {
       beachRef.current.flipOutY();
       paginationRef.current.flipOutY();
     }
-    if (welcomeMesIsDisplayed) welcomeRef.current.flipOutY();
   };
 
   const changeBeachDirection = (direction, jumpTo) => {
     if (!jumpTo) {
       let navIndex = region.id - 1;
       if (direction == "left") {
+        updatePolygonStrokeColour(navIndex - 1);
         setRegion(beachData[navIndex - 1]);
         setNavIndex(beachData[navIndex - 1].id - 1);
       } else if (direction == "right") {
+        updatePolygonStrokeColour(navIndex + 1);
         setRegion(beachData[navIndex + 1]);
         setNavIndex(beachData[navIndex + 1].id - 1);
       }
     } else {
+      updatePolygonStrokeColour(jumpTo - 1);
       setRegion(beachData[jumpTo - 1]);
       setNavIndex(beachData[jumpTo - 1].id - 1);
       setWelcomeMessageOverlay(false);
@@ -217,6 +221,7 @@ const MapsView = ({ route }) => {
 
   useFocusEffect(() => {
     if (route.params) {
+      updatePolygonStrokeColour(route.params.region.id - 1);
       setRegion(route.params.region);
       setWelcomeMessageOverlay(false);
       setBeachOverlay(true);
@@ -228,7 +233,7 @@ const MapsView = ({ route }) => {
           latitude: region.latitude,
           longitude: region.longitude,
           latitudeDelta: 0.017,
-          longitudeDelta: 0.017,
+          longitudeDelta: 0.017
         },
         2000
       );
@@ -244,7 +249,7 @@ const MapsView = ({ route }) => {
           latitude: region.latitude,
           longitude: region.longitude,
           latitudeDelta: 0.017,
-          longitudeDelta: 0.017,
+          longitudeDelta: 0.017
         }}
         ref={mapRef}
       >

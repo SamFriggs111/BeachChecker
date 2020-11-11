@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useRef, useState } from "react";
 import { Searchbar } from "react-native-paper";
 import {
   FlatList,
@@ -17,9 +17,9 @@ const Item = ({ title }) => (
 );
 
 const SearchView = ({ navigation }) => {
-  let items = getBeachData();
-  const [value, onChangeText] = React.useState("");
-  const [data, setBeachData] = React.useState(items);
+  let items = getBeachData(true);
+  const [value, onChangeText] = useState("");
+  const [data, setBeachData] = useState(items);
   const refreshing = false;
 
   const searchFilterFunction = text => {
