@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 1
   },
   item: {
     backgroundColor: "white",
@@ -16,18 +16,18 @@ const styles = StyleSheet.create({
     shadowRadius: 3,
     elevation: 5,
     flexDirection: "row",
-    alignItems: "center",
+    alignItems: "center"
   },
   title: {
-    fontSize: 32,
+    fontSize: 24
   },
   searchBar: {
-    marginBottom: 5,
+    marginBottom: 5
   },
   icons: {
     position: "absolute",
-    right: 10,
-  },
+    right: 10
+  }
 });
 
 export default styles;
