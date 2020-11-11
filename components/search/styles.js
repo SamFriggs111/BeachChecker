@@ -15,12 +15,18 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.4,
     shadowRadius: 3,
     elevation: 5,
+    flexDirection: "row",
+    alignItems: "center",
   },
   title: {
     fontSize: 32,
   },
   searchBar: {
     marginBottom: 5,
+  },
+  icons: {
+    position: "absolute",
+    right: 10,
   },
 });
 

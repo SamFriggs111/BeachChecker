@@ -1,4 +1,3 @@
-// Dont forget welcome card
 const noticeText = {
   Title: "Notice:",
   Intro:
@@ -313,6 +312,12 @@ const beachData = [
   },
 ];
 
+const welcomeCard = [
+  "Welcome to the south coast",
+  "Simply interact with a beach of your choice to view congestion",
+  "Congestion signals",
+];
+
 export const getDefaultRegion = () => {
   return {
     latitude: 50.711602,
@@ -322,26 +327,12 @@ export const getDefaultRegion = () => {
   };
 };
 
-function sortAlphabetically(property) {
-  var sortOrder = 1;
-  if (property[0] === "-") {
-    sortOrder = -1;
-    property = property.substr(1);
-  }
-
-  return function (a, b) {
-    if (sortOrder == -1) {
-      return b[property].localeCompare(a[property]);
-    } else {
-      return a[property].localeCompare(b[property]);
-    }
-  };
-}
-
-export const getBeachData = (requireAlphabetical) => {
-  // if (requireAlphabetical) return beachData.sort(sortAlphabetically("title"));
-  // else return beachData;
+export const getBeachData = () => {
   return beachData;
+};
+
+export const getWelcomeData = () => {
+  return welcomeCard;
 };
 
 export const getNoticeText = () => {

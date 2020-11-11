@@ -1,5 +1,6 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { Searchbar } from "react-native-paper";
+import { FontAwesome } from "@expo/vector-icons";
 import {
   FlatList,
   View,
@@ -10,9 +11,15 @@ import {
 import { getBeachData } from "../../api/api";
 import styles from "./styles";
 
-const Item = ({ title }) => (
+const Item = ({ title, congestionColour }) => (
   <View style={styles.item}>
     <Text style={styles.title}>{title}</Text>
+    <FontAwesome
+      style={styles.icons}
+      name="circle"
+      size={20}
+      color={congestionColour}
+    />
   </View>
 );
 
@@ -43,7 +50,7 @@ const SearchView = ({ navigation }) => {
     <TouchableOpacity
       onPress={() => navigation.navigate("Map", { region: item })}
     >
-      <Item title={item.title} />
+      <Item title={item.title} congestionColour={item.iconColour} />
     </TouchableOpacity>
   );
 

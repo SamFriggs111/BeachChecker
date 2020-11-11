@@ -1,12 +1,12 @@
 import React from "react";
 import { View, Text } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
-import { getCongestion } from "../../../api/api";
+import { getCongestion, getWelcomeData } from "../../../api/api";
 import { styles, welcomeMessage } from "../styles";
 
 const CongestionTextView = () => {
   const congestion = getCongestion();
-  return congestion.map(warning => (
+  return congestion.map((warning) => (
     <View
       key={warning.id}
       style={[welcomeMessage.congestionView, welcomeMessage.textPadding]}
@@ -20,20 +20,17 @@ const CongestionTextView = () => {
 };
 
 const WelcomeDetailView = () => {
+  const welcomeData = getWelcomeData();
   return (
     <View style={styles.innerSlide}>
       <View style={styles.titleView}>
-        <Text style={welcomeMessage.slideTitle}>
-          Welcome to the south coast
-        </Text>
+        <Text style={welcomeMessage.slideTitle}>{welcomeData[0]}</Text>
       </View>
       <View style={styles.sliders}>
-        <Text style={welcomeMessage.slideDesc}>
-          Simply interact with a beach of your choice to view congestion
-        </Text>
+        <Text style={welcomeMessage.slideDesc}>{welcomeData[1]}</Text>
       </View>
       <View style={welcomeMessage.warning}>
-        <Text style={welcomeMessage.signal}>Congestion signals</Text>
+        <Text style={welcomeMessage.signal}>{welcomeData[2]}</Text>
       </View>
       <CongestionTextView />
     </View>
