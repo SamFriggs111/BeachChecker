@@ -23,15 +23,15 @@ const MapsView = ({ route }) => {
 
   const beachData = getBeachData();
 
-  const switchToBeach = key => {
+  const switchToBeach = (key) => {
     setRegion(beachData[key - 1]);
     setNavIndex(beachData[key - 1].id - 1);
     setWelcomeMessageOverlay(false);
     updatePolygonStrokeColour(key - 1);
   };
 
-  const updatePolygonStrokeColour = key => {
-    beachData.forEach(index =>
+  const updatePolygonStrokeColour = (key) => {
+    beachData.forEach((index) =>
       setBeachOverlay((beachData[index.id - 1].strokeColour = null))
     );
     if (key || key == 0) {
@@ -41,7 +41,7 @@ const MapsView = ({ route }) => {
   };
 
   const PolygonViews = () => {
-    return beachData.map(data => (
+    return beachData.map((data) => (
       <Polygon
         ref={polyRef}
         key={data.id}
@@ -67,7 +67,7 @@ const MapsView = ({ route }) => {
                     styles.paginationDot,
                     navIndex === key
                       ? styles.paginationDotActive
-                      : styles.paginationDotInactive
+                      : styles.paginationDotInactive,
                   ]}
                 />
               );
@@ -233,7 +233,7 @@ const MapsView = ({ route }) => {
           latitude: region.latitude,
           longitude: region.longitude,
           latitudeDelta: 0.017,
-          longitudeDelta: 0.017
+          longitudeDelta: 0.017,
         },
         2000
       );
@@ -249,7 +249,7 @@ const MapsView = ({ route }) => {
           latitude: region.latitude,
           longitude: region.longitude,
           latitudeDelta: 0.017,
-          longitudeDelta: 0.017
+          longitudeDelta: 0.017,
         }}
         ref={mapRef}
       >

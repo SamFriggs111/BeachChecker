@@ -29,10 +29,10 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
   },
   noticeFlex: {
-    flex: 1.2,
+    flex: 2,
   },
   helpFlex: {
-    flex: 1,
+    flex: 3,
   },
 });
 

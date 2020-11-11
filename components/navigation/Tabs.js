@@ -23,7 +23,7 @@ const Tabs = () => {
           tabBarLabel: "Search",
           tabBarIcon: ({ color }) => (
             <MaterialIcons name="search" color={color} size={26} />
-          )
+          ),
         }}
       />
       <Tab.Screen
@@ -33,17 +33,17 @@ const Tabs = () => {
           tabBarLabel: "Map",
           tabBarIcon: ({ color }) => (
             <Feather name="map" color={color} size={24} />
-          )
+          ),
         }}
       />
       <Tab.Screen
-        name="Faq"
+        name="Info"
         component={InfoView}
         options={{
           tabBarLabel: "Info",
           tabBarIcon: ({ color }) => (
             <Entypo name="info-with-circle" color={color} size={22} />
-          )
+          ),
         }}
       />
     </Tab.Navigator>
